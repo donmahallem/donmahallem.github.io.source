@@ -33,17 +33,28 @@ jobs:
   include:
   - stage: github pages release
     node_js: 'stable'
-    before_script:
-    - ./download_build_app.sh
     script:
-    - npm run build
+    - ng build --aot --prod --base-href=/
     if: branch = master
     deploy:
       provider: pages
       skip-cleanup: true
-      local-dir: ./dist
+      local-dir: ./dist/DonMahallem
       github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
       keep-history: true
       repo: donmahallem/donmahallem.github.io
+      on:
+        branch: master
+  - stage: Publish docs on github
+    node_js: stable
+    script:
+    - npm run compodoc
+    if: branch = master
+    deploy:
+      provider: pages
+      skip-cleanup: true
+      local-dir: docs
+      github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+      keep-history: true
       on:
         branch: master
