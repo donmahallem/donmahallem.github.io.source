@@ -42,6 +42,7 @@ jobs:
       local-dir: ./dist/DonMahallem
       github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
       keep-history: true
+      target_branch: master
       repo: donmahallem/donmahallem.github.io
       on:
         branch: master
