@@ -1,0 +1,49 @@
+language: node_js
+node_js:
+  - "stable"
+env:
+  matrix:
+  - TEST_SUITE=lint
+  - TEST_SUITE=build
+  - TEST_SUITE=unit
+  - TEST_SUITE=docs
+matrix:
+  exclude:
+    - node_js: "8"
+      env: TEST_SUITE=lint
+    - node_js: "8"
+      env: TEST_SUITE=docs
+    - node_js: "8"
+      env: TEST_SUITE=api-docs
+    - node_js: "9"
+      env: TEST_SUITE=lint
+    - node_js: "9"
+      env: TEST_SUITE=docs
+    - node_js: "9"
+      env: TEST_SUITE=api-docs
+cache:
+  directories:
+  - node_modules
+  - "$(npm config get prefix)/node_modules"
+script:
+- npm run test:$TEST_SUITE
+after_success:
+- ./coveralls_upload.sh
+jobs:
+  include:
+  - stage: github pages release
+    node_js: 'stable'
+    before_script:
+    - ./download_build_app.sh
+    script:
+    - npm run build
+    if: branch = master
+    deploy:
+      provider: pages
+      skip-cleanup: true
+      local-dir: ./dist
+      github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+      keep-history: true
+      repo: donmahallem/donmahallem.github.io
+      on:
+        branch: master
