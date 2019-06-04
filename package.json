@@ -1,5 +1,5 @@
 {
-  "name": "don-mahallem",
+  "name": "@donmahallem/github-page",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -15,7 +15,26 @@
     "test:lint": "ng lint",
     "test:docs": "npm run compodoc"
   },
-  "private": true,
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://donmahallem.github.io/TrapezeClientNg/",
+  "author": {
+    "name": "donmahallem",
+    "email": "donmahallem@users.noreply.github.com",
+    "url": "https://github.com/donmahallem"
+  },
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/donmahallem/TrapezeClientNg/issues"
+  },
+  "files": [
+    "dist/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/donmahallem/TrapezeClientNg.git"
+  },
   "dependencies": {
     "@angular/animations": "~8.0.0",
     "@angular/common": "~8.0.0",
@@ -34,9 +53,10 @@
     "@angular/cli": "~8.0.1",
     "@angular/compiler-cli": "~8.0.0",
     "@angular/language-service": "~8.0.0",
-    "@types/node": "~8.9.4",
+    "@compodoc/compodoc": "^1.1.9",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "~8.9.4",
     "codelyzer": "^5.0.0",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
