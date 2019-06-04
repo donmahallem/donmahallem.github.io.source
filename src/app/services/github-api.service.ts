@@ -13,6 +13,6 @@ export class GithubApiService {
     }
 
     public getRepos(username: string): Observable<Repository[]> {
-        return this.http.get<Repository[]>('https://api.github.com/users/' + username + '/repos');
+        return this.http.get<Repository[]>('https://api.github.com/users/' + username + '/repos?per_page=100');
     }
 }

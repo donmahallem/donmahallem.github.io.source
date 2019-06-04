@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ReposResolver } from './repos.resolver';
 import { RepoListComponent } from './repo-list.component';
+import { RepoDetailComponent } from './repo-detail.component';
+import { RepoResolver } from './repo.resolver';
 
 const tripPassagesRoute: Routes = [
     {
@@ -10,6 +12,15 @@ const tripPassagesRoute: Routes = [
         resolve: {
             repos: ReposResolver,
         },
+        children: [
+            {
+                path: ':id',
+                component: RepoDetailComponent,
+                resolve: {
+                    repo: RepoResolver,
+                },
+            }
+        ]
     },
 ];
 

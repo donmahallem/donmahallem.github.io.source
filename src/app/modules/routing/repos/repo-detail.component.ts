@@ -5,12 +5,12 @@ import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
-    selector: 'app-repo-list',
-    templateUrl: './repo-list.component.html',
-    styleUrls: ['./repo-list.component.scss'],
+    selector: 'app-repo-detail',
+    templateUrl: './repo-detail.component.html',
+    styleUrls: ['./repo-detail.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RepoListComponent implements AfterViewInit, OnDestroy {
+export class RepoDetailComponent implements AfterViewInit, OnDestroy {
     public repos: Repository[] = [];
     private updateSubscription: Subscription;
     public constructor(private activatedRoute: ActivatedRoute,
