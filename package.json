@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "compodoc": "npx compodoc -p src/tsconfig.app.json -d ./docs",
+    "compodoc": "npx compodoc -p tsconfig.json -d ./docs",
     "test-headless": "ng test --watch=false --browsers=ChromeHeadless --code-coverage",
     "test:unit": "npm run test-headless",
     "test:build": "ng build --prod --aot --base-href ./",
