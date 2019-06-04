@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { GithubApiService } from './services';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'DonMahallem';
+  constructor(private test: GithubApiService) {
+    test.getRepos('DonMahallem').subscribe(console.log, console.error);
+  }
 }
