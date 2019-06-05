@@ -52,6 +52,12 @@ const main = async () => {
         console.log("Page error: " + theTempValue);
     });
     page.on('console', msg => console.log('PAGE LOG:', msg.text()));
+
+    await page.setRequestInterception(true);
+    page.on('request', interceptedRequest => {
+        console.log("req uri", interceptedRequest.url());
+        interceptedRequest.continue();
+    });
     do {
         const p = PAGES[0];
 
