@@ -287,6 +287,7 @@
         // requesting the first page in PAGES array
         await page.goto(uri, { waitUntil: &quot;networkidle0&quot; });
 
+        await timeout(2000);
         // getting the html content after the Chromium finish rendering.
         let result &#x3D; await page.evaluate(() &#x3D;&gt; document.documentElement.outerHTML);
         result &#x3D; await page.content();
