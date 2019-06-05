@@ -66,7 +66,25 @@
                             <a href="#environment" title="src/environments/environment.ts"><b>environment</b>&nbsp;&nbsp;&nbsp;(src/.../environment.ts)</a>
                         </li>
                         <li>
+                            <a href="#HOST" title="prerender/prerender.ts"><b>HOST</b>&nbsp;&nbsp;&nbsp;(prerender/.../prerender.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#main" title="prerender/prerender.ts"><b>main</b>&nbsp;&nbsp;&nbsp;(prerender/.../prerender.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#PAGES" title="prerender/prerender.ts"><b>PAGES</b>&nbsp;&nbsp;&nbsp;(prerender/.../prerender.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#PORT" title="prerender/prerender.ts"><b>PORT</b>&nbsp;&nbsp;&nbsp;(prerender/.../prerender.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#RENDERED_PAGES" title="prerender/prerender.ts"><b>RENDERED_PAGES</b>&nbsp;&nbsp;&nbsp;(prerender/.../prerender.ts)</a>
+                        </li>
+                        <li>
                             <a href="#require" title="src/test.ts"><b>require</b>&nbsp;&nbsp;&nbsp;(src/.../test.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#timeout" title="prerender/prerender.ts"><b>timeout</b>&nbsp;&nbsp;&nbsp;(prerender/.../prerender.ts)</a>
                         </li>
                     </ul>
                 </td>
@@ -184,6 +202,251 @@
     username: &#x27;DonMahallem&#x27;
   }
 }</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+</section>
+    <h3>prerender/prerender.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="HOST"></a>
+                        <span class="name">
+                            <b>
+                            HOST</b>
+                            <a href="#HOST"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&#x60;http://localhost:${PORT}&#x60;</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="main"></a>
+                        <span class="name">
+                            <b>
+                            main</b>
+                            <a href="#main"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>async () &#x3D;&gt; {
+
+    // starting an Express.js server to serve the static files while puppeter prerender the pages
+    const app &#x3D; express();
+
+    // setting the html content from the index.html file
+    const index &#x3D; (await readFile(join(__dirname, &quot;..&quot;,
+        &quot;dist&quot;,
+        &quot;DonMahallem&quot;,
+        &quot;index.html&quot;))).toString();
+    const subRoute &#x3D; express.Router();
+    subRoute.get(&quot;*.*&quot;, express.static(join(__dirname, &quot;..&quot;,
+        &quot;dist&quot;,
+        &quot;DonMahallem&quot;), {
+
+        }));
+    subRoute.get(&quot;*&quot;, (req, res) &#x3D;&gt; res.send(index));
+    app.use(subRoute);
+
+    // starting the express server
+    const server: Server &#x3D; await (new Promise((resolve, reject) &#x3D;&gt; {
+        const s &#x3D; app.listen(PORT, (e) &#x3D;&gt; e ? reject(e) : resolve(s));
+    }));
+
+    // tslint:disable-next-line:no-console
+    console.log(&#x60;Started server ${HOST}!&#x60;);
+
+    // launching Puppeteer
+    const browser &#x3D; await puppeteer.launch();
+    await timeout(1000);
+    // tslint:disable-next-line:no-console
+    console.log(&#x60;Started browser!&#x60;);
+
+    // creating a new Tap/Page
+    const page &#x3D; await browser.newPage();
+
+    do {
+        const p &#x3D; PAGES[0];
+
+        // requesting the first page in PAGES array
+        await page.goto(&#x60;${HOST}/${p}&#x60;, { waitUntil: &quot;networkidle0&quot; });
+
+        // getting the html content after the Chromium finish rendering.
+        let result &#x3D; await page.evaluate(() &#x3D;&gt; document.documentElement.outerHTML);
+        result &#x3D; await page.content();
+        // defining the html file name that will be created
+        let file &#x3D; &quot;&quot;;
+        if (p) {
+            file &#x3D; join(process.cwd(), &quot;dist&quot;, &quot;DonMahallem&quot;, p, &quot;index.html&quot;);
+        } else {
+            file &#x3D; join(process.cwd(), &quot;dist&quot;, &quot;DonMahallem&quot;, &quot;index.html&quot;);
+        }
+        const dir &#x3D; dirname(file);
+
+        // test if the directory exist, if not create the directory
+        if (!(await exists(dir))) {
+            await mkdir(dir, { recursive: true } as any);
+        }
+
+        // write the rendered html file
+        await writeFile(file, result);
+
+        // tslint:disable-next-line:no-console
+        console.log(&#x60;Wrote ${file}&#x60;);
+
+        // add this page to the RENDERED PAGES array
+        RENDERED_PAGES &#x3D; [...RENDERED_PAGES, p];
+
+        // set PAGES with the pages that still need to be rendered
+
+        /// uniq(PAGES.concat(result.match(/href&#x3D;&quot;\/[\/\w\d\-]*&quot;/g).map(s &#x3D;&gt; s.match(/\/([\/\w\d\-]*)/)[1]))),
+        const matchedUrls: RegExpMatchArray | null &#x3D; result.match(/href&#x3D;&quot;\/[\/\w\d\-]*&quot;/g);
+        if (matchedUrls) {
+            const matchedPath &#x3D; matchedUrls.map((s: string) &#x3D;&gt; {
+                const match &#x3D; s.match(/\/([\/\w\d\-]*)/);
+                if (match) {
+                    return match[1];
+                }
+                return &quot;&quot;;
+            });
+            PAGES &#x3D; difference(
+                uniq(PAGES.concat(matchedPath)),
+                RENDERED_PAGES,
+            );
+        }
+
+    } while (PAGES.length &gt; 0);
+
+    // closes Chromium and finishes the express server.
+    browser.close();
+    server.close();
+}</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="PAGES"></a>
+                        <span class="name">
+                            <b>
+                            PAGES</b>
+                            <a href="#PAGES"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>string[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[&quot;&quot;]</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="PORT"></a>
+                        <span class="name">
+                            <b>
+                            PORT</b>
+                            <a href="#PORT"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>4000</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="RENDERED_PAGES"></a>
+                        <span class="name">
+                            <b>
+                            RENDERED_PAGES</b>
+                            <a href="#RENDERED_PAGES"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>string[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[]</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="timeout"></a>
+                        <span class="name">
+                            <b>
+                            timeout</b>
+                            <a href="#timeout"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Promise&lt;any&gt;</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>(ms: number): Promise&lt;any&gt; &#x3D;&gt;
+    new Promise((resolve) &#x3D;&gt; setTimeout(resolve, ms))</code>
                         </td>
                     </tr>
 
