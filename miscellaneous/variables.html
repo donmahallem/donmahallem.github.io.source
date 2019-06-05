@@ -247,21 +247,16 @@
                     <tr>
                         <td class="col-md-4">
                             <i>Default value : </i><code>async () &#x3D;&gt; {
-
+    const DIST_BASE_PATH &#x3D; join(__dirname, &quot;..&quot;, &quot;dist&quot;, &quot;DonMahallem&quot;)
+    const DIST_OUTPUT_PATH &#x3D; join(__dirname, &quot;..&quot;, &quot;dist&quot;, &quot;prerender&quot;)
     // starting an Express.js server to serve the static files while puppeter prerender the pages
     const app &#x3D; express();
 
     // setting the html content from the index.html file
-    const index &#x3D; (await readFile(join(__dirname, &quot;..&quot;,
-        &quot;dist&quot;,
-        &quot;DonMahallem&quot;,
+    const index &#x3D; (await readFile(join(DIST_BASE_PATH,
         &quot;index.html&quot;))).toString();
     const subRoute &#x3D; express.Router();
-    subRoute.get(&quot;*.*&quot;, express.static(join(__dirname, &quot;..&quot;,
-        &quot;dist&quot;,
-        &quot;DonMahallem&quot;), {
-
-        }));
+    subRoute.get(&quot;*.*&quot;, express.static(DIST_BASE_PATH, {}));
     subRoute.get(&quot;*&quot;, (req, res) &#x3D;&gt; res.send(index));
     app.use(subRoute);
 
@@ -288,8 +283,9 @@
     do {
         const p &#x3D; PAGES[0];
 
+        const uri: string &#x3D; &#x60;${HOST}/${p}&#x60;;
         // requesting the first page in PAGES array
-        await page.goto(&#x60;${HOST}/${p}&#x60;, { waitUntil: &quot;networkidle0&quot; });
+        await page.goto(uri, { waitUntil: &quot;networkidle0&quot; });
 
         // getting the html content after the Chromium finish rendering.
         let result &#x3D; await page.evaluate(() &#x3D;&gt; document.documentElement.outerHTML);
@@ -297,9 +293,9 @@
         // defining the html file name that will be created
         let file &#x3D; &quot;&quot;;
         if (p) {
-            file &#x3D; join(process.cwd(), &quot;dist&quot;, &quot;DonMahallem&quot;, p, &quot;index.html&quot;);
+            file &#x3D; join(DIST_OUTPUT_PATH, p, &quot;index.html&quot;);
         } else {
-            file &#x3D; join(process.cwd(), &quot;dist&quot;, &quot;DonMahallem&quot;, &quot;index.html&quot;);
+            file &#x3D; join(DIST_OUTPUT_PATH, &quot;index.html&quot;);
         }
         const dir &#x3D; dirname(file);
 
@@ -316,11 +312,12 @@
 
         // add this page to the RENDERED PAGES array
         RENDERED_PAGES &#x3D; [...RENDERED_PAGES, p];
-
+        //console.log(RENDERED_PAGES);
         // set PAGES with the pages that still need to be rendered
 
         /// uniq(PAGES.concat(result.match(/href&#x3D;&quot;\/[\/\w\d\-]*&quot;/g).map(s &#x3D;&gt; s.match(/\/([\/\w\d\-]*)/)[1]))),
         const matchedUrls: RegExpMatchArray | null &#x3D; result.match(/href&#x3D;&quot;\/[\/\w\d\-]*&quot;/g);
+        //console.log(&quot;MatchedUrls&quot;, matchedUrls);
         if (matchedUrls) {
             const matchedPath &#x3D; matchedUrls.map((s: string) &#x3D;&gt; {
                 const match &#x3D; s.match(/\/([\/\w\d\-]*)/);
@@ -331,6 +328,11 @@
             });
             PAGES &#x3D; difference(
                 uniq(PAGES.concat(matchedPath)),
+                RENDERED_PAGES,
+            );
+        } else {
+            PAGES &#x3D; difference(
+                PAGES,
                 RENDERED_PAGES,
             );
         }
