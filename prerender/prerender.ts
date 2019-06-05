@@ -52,7 +52,10 @@ const main = async () => {
 
     // creating a new Tap/Page
     const page = await browser.newPage();
-
+    page.on("pageerror", (err) => {
+        const theTempValue = err.toString();
+        console.log("Page error: " + theTempValue);
+    });
     do {
         const p = PAGES[0];
 
@@ -80,7 +83,7 @@ const main = async () => {
         await writeFile(file, result);
 
         // tslint:disable-next-line:no-console
-        console.log(`Wrote ${file}`);
+        console.log(`Wrote (${RENDERED_PAGES.length + 1}) ${file}`);
 
         // add this page to the RENDERED PAGES array
         RENDERED_PAGES = [...RENDERED_PAGES, p];
