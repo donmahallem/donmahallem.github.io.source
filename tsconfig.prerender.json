@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "outDir": "./dist/prerender",
+    "rootDir": "./prerender",
+    "sourceMap": true,
+    "declaration": true,
+    "moduleResolution": "node",
+    "strictNullChecks": true,
+    "noUnusedLocals": true
+  },
+  "typeAcquisition": {
+    "enable": true
+  },
+  "include": [
+    "prerender/**/*.ts"
+  ],
+  "baseUrl": "./prerender",
+  "exclude": [
+    "node_modules",
+    "prerender/**/*.spec.ts"
+  ]
+}
