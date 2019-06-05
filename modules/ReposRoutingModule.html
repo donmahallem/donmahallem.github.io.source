@@ -34,7 +34,7 @@
 
 <ol class="breadcrumb">
     <li>Modules</li>
-    <li>AppRoutingModule</li>
+    <li>ReposRoutingModule</li>
 </ol>
 
 
@@ -54,7 +54,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/app-routing.module.ts</code>
+            <code>src/app/modules/routing/repos/repos-routing.module.ts</code>
         </p>
 
 
@@ -71,19 +71,38 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
-import { Routes, RouterModule } from &#x27;@angular/router&#x27;;
+import { RouterModule, Routes } from &#x27;@angular/router&#x27;;
+import { ReposResolver } from &#x27;./repos.resolver&#x27;;
+import { RepoListComponent } from &#x27;./repo-list.component&#x27;;
+import { RepoDetailComponent } from &#x27;./repo-detail.component&#x27;;
+import { RepoResolver } from &#x27;./repo.resolver&#x27;;
 
-const routes: Routes &#x3D; [
-  {
-    loadChildren: () &#x3D;&gt; &quot;import(&#x27;./modules/routing/repos/repos.module&#x27;).then(m &#x3D;&gt; m.ReposModule)&quot;,
-    path: &#x27;repos&#x27;,
-  }];
+const tripPassagesRoute: Routes &#x3D; [
+    {
+        component: RepoListComponent,
+        path: &#x27;&#x27;,
+        resolve: {
+            repos: ReposResolver,
+        }
+    },
+    {
+        path: &#x27;:username/:reponame&#x27;,
+        component: RepoDetailComponent,
+        resolve: {
+            repo: RepoResolver,
+        },
+    }
+];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    exports: [
+        RouterModule,
+    ],
+    imports: [
+        RouterModule.forChild(tripPassagesRoute),
+    ],
 })
-export class AppRoutingModule { }
+export class ReposRoutingModule { }
 </code></pre>
     </div>
 </div>
@@ -118,7 +137,7 @@ export class AppRoutingModule { }
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'module';
-            var COMPODOC_CURRENT_PAGE_URL = 'AppRoutingModule.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ReposRoutingModule.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>
