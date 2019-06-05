@@ -37,7 +37,7 @@ jobs:
     - ng build --aot --prod --base-href=./
     - npm run prerender
     - cd ./dist/prerender
-    - yes | cp -rf ./ ./dist/DonMahallem
+    - yes | cp -rf ./ ./../../dist/DonMahallem
     - cd ../../
     - cp ./dist/DonMahallem/index.html ./dist/DonMahallem/404.html
     if: branch = master
