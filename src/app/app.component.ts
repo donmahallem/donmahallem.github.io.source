@@ -9,5 +9,6 @@ import { GithubApiService } from './services';
 export class AppComponent {
   title = 'DonMahallem';
   constructor() {
+    // Not Empty
   }
 }
