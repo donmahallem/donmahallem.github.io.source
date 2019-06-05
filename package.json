@@ -13,7 +13,8 @@
     "test:unit": "npm run test-headless",
     "test:build": "ng build --prod --aot --base-href ./",
     "test:lint": "ng lint",
-    "test:docs": "npm run compodoc"
+    "test:docs": "npm run compodoc",
+    "prerender": "ts-node --project tsconfig.prerender.json ./prerender/prerender.ts"
   },
   "publishConfig": {
     "access": "public"
@@ -60,6 +61,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~12.0.4",
     "codelyzer": "^5.0.0",
+    "express": "^4.17.1",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.1.0",
@@ -67,7 +69,10 @@
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
+    "lodash": "^4.17.11",
+    "mz": "^2.7.0",
     "protractor": "~5.4.0",
+    "puppeteer": "^1.17.0",
     "ts-node": "~8.2.0",
     "tslint": "~5.17.0",
     "typescript": "~3.4.3"
