@@ -281,7 +281,10 @@
 
     // creating a new Tap/Page
     const page &#x3D; await browser.newPage();
-
+    page.on(&quot;pageerror&quot;, (err) &#x3D;&gt; {
+        const theTempValue &#x3D; err.toString();
+        console.log(&quot;Page error: &quot; + theTempValue);
+    });
     do {
         const p &#x3D; PAGES[0];
 
@@ -309,7 +312,7 @@
         await writeFile(file, result);
 
         // tslint:disable-next-line:no-console
-        console.log(&#x60;Wrote ${file}&#x60;);
+        console.log(&#x60;Wrote (${RENDERED_PAGES.length + 1}) ${file}&#x60;);
 
         // add this page to the RENDERED PAGES array
         RENDERED_PAGES &#x3D; [...RENDERED_PAGES, p];
