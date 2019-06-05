@@ -11,17 +11,15 @@ const tripPassagesRoute: Routes = [
         path: '',
         resolve: {
             repos: ReposResolver,
-        },
-        children: [
-            {
-                path: ':id',
-                component: RepoDetailComponent,
-                resolve: {
-                    repo: RepoResolver,
-                },
-            }
-        ]
+        }
     },
+    {
+        path: ':username/:reponame',
+        component: RepoDetailComponent,
+        resolve: {
+            repo: RepoResolver,
+        },
+    }
 ];
 
 @NgModule({

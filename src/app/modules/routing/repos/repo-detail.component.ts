@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RepoDetailComponent implements AfterViewInit, OnDestroy {
-    public repos: Repository[] = [];
+    public repository: Repository = undefined;
     private updateSubscription: Subscription;
     public constructor(private activatedRoute: ActivatedRoute,
                        private cdRef: ChangeDetectorRef) {
@@ -21,14 +21,14 @@ export class RepoDetailComponent implements AfterViewInit, OnDestroy {
     public ngAfterViewInit(): void {
         this.updateSubscription = this.activatedRoute
             .data
-            .pipe(map(data => data.repos))
-            .subscribe((repos: Repository[]) => {
-                this.setRepositories(repos);
+            .pipe(map(data => data.repo))
+            .subscribe((repo: Repository) => {
+                this.setRepository(repo);
             });
     }
 
-    public setRepositories(repos: Repository[]): void {
-        this.repos = repos;
+    public setRepository(repo: Repository): void {
+        this.repository = repo;
         this.cdRef.detectChanges();
     }
 

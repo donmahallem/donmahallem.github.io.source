@@ -27,7 +27,7 @@ export class RepoResolver implements Resolve<any> {
      */
     public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
         return this.api
-            .getRepos(environment.github.username)
+            .getRepo(route.params.username, route.params.reponame)
             .pipe(catchError((err: any | HttpErrorResponse) => {
                 if (err.status === 404) {
                     this.router.navigate(['stops']);

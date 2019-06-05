@@ -8,7 +8,6 @@ import { GithubApiService } from './services';
 })
 export class AppComponent {
   title = 'DonMahallem';
-  constructor(private test: GithubApiService) {
-    test.getRepos('DonMahallem').subscribe(console.log, console.error);
+  constructor() {
   }
 }
