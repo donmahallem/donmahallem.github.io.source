@@ -51,6 +51,7 @@ const main = async () => {
         const theTempValue = err.toString();
         console.log("Page error: " + theTempValue);
     });
+    page.on('console', msg => console.log('PAGE LOG:', msg.text()));
     do {
         const p = PAGES[0];
 
@@ -58,7 +59,6 @@ const main = async () => {
         // requesting the first page in PAGES array
         await page.goto(uri, { waitUntil: "networkidle0" });
 
-        await timeout(2000);
         // getting the html content after the Chromium finish rendering.
         let result = await page.evaluate(() => document.documentElement.outerHTML);
         result = await page.content();
