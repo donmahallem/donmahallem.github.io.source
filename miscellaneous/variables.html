@@ -164,7 +164,7 @@
                             <i>Default value : </i><code>{
   production: true,
   github: {
-    username: &#x27;DonMahallem&#x27;
+    username: &#x27;donmahallem&#x27;
   }
 }</code>
                         </td>
@@ -199,7 +199,7 @@
                             <i>Default value : </i><code>{
   production: false,
   github: {
-    username: &#x27;DonMahallem&#x27;
+    username: &#x27;donmahallem&#x27;
   }
 }</code>
                         </td>
@@ -281,6 +281,12 @@
         console.log(&quot;Page error: &quot; + theTempValue);
     });
     page.on(&#x27;console&#x27;, msg &#x3D;&gt; console.log(&#x27;PAGE LOG:&#x27;, msg.text()));
+
+    await page.setRequestInterception(true);
+    page.on(&#x27;request&#x27;, interceptedRequest &#x3D;&gt; {
+        console.log(&quot;req uri&quot;, interceptedRequest.url());
+        interceptedRequest.continue();
+    });
     do {
         const p &#x3D; PAGES[0];
 
