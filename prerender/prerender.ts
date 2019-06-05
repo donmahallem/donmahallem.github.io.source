@@ -58,6 +58,7 @@ const main = async () => {
         // requesting the first page in PAGES array
         await page.goto(uri, { waitUntil: "networkidle0" });
 
+        await timeout(2000);
         // getting the html content after the Chromium finish rendering.
         let result = await page.evaluate(() => document.documentElement.outerHTML);
         result = await page.content();
