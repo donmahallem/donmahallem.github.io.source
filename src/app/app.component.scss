@@ -1,0 +1,18 @@
+$maxContent: 1200px;
+:host{
+    background: white;
+    main{
+        width:100vw;
+        background:red;
+    }
+}
+@media (min-width: #{$maxContent+1}){
+    :host{
+        background: #EEEEEE;
+        main{
+            width:$maxContent;
+            margin:0px auto;
+            background: white;
+        }
+    }
+}
