@@ -14,7 +14,7 @@ export class ObjectTreeItemComponent implements AfterViewInit, OnDestroy {
     public repository: Repository = undefined;
     private updateSubscription: Subscription;
     public constructor(private activatedRoute: ActivatedRoute,
-        private cdRef: ChangeDetectorRef) {
+                       private cdRef: ChangeDetectorRef) {
 
     }
 

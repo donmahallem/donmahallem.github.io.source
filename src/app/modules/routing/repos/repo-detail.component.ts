@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-
 @Component({
     selector: 'app-repo-detail',
     templateUrl: './repo-detail.component.html',
@@ -15,7 +14,7 @@ export class RepoDetailComponent implements AfterViewInit, OnDestroy {
     public repository: Repository = undefined;
     private updateSubscription: Subscription;
     public constructor(private activatedRoute: ActivatedRoute,
-        private cdRef: ChangeDetectorRef) {
+                       private cdRef: ChangeDetectorRef) {
 
     }
 

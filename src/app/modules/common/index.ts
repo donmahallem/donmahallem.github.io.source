@@ -1,1 +1,1 @@
-export * from "./object-tree";
+export * from './object-tree';
