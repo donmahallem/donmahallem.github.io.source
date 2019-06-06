@@ -288,6 +288,16 @@
         console.log(&quot;req uri&quot;, interceptedRequest.url());
         interceptedRequest.continue();
     });
+    page.on(&#x27;response&#x27;, async response &#x3D;&gt; {
+        if (response.status() !&#x3D;&#x3D; 200) {
+            console.log(&quot;response url: &quot;, response.url());
+            console.log(&quot;response code: &quot;, response.status());
+            console.log(&quot;response status text: &quot;, response.statusText());
+            const tttext &#x3D; await response.text();
+            console.log(&quot;response text: &quot;, tttext);
+        }
+        // do something here
+    });
     do {
         const p &#x3D; PAGES[0];
 
