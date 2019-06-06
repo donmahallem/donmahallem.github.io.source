@@ -59,6 +59,16 @@ const main = async () => {
         console.log("req uri", interceptedRequest.url());
         interceptedRequest.continue();
     });
+    page.on('response', async response => {
+        if (response.status() !== 200) {
+            console.log("response url: ", response.url());
+            console.log("response code: ", response.status());
+            console.log("response status text: ", response.statusText());
+            const tttext = await response.text();
+            console.log("response text: ", tttext);
+        }
+        // do something here
+    });
     do {
         const p = PAGES[0];
 
