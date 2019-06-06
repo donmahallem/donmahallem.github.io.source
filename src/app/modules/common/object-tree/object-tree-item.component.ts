@@ -4,14 +4,13 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-
 @Component({
-    selector: 'app-repo-detail',
-    templateUrl: './repo-detail.component.html',
-    styleUrls: ['./repo-detail.component.scss'],
+    selector: 'app-object-tree-item',
+    templateUrl: './object-tree-item.component.html',
+    styleUrls: ['./object-tree-item.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RepoDetailComponent implements AfterViewInit, OnDestroy {
+export class ObjectTreeItemComponent implements AfterViewInit, OnDestroy {
     public repository: Repository = undefined;
     private updateSubscription: Subscription;
     public constructor(private activatedRoute: ActivatedRoute,
