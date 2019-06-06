@@ -1,6 +1,6 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ObjectTreeItemComponent } from './object-tree-item.component';
+import { ObjectTreeComponent } from './object-tree.component';
 
 describe('modules/common/object-tree/object-tree-item.component', () => {
   describe('ObjectTreeItemComponent', () => {
@@ -10,13 +10,13 @@ describe('modules/common/object-tree/object-tree-item.component', () => {
           RouterTestingModule
         ],
         declarations: [
-          ObjectTreeItemComponent
+          ObjectTreeComponent
         ],
       }).compileComponents();
     }));
 
     it('should create the app', () => {
-      const fixture = TestBed.createComponent(ObjectTreeItemComponent);
+      const fixture = TestBed.createComponent(ObjectTreeComponent);
       const app = fixture.debugElement.componentInstance;
       expect(app).toBeTruthy();
     });

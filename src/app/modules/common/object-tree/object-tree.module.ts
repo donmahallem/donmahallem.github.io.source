@@ -1,21 +1,25 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import {
-    MatSnackBarModule, MatTreeModule,
+    MatSnackBarModule, MatTreeModule, MatIconModule, MatButtonModule,
 } from '@angular/material';
-import { ObjectTreeItemComponent } from './object-tree-item.component';
+import { ObjectTreeComponent } from './object-tree.component';
 @NgModule({
     declarations: [
-        ObjectTreeItemComponent,
+        ObjectTreeComponent,
     ],
     exports: [
         CommonModule,
-        ObjectTreeItemComponent,
-        MatTreeModule
+        ObjectTreeComponent,
+        MatTreeModule,
+        MatIconModule,
+        MatButtonModule
     ],
     imports: [
-        MatTreeModule,
         CommonModule,
+        MatTreeModule,
+        MatIconModule,
+        MatButtonModule
     ],
 })
 export class ObjectTreeModule { }
