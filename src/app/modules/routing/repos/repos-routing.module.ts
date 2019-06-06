@@ -7,19 +7,40 @@ import { RepoResolver } from './repo.resolver';
 
 const tripPassagesRoute: Routes = [
     {
-        component: RepoListComponent,
         path: '',
-        resolve: {
-            repos: ReposResolver,
-        }
+        redirectTo: 'list'
     },
     {
-        path: ':username/:reponame',
+        path: 'list',
+        children: [
+            {
+                path: '',
+                component: RepoListComponent,
+                resolve: {
+                    repos: ReposResolver,
+                },
+            },
+            {
+                path: ':page',
+                component: RepoListComponent,
+                resolve: {
+                    repos: ReposResolver,
+                },
+            }
+        ]
+    },
+    {
+        path: 'detail/:reponame',
         component: RepoDetailComponent,
         resolve: {
             repo: RepoResolver,
         },
+    },
+    {
+        path: '**',
+        redirectTo: '404'
     }
+
 ];
 
 @NgModule({

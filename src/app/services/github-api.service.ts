@@ -12,8 +12,18 @@ export class GithubApiService {
 
     }
 
-    public getUserRepos(username: string): Observable<Repository[]> {
-        return this.http.get<Repository[]>('https://api.github.com/users/' + username + '/repos?per_page=100');
+    /**
+     *
+     * @param username Username
+     * @param page_size Page size
+     * @param page Page to query starting at 1
+     */
+    public getUserRepos(username: string, page_size: number = 25, page?: number): Observable<Repository[]> {
+        let url: string = 'https://api.github.com/users/' + username + '/repos?per_page=' + page_size;
+        if (page) {
+            url += '&page=' + page;
+        }
+        return this.http.get<Repository[]>(url);
     }
 
     public getRepo(usernameOrFullname: string, reponame?: string): Observable<Repository> {
