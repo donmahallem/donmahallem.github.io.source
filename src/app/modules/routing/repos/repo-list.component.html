@@ -1,5 +1,5 @@
 <mat-nav-list>
-    <ng-container *ngFor="let item of repos; let idx = index">
+    <ng-container *ngFor="let item of items; let idx = index">
         <h3 matSubheader *ngIf="item.hasHeader">{{item.header}}</h3>
         <a mat-list-item [routerLink]="['/repos','detail',item.repo.name]">
             <mat-icon matListIcon>folder</mat-icon>
@@ -9,3 +9,4 @@
         <mat-divider *ngIf="item.hasDivider"></mat-divider>
     </ng-container>
 </mat-nav-list>
+<app-pager></app-pager>

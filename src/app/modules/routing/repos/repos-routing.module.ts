@@ -4,6 +4,7 @@ import { ReposResolver } from './repos.resolver';
 import { RepoListComponent } from './repo-list.component';
 import { RepoDetailComponent } from './repo-detail.component';
 import { RepoResolver } from './repo.resolver';
+import { ReposOverviewComponent } from './repos-overview.component';
 
 const tripPassagesRoute: Routes = [
     {
@@ -15,14 +16,14 @@ const tripPassagesRoute: Routes = [
         children: [
             {
                 path: '',
-                component: RepoListComponent,
+                component: ReposOverviewComponent,
                 resolve: {
                     repos: ReposResolver,
                 },
             },
             {
                 path: ':page',
-                component: RepoListComponent,
+                component: ReposOverviewComponent,
                 resolve: {
                     repos: ReposResolver,
                 },

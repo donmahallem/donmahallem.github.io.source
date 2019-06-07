@@ -16,11 +16,14 @@ import { ReposListItemComponent } from './repos-list-item.component';
 import { ObjectTreeModule } from '../../common';
 import { RepoDetailComponent } from './repo-detail.component';
 import { RepoResolver } from './repo.resolver';
+import { ReposOverviewComponent } from './repos-overview.component';
+import { PagerModule } from '../../common/pager';
 @NgModule({
     declarations: [
         RepoListComponent,
         ReposListItemComponent,
-        RepoDetailComponent
+        RepoDetailComponent,
+        ReposOverviewComponent
     ],
     imports: [
         CommonModule,
@@ -28,7 +31,8 @@ import { RepoResolver } from './repo.resolver';
         MatGridListModule,
         MatDividerModule,
         MatListModule,
-        ObjectTreeModule
+        ObjectTreeModule,
+        PagerModule
     ],
     providers: [
         ReposResolver,
