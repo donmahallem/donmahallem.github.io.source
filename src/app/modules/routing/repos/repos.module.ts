@@ -27,6 +27,7 @@ import { RepoResolver } from './repo.resolver';
         ReposRoutingModule,
         MatGridListModule,
         MatDividerModule,
+        MatListModule,
         ObjectTreeModule
     ],
     providers: [
