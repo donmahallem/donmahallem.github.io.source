@@ -1,8 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
-import { EMPTY, Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { EMPTY, Observable, from } from 'rxjs';
+import { catchError, tap, map } from 'rxjs/operators';
 import { GithubApiService } from 'src/app/services';
 import { environment } from 'src/environments/environment.prod';
 import { Repository } from 'src/app/modal';
@@ -38,12 +38,23 @@ export class ReposResolver implements Resolve<Repository[]> {
      * @param state The RouterState
      */
     public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Repository[]> {
-        const page: number = this.parseInt(route.params.page, 1);
+        let page = 1;
+        if (route.params.page) {
+            page = this.parseInt(route.params.page, -1);
+            if (page < 1) {
+                this.router.navigate(['repos', 'list']);
+                return EMPTY;
+            }
+        }
         return this.api
             .getUserRepos(environment.github.username, 25, page)
-            .pipe(catchError((err: any | HttpErrorResponse) => {
+            .pipe(tap((value) => {
+                if (value.length === 0 && page !== 1) {
+                    throw new Error('Empty Response');
+                }
+            }), catchError((err: any | HttpErrorResponse) => {
                 if (err.status === 404) {
-                    this.router.navigate(['stops']);
+                    this.router.navigate(['404']);
                 }
                 return EMPTY;
             }));
