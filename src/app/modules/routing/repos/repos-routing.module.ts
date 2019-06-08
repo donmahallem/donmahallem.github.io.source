@@ -1,23 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ReposResolver } from './repos.resolver';
-import { RepoListComponent } from './repo-list.component';
-import { RepoDetailComponent } from './repo-detail.component';
 import { RepoResolver } from './repo.resolver';
+import { ReposOverviewComponent } from './repos-overview.component';
 
 const tripPassagesRoute: Routes = [
     {
-        component: RepoListComponent,
         path: '',
+        component: ReposOverviewComponent,
         resolve: {
             repos: ReposResolver,
-        }
+        },
+        pathMatch: 'full'
     },
     {
-        path: ':username/:reponame',
-        component: RepoDetailComponent,
+        path: ':page',
+        component: ReposOverviewComponent,
         resolve: {
-            repo: RepoResolver,
+            repos: ReposResolver,
         },
     }
 ];

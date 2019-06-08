@@ -1,6 +1,9 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<nav>
-  <a routerLink="/repos" routerLinkActive="active">Repos</a>
-  <a routerLink="/heroes" routerLinkActive="active">Heroes</a>
-</nav>
-<router-outlet></router-outlet>
+<header>
+  <mat-toolbar color="primary">
+    <a routerLink="/"><span>DonMahallem</span></a>
+  </mat-toolbar>
+</header>
+<main class="mat-app-background">
+  <router-outlet></router-outlet>
+</main>

@@ -1,22 +1,22 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { RepoDetailComponent } from './repo-detail.component';
+import { HomeComponent } from './home.component';
 
-describe('modules/routing/repos/repo-detail.component', () => {
-  describe('RepoDetailComponent', () => {
+describe('home.component', () => {
+  describe('HomeComponent', () => {
     beforeEach(async(() => {
       TestBed.configureTestingModule({
         imports: [
           RouterTestingModule
         ],
         declarations: [
-          RepoDetailComponent
+          HomeComponent
         ],
       }).compileComponents();
     }));
 
     it('should create the app', () => {
-      const fixture = TestBed.createComponent(RepoDetailComponent);
+      const fixture = TestBed.createComponent(HomeComponent);
       const app = fixture.debugElement.componentInstance;
       expect(app).toBeTruthy();
     });

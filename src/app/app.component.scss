@@ -1,0 +1,21 @@
+$maxContent: 800px;
+:host{
+    display: block;
+    min-height: 100vh;
+    main{
+        display: block;
+    }
+}
+@media (min-width: #{$maxContent+1}){
+    :host{
+        background: rgba(255, 255, 255, 0.1);
+        main{
+            width:$maxContent;
+            margin:0px auto;
+        }
+    }
+}
+mat-toolbar a{
+    color: inherit; /* blue colors for links too */
+    text-decoration: inherit;
+}
