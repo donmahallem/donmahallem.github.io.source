@@ -14,6 +14,7 @@ import { Repository } from 'src/app/modal';
 @Injectable()
 export class ReposResolver implements Resolve<Repository[]> {
 
+    private readonly INT_REGEX: RegExp = /^([1-9]+|0*[1-9][0-9]+)$/;
     /**
      * Constructor
      * @param api the {@ApiService}
@@ -21,15 +22,8 @@ export class ReposResolver implements Resolve<Repository[]> {
      */
     public constructor(private api: GithubApiService, private router: Router) { }
 
-    public parseInt(value: any, defaultValue: number) {
-        if (value) {
-            try {
-                return Math.max(1, parseInt(value, 10));
-            } catch {
-                return defaultValue;
-            }
-        }
-        return defaultValue;
+    public validatePage(value: any) {
+        return this.INT_REGEX.test(value);
     }
 
     /**
@@ -40,17 +34,17 @@ export class ReposResolver implements Resolve<Repository[]> {
     public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Repository[]> {
         let page = 1;
         if (route.params.page) {
-            page = this.parseInt(route.params.page, -1);
-            if (page < 1) {
+            if (!this.validatePage(route.params.page)) {
                 this.router.navigate(['repos', 'list']);
                 return EMPTY;
             }
+            page = route.params.page;
         }
         return this.api
             .getUserRepos(environment.github.username, 25, page)
             .pipe(tap((value) => {
                 if (value.length === 0 && page !== 1) {
-                    throw new Error('Empty Response');
+                    throw new HttpErrorResponse({ status: 404 });
                 }
             }), catchError((err: any | HttpErrorResponse) => {
                 if (err.status === 404) {

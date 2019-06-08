@@ -1,7 +1,7 @@
 <mat-nav-list>
     <ng-container *ngFor="let item of items; let idx = index">
         <h3 matSubheader *ngIf="item.hasHeader">{{item.header}}</h3>
-        <a mat-list-item [routerLink]="['/repos','detail',item.repo.name]">
+        <a mat-list-item [routerLink]="['/repo',item.repo.name]">
             <mat-icon matListIcon>folder</mat-icon>
             <h4 matLine>{{item.repo.name}}</h4>
             <p matLine class="demo-2"> {{item.repo.updated_at}} </p>

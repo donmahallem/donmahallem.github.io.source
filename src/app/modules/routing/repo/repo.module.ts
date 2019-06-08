@@ -9,23 +9,18 @@ import {
     MatGridListModule,
     MatDividerModule,
 } from '@angular/material';
-import { ReposResolver } from './repos.resolver';
-import { RepoListComponent } from './repo-list.component';
-import { ReposRoutingModule } from './repos-routing.module';
-import { ReposListItemComponent } from './repos-list-item.component';
 import { ObjectTreeModule } from '../../common';
+import { RepoDetailComponent } from './repo-detail.component';
 import { RepoResolver } from './repo.resolver';
-import { ReposOverviewComponent } from './repos-overview.component';
 import { PagerModule } from '../../common/pager';
+import { RepoRoutingModule } from './repo-routing.module';
 @NgModule({
     declarations: [
-        RepoListComponent,
-        ReposListItemComponent,
-        ReposOverviewComponent
+        RepoDetailComponent,
     ],
     imports: [
         CommonModule,
-        ReposRoutingModule,
+        RepoRoutingModule,
         MatGridListModule,
         MatDividerModule,
         MatListModule,
@@ -33,8 +28,7 @@ import { PagerModule } from '../../common/pager';
         PagerModule
     ],
     providers: [
-        ReposResolver,
         RepoResolver
     ],
 })
-export class ReposModule { }
+export class RepoModule { }

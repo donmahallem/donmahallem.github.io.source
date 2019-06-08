@@ -19,25 +19,40 @@ export class ReposOverviewComponent implements AfterViewInit, OnDestroy {
     public repos: Repository[] = [];
     public page = 1;
     private updateSubscription: Subscription;
+
     public constructor(private activatedRoute: ActivatedRoute,
                        private cdRef: ChangeDetectorRef) {
 
     }
 
     public ngAfterViewInit(): void {
-        this.updateSubscription = combineLatest(this.activatedRoute
+        this.updateSubscription = this.activatedRoute
             .data
             .pipe(map((data: { repos: Repository[] }): Repository[] => {
                 return data.repos;
-            })), this.activatedRoute.params.pipe(map(params => params.page)))
-            .subscribe(([repos, page]) => {
-                this.update(repos, page);
+            })).subscribe((repos) => {
+                this.update(repos);
             });
     }
+    public getCurrentPage(): number {
+        const params: any = this.activatedRoute.snapshot.params;
+        if (params.page) {
+            return parseInt(params.page, 10);
+        } else {
+            return 1;
+        }
+    }
 
-    public update(repos: Repository[], page): void {
+    public hasNextPage(): boolean {
+        return this.repos.length === 25;
+    }
+
+    public hasPreviousPage(): boolean {
+        return this.getCurrentPage() > 1;
+    }
+    public update(repos: Repository[]): void {
         this.repos = repos;
-        this.page = page;
+        this.page = this.getCurrentPage();
         this.cdRef.detectChanges();
     }
 
