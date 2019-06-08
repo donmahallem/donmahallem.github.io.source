@@ -13,6 +13,7 @@ import { ObjectTreeModule } from '../../common';
 import { RepoDetailComponent } from './repo-detail.component';
 import { RepoResolver } from './repo.resolver';
 import { RepoRoutingModule } from './repo-routing.module';
+import { NpmPackageInfoModule } from '../../common/npm-package-info';
 @NgModule({
     declarations: [
         RepoDetailComponent,
@@ -23,7 +24,8 @@ import { RepoRoutingModule } from './repo-routing.module';
         MatGridListModule,
         MatDividerModule,
         MatListModule,
-        ObjectTreeModule
+        ObjectTreeModule,
+        NpmPackageInfoModule
     ],
     providers: [
         RepoResolver

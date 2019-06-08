@@ -4,9 +4,11 @@ import {
     MatSnackBarModule, MatTreeModule, MatIconModule, MatButtonModule,
 } from '@angular/material';
 import { NpmPackageInfoComponent } from './npm-package-info.component';
+import { NpmPackageListComponent } from './npm-package-list.component';
 @NgModule({
     declarations: [
         NpmPackageInfoComponent,
+        NpmPackageListComponent
     ],
     exports: [
         CommonModule,

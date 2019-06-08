@@ -3,6 +3,7 @@ import { Repository } from 'src/app/modal';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
     selector: 'app-repo-detail',
@@ -34,5 +35,17 @@ export class RepoDetailComponent implements AfterViewInit, OnDestroy {
 
     public ngOnDestroy(): void {
         this.updateSubscription.unsubscribe();
+    }
+
+    public isJavascript(): boolean {
+        if (this.repository && this.repository.language) {
+            const lowerCaseLanguage: string = this.repository.language.toLowerCase();
+            return (lowerCaseLanguage === 'typescript' || lowerCaseLanguage === 'javascript');
+        }
+        return false;
+    }
+
+    public get npmPackageUrl(): string {
+        return 'https://raw.githubusercontent.com/' + this.repository.full_name + '/master/package.json';
     }
 }

@@ -1,32 +1,31 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { GithubApiService } from '../../../services';
-import { distinct } from 'rxjs/operators';
-import { flatMap } from 'tslint/lib/utils';
-import { GithubFileId } from '../../../modal';
+import { distinct, flatMap } from 'rxjs/operators';
+import { NpmPackage } from '../../../modal';
+import { FileDownloadService } from 'src/app/services/file-download.service';
 
 @Injectable()
 export class NpmPackageService {
 
-    private packageSubject: BehaviorSubject<GithubFileId> = new BehaviorSubject(undefined);
-    public constructor(private githubApi: GithubApiService) {
+    private packageSubject: BehaviorSubject<string> = new BehaviorSubject(undefined);
+    public constructor(private downloadService: FileDownloadService) {
 
     }
 
-    public set package(file: GithubFileId) {
+    public set package(file: string) {
         this.packageSubject.next(file);
     }
 
-    public get package(): GithubFileId {
+    public get package(): string {
         return this.packageSubject.value;
     }
 
-    public observePackage(): Observable<any> {
+    public observePackage(): Observable<NpmPackage> {
         return this.packageSubject
             .pipe(
                 distinct(),
-                flatMap((file: GithubFileId): any => {
-                    return this.githubApi.getRawFile(file);
+                flatMap((file: string): Observable<NpmPackage> => {
+                    return this.downloadService.getRawFile<NpmPackage>(file);
                 })
             );
     }

@@ -1,0 +1,5 @@
+<ul>
+    <li *ngFor="let dep of packages"><a href="https://www.npmjs.com/package/{{dep[0]}}/v/{{derangeVersion(dep[1])}}"
+            target="_blank">{{dep[0]}} -
+            {{dep[1]}}</a></li>
+</ul>
