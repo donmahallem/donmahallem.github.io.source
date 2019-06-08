@@ -19,6 +19,6 @@ export class NpmPackageInfoComponent {
     }
     @Input()
     public set packageUrl(url: string) {
-        this.packageService.setPackageUrl(url);
+        this.packageService.packageUrl = url;
     }
 }

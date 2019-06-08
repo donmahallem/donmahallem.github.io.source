@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Repository } from '../modal';
+import { Repository, GithubFileId } from '../modal';
 
 @Injectable({
     providedIn: 'root',
@@ -35,8 +35,9 @@ export class GithubApiService {
 
     }
 
-    public getRawFile(username: string, reponame: string, filepath: string, branch: string = 'master'): Observable<any> {
-        return this.http.get<any>('https://raw.githubusercontent.com/' + username + '/' + reponame + '/' + branch + '/' + filepath);
+    public getRawFile(file: GithubFileId): Observable<any> {
+        return this.http.get<any>('https://raw.githubusercontent.com/' + file.username
+            + '/' + file.reponame + '/' + file.branch ? file.branch : 'master' + '/' + file.filepath);
 
     }
 }
