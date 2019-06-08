@@ -16,7 +16,6 @@ import { ReposListItemComponent } from './repos-list-item.component';
 import { ObjectTreeModule } from '../../common';
 import { RepoResolver } from './repo.resolver';
 import { ReposOverviewComponent } from './repos-overview.component';
-import { PagerModule } from '../../common/pager';
 @NgModule({
     declarations: [
         RepoListComponent,
@@ -29,8 +28,7 @@ import { PagerModule } from '../../common/pager';
         MatGridListModule,
         MatDividerModule,
         MatListModule,
-        ObjectTreeModule,
-        PagerModule
+        ObjectTreeModule
     ],
     providers: [
         ReposResolver,

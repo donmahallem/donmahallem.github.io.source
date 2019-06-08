@@ -12,7 +12,6 @@ import {
 import { ObjectTreeModule } from '../../common';
 import { RepoDetailComponent } from './repo-detail.component';
 import { RepoResolver } from './repo.resolver';
-import { PagerModule } from '../../common/pager';
 import { RepoRoutingModule } from './repo-routing.module';
 @NgModule({
     declarations: [
@@ -24,8 +23,7 @@ import { RepoRoutingModule } from './repo-routing.module';
         MatGridListModule,
         MatDividerModule,
         MatListModule,
-        ObjectTreeModule,
-        PagerModule
+        ObjectTreeModule
     ],
     providers: [
         RepoResolver
