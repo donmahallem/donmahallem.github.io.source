@@ -34,4 +34,9 @@ export class GithubApiService {
         }
 
     }
+
+    public getRawFile(username: string, reponame: string, filepath: string, branch: string = 'master'): Observable<any> {
+        return this.http.get<any>('https://raw.githubusercontent.com/' + username + '/' + reponame + '/' + branch + '/' + filepath);
+
+    }
 }
