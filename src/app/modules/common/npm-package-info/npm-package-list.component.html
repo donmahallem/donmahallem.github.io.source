@@ -1,5 +1,19 @@
-<ul>
-    <li *ngFor="let dep of packages"><a href="https://www.npmjs.com/package/{{dep[0]}}/v/{{derangeVersion(dep[1])}}"
-            target="_blank">{{dep[0]}} -
-            {{dep[1]}}</a></li>
-</ul>
+<mat-expansion-panel [disabled]="isDisabled()">
+    <mat-expansion-panel-header>
+        <mat-panel-title>{{header}}</mat-panel-title>
+        <mat-panel-description>{getPackageCount(), plural,
+            =0 {No package detected}
+            =1 {One package detected}
+            =2 {Two packages detected}
+            other {{{getPackageCount()}} packages detected}}
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-nav-list dense>
+        <a *ngFor="let dep of packages" mat-list-item
+            href="https://www.npmjs.com/package/{{dep[0]}}/v/{{derangeVersion(dep[1])}}" target="_blank">
+            <mat-icon matListIcon>archive</mat-icon>
+            <h3 matLine>{{dep[0]}}</h3>
+            <p matLine i18n="npm package list|The npm version@@version_x">Version: {{dep[1]}}</p>
+        </a>
+    </mat-nav-list>
+</mat-expansion-panel>

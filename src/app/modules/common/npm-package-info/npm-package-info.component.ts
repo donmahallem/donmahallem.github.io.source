@@ -1,8 +1,8 @@
 import { Component, AfterViewInit, OnDestroy, NgZone, ChangeDetectorRef, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Repository, GithubFileId, NpmPackage } from 'src/app/modal';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Subscription, from, EMPTY } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { NpmPackageService } from './npm-package.service';
@@ -18,6 +18,7 @@ export class NpmPackageInfoComponent implements AfterViewInit, OnDestroy {
     private loadSubscription: Subscription;
     public dependencies: DependencyInfo[] = [];
     public devDependencies: DependencyInfo[] = [];
+    public optionalDependencies: DependencyInfo[] = [];
     constructor(private packageService: NpmPackageService,
                 private changeDetectorRef: ChangeDetectorRef) {
 
@@ -28,15 +29,22 @@ export class NpmPackageInfoComponent implements AfterViewInit, OnDestroy {
     }
 
     public convertMapToArray(obj: { [key: string]: string }): DependencyInfo[] {
-        return Object.keys(obj).map((key: string) => [key, obj[key]]);
+        if (obj) {
+            return Object.keys(obj).map((key: string) => [key, obj[key]]);
+        }
+        return [];
     }
 
     public ngAfterViewInit(): void {
         this.loadSubscription = this.packageService
             .observePackage()
+            .pipe(catchError((err) => {
+                return EMPTY;
+            }))
             .subscribe((pack: NpmPackage): void => {
                 this.dependencies = this.convertMapToArray(pack.dependencies);
                 this.devDependencies = this.convertMapToArray(pack.devDependencies);
+                this.optionalDependencies = this.convertMapToArray(pack.optionalDependencies);
                 this.changeDetectorRef.detectChanges();
             });
     }

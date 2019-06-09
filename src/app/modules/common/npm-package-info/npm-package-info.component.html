@@ -1,4 +1,12 @@
 <h1>Package Info</h1>
-<app-npm-package-list [packages]="dependencies"></app-npm-package-list>
-<h4>Dev</h4>
-<app-npm-package-list [packages]="devDependencies"></app-npm-package-list>
+<app-npm-package-list [packages]="dependencies"
+    i18n-header="npm package file|package list dependencies header@@npmPackageListDependencies" header="Dependencies">
+</app-npm-package-list>
+<app-npm-package-list [packages]="devDependencies"
+    i18n-header="npm package file|package list dev dependencies header@@npmPackageListDevDependencies"
+    header="Development Dependencies">
+</app-npm-package-list>
+<app-npm-package-list [packages]="optionalDependencies"
+    i18n-header="npm package file|package list optional dependencies header@@npmPackageListOptionalDependencies"
+    header="Optional Dependencies">
+</app-npm-package-list>

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import {
-    MatSnackBarModule, MatTreeModule, MatIconModule, MatButtonModule,
+    MatSnackBarModule, MatTreeModule, MatIconModule, MatButtonModule, MatExpansionModule, MatListModule,
 } from '@angular/material';
 import { NpmPackageInfoComponent } from './npm-package-info.component';
 import { NpmPackageListComponent } from './npm-package-list.component';
@@ -15,13 +15,17 @@ import { NpmPackageListComponent } from './npm-package-list.component';
         NpmPackageInfoComponent,
         MatTreeModule,
         MatIconModule,
-        MatButtonModule
+        MatButtonModule,
+        MatExpansionModule,
+        MatListModule
     ],
     imports: [
         CommonModule,
         MatTreeModule,
         MatIconModule,
-        MatButtonModule
+        MatButtonModule,
+        MatExpansionModule,
+        MatListModule
     ],
 })
 export class NpmPackageInfoModule { }

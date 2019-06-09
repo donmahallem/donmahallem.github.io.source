@@ -11,9 +11,24 @@ export class NpmPackageListComponent {
 
     @Input()
     public packages: DependencyInfo[] = [];
+    @Input()
+    public header = '';
+    @Input()
+    public description = '';
 
     public derangeVersion(version: string): string {
         return version.match(/[0-9].*/)[0];
+    }
+
+    public getPackageCount(): number {
+        if (this.packages) {
+            return this.packages.length;
+        }
+        return 0;
+    }
+
+    public isDisabled(): boolean {
+        return this.getPackageCount() < 1;
     }
 
 }
