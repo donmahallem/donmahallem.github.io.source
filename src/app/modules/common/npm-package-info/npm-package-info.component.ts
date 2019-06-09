@@ -11,7 +11,10 @@ import { DependencyInfo } from './dependendy-info';
     selector: 'app-npm-package-info',
     templateUrl: './npm-package-info.component.html',
     styleUrls: ['./npm-package-info.component.scss'],
-    providers: [NpmPackageService]
+    providers: [NpmPackageService],
+    host: {
+        role: 'complementary'
+    }
 })
 export class NpmPackageInfoComponent implements AfterViewInit, OnDestroy {
 
