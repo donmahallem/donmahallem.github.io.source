@@ -1,7 +1,15 @@
-<h1 class="mat-display-1">Name: {{repository?.full_name}}</h1>
-<h3>{{repository?.description}}</h3>
-<mat-divider></mat-divider>
+<h1 class="mat-display-1">{{repository?.full_name}}</h1>
+<h3 class="mat-display-4" *ngIf="hasDescription()">{{repository?.description}}</h3>
 <app-object-tree></app-object-tree>
 <a href="{{repository?.html_url}}">On Github</a>
 <h4>{{repository?.language}}</h4>
-<app-npm-package-info *ngIf="isJavascript()" [packageUrl]="npmPackageUrl"></app-npm-package-info>
+<div class="npm-version-box">
+    <span>0</span>
+    <span>1</span>
+    <span>2</span>
+    <span>3</span>
+</div>
+<ng-container *ngIf="isJavascript()">
+    <mat-divider></mat-divider>
+    <app-npm-package-info [packageUrl]="npmPackageUrl"></app-npm-package-info>
+</ng-container>
