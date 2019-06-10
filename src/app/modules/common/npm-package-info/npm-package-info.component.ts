@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnDestroy, NgZone, ChangeDetectorRef, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, NgZone, ChangeDetectorRef, ChangeDetectionStrategy, Input, HostBinding } from '@angular/core';
 import { Repository, GithubFileId, NpmPackage } from 'src/app/modal';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription, from, EMPTY } from 'rxjs';
@@ -12,12 +12,11 @@ import { DependencyInfo } from './dependendy-info';
     templateUrl: './npm-package-info.component.html',
     styleUrls: ['./npm-package-info.component.scss'],
     providers: [NpmPackageService],
-    host: {
-        role: 'complementary'
-    }
 })
 export class NpmPackageInfoComponent implements AfterViewInit, OnDestroy {
 
+    @HostBinding('role')
+    public ariaRole = 'complementary';
     private loadSubscription: Subscription;
     public dependencies: DependencyInfo[] = [];
     public devDependencies: DependencyInfo[] = [];

@@ -49,9 +49,9 @@ export class RepoDetailComponent implements AfterViewInit, OnDestroy {
         return 'https://raw.githubusercontent.com/' + this.repository.full_name + '/master/package.json';
     }
 
-    public hasDescription():boolean{
-        if(this.repository){
-            return typeof this.repository.description==="string";
+    public hasDescription(): boolean {
+        if (this.repository) {
+            return typeof this.repository.description === 'string';
         }
         return false;
     }

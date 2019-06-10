@@ -14,9 +14,13 @@ import { RepoDetailComponent } from './repo-detail.component';
 import { RepoResolver } from './repo.resolver';
 import { RepoRoutingModule } from './repo-routing.module';
 import { NpmPackageInfoModule } from '../../common/npm-package-info';
+import { RepoStatsBoxComponent } from './repo-stats-box.component';
+import { RepoStatsBoxItemComponent } from './repo-stats-box-item.component';
 @NgModule({
     declarations: [
         RepoDetailComponent,
+        RepoStatsBoxComponent,
+        RepoStatsBoxItemComponent
     ],
     imports: [
         CommonModule,
@@ -25,7 +29,8 @@ import { NpmPackageInfoModule } from '../../common/npm-package-info';
         MatDividerModule,
         MatListModule,
         ObjectTreeModule,
-        NpmPackageInfoModule
+        NpmPackageInfoModule,
+        MatIconModule
     ],
     providers: [
         RepoResolver

@@ -1,0 +1,18 @@
+:host{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    app-repo-stats-box-item{
+        grid-column: span 1;
+    }
+    
+    @media (max-width: 300px){
+        app-repo-stats-box-item{
+            grid-column: span 4;
+        }
+    }
+    @media (min-width: 301px) and (max-width: 500px){
+        app-repo-stats-box-item{
+            grid-column: span 2;
+        }
+    }
+}
