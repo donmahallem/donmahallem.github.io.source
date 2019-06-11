@@ -13,7 +13,4 @@ import { environment } from 'src/environments/environment.prod';
 export class RepoStatsBoxItemComponent {
     @Input()
     public icon: string;
-
-    @Input()
-    public title: string;
 }

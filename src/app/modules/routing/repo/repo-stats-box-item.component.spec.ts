@@ -1,7 +1,8 @@
-import { TestBed, async } from '@angular/core/testing';
-import { Component, Input } from '@angular/core';
+import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+import { Component, Input, DebugElement } from '@angular/core';
 import { Repository } from 'src/app/modal';
 import { RepoStatsBoxItemComponent } from './repo-stats-box-item.component';
+import { By } from '@angular/platform-browser';
 
 // tslint:disable:component-selector
 // tslint:disable:directive-selector
@@ -10,6 +11,13 @@ import { RepoStatsBoxItemComponent } from './repo-stats-box-item.component';
   template: '',
 })
 export class TestMatIconComponent { }
+@Component({
+  template: '<app-repo-stats-box-item [icon]="useIcon">{{content}}</app-repo-stats-box-item>',
+})
+export class TestParentComponent {
+  public useIcon: string;
+  public content: string;
+}
 
 // tslint:enable:component-selector
 // tslint:enable:directive-selector
@@ -21,7 +29,8 @@ describe('modules/routing/repo/repo-stats-box-item.component', () => {
         ],
         declarations: [
           TestMatIconComponent,
-          RepoStatsBoxItemComponent
+          RepoStatsBoxItemComponent,
+          TestParentComponent
         ],
       }).compileComponents();
     }));
@@ -33,17 +42,26 @@ describe('modules/routing/repo/repo-stats-box-item.component', () => {
     });
 
     describe('layout', () => {
-      describe('as child', () => {
-        it('requires implementation');
+      let parentFixture: ComponentFixture<TestParentComponent>;
+      let testComponent: TestParentComponent;
+      let testChild: RepoStatsBoxItemComponent;
+      let testChildDebugElement: DebugElement;
+      beforeEach(() => {
+        parentFixture = TestBed.createComponent(TestParentComponent);
+        testComponent = parentFixture.debugElement.componentInstance;
+        testChildDebugElement = parentFixture.debugElement.query(By.directive(RepoStatsBoxItemComponent));
+        testChild = testChildDebugElement.componentInstance;
       });
-      describe('as host', () => {
-        it('requires implementation');
+      ['star', 'home'].forEach((testText: string) => {
+        it('it should display "' + testText + '"', () => {
+          testComponent.useIcon = testText;
+          testComponent.content = testText;
+          parentFixture.detectChanges();
+          expect(testChild.icon).toEqual(testText);
+          expect(testChildDebugElement.nativeElement.textContent.trim()).toEqual(testText);
+        });
       });
     });
-
-    describe('methods', () => {
-      it('requires implementation');
-    });
-
   });
+
 });
