@@ -365,7 +365,7 @@
 
     // creating a new Tap/Page
     const page &#x3D; await browser.newPage();
-    page.setUserAgent(&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36&quot;);
+    page.setUserAgent(&quot;Mozilla/5.0 (&quot; + Math.random() + &quot;) AppleWebKit/&quot; + Math.random() + &quot; (KHTML, like Gecko) Chrome/&quot; + Math.random() + &quot; Safari/&quot; + Math.random());
     page.on(&quot;pageerror&quot;, (err) &#x3D;&gt; {
         const theTempValue &#x3D; err.toString();
         console.log(&quot;Page error: &quot; + theTempValue);
@@ -378,7 +378,7 @@
         interceptedRequest.continue();
     });*/
     page.on(&#x27;response&#x27;, async response &#x3D;&gt; {
-        if (response.status() !&#x3D;&#x3D; 200) {
+        if (response.status() !&#x3D;&#x3D; 200 &amp;&amp; response.status() !&#x3D;&#x3D; 304) {
             console.log(&quot;response url: &quot;, response.url());
             console.log(&quot;response code: &quot;, response.status());
             //console.log(&quot;response status text: &quot;, response.statusText());
@@ -392,6 +392,7 @@
 
         const uri: string &#x3D; &#x60;${HOST}/${p}&#x60;;
         // requesting the first page in PAGES array
+        console.log(&quot;Querying&quot;, uri);
         await page.goto(uri, { waitUntil: &quot;networkidle0&quot; });
 
         // getting the html content after the Chromium finish rendering.
@@ -449,6 +450,21 @@
     // closes Chromium and finishes the express server.
     browser.close();
     server.close();
+
+
+    let sitemap: string &#x3D; &#x27;&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;&lt;urlset xmlns&#x3D;&quot;http://www.sitemaps.org/schemas/sitemap/0.9&quot;&gt;&#x27;;
+    for (let page of RENDERED_PAGES) {
+        sitemap +&#x3D; &quot;&lt;url&gt;&lt;loc&gt;&quot;;
+        sitemap +&#x3D; &quot;https://donmahallem.github.io/&quot; + page;
+        sitemap +&#x3D; &quot;&lt;/loc&gt;&lt;lastmod&gt;&quot;;
+        sitemap +&#x3D; &quot;&quot; + (new Date()).toISOString().split(&#x27;T&#x27;)[0] + &quot;&lt;/lastmod&gt;&quot;;
+        sitemap +&#x3D; &quot;&lt;changefreq&gt;daily&lt;/changefreq&gt;&quot;;
+        sitemap +&#x3D; &quot;&lt;priority&gt;0.5&lt;/priority&gt;&quot;
+        sitemap +&#x3D; &quot;&lt;/url&gt;&quot;;
+    }
+    sitemap +&#x3D; &quot;&lt;/urlset&gt;&quot;;
+
+    await writeFile(join(DIST_OUTPUT_PATH, &quot;sitemap.xml&quot;), sitemap);
 }</code>
                         </td>
                     </tr>
