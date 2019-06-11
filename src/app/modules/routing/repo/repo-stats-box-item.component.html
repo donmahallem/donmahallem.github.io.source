@@ -1,2 +1,3 @@
-<mat-icon aria-hidden="true">{{icon}}</mat-icon>
+<mat-icon *ngIf="isFontAwesome()" aria-hidden="true" fontSet="fas" fontIcon="{{icon}}"></mat-icon>
+<mat-icon *ngIf="!isFontAwesome()" aria-hidden="true">{{icon}}</mat-icon>
 <ng-content></ng-content>

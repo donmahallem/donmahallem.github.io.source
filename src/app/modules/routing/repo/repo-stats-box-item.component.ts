@@ -13,4 +13,11 @@ import { environment } from 'src/environments/environment.prod';
 export class RepoStatsBoxItemComponent {
     @Input()
     public icon: string;
+
+    public isFontAwesome(): boolean {
+        if (this.icon) {
+            return this.icon.substr(0, 3).toLowerCase() === 'fa-';
+        }
+        return false;
+    }
 }

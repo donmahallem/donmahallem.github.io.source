@@ -1,5 +1,5 @@
-<h1 class="mat-display-1">{{repository?.full_name}}</h1>
-<h3 class="mat-display-4" *ngIf="hasDescription()">{{repository?.description}}</h3>
+<h1 class="mat-display-3">{{repository?.full_name}}</h1>
+<h3 class="mat-display-1" *ngIf="hasDescription()">{{repository?.description}}</h3>
 <app-repo-stats-box [repository]="repository"></app-repo-stats-box>
 <app-object-tree></app-object-tree>
 <a href="{{repository?.html_url}}">On Github</a>
