@@ -77,6 +77,10 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Public</span>
+                                <a href="#getRawFile">getRawFile</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
                                 <a href="#getRepo">getRepo</a>
                             </li>
                             <li>
@@ -153,6 +157,86 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="getRawFile"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getRawFile
+                        </b>
+                        <a href="#getRawFile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getRawFile(file: <a href="../interfaces/GithubFileId.html">GithubFileId</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="38"
+                            class="link-to-prism">src/app/services/github-api.service.ts:38</a></div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Type parameters :</b>
+                    <ul class="type-parameters">
+                        <li>T</li>
+                    </ul>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>file</td>
+                                    <td>
+                                                <code><a href="../interfaces/GithubFileId.html" target="_self" >GithubFileId</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;T&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="getRepo"></a>
                     <span class="name">
                         <b>
@@ -173,8 +257,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="19"
-                            class="link-to-prism">src/app/services/github-api.service.ts:19</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="29"
+                            class="link-to-prism">src/app/services/github-api.service.ts:29</a></div>
                 </td>
             </tr>
 
@@ -250,15 +334,15 @@
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getUserRepos(username: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>getUserRepos(username: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, page_size: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, page?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="15"
-                            class="link-to-prism">src/app/services/github-api.service.ts:15</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="21"
+                            class="link-to-prism">src/app/services/github-api.service.ts:21</a></div>
                 </td>
             </tr>
 
@@ -274,6 +358,8 @@
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Default value</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -287,7 +373,50 @@
                                         No
                                     </td>
 
+                                    <td>
+                                    </td>
 
+                                    <td>
+                                        <p>Username</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>page_size</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                        <code>25</code>
+                                    </td>
+
+                                    <td>
+                                        <p>Page size</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>page</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        <p>Page to query starting at 1</p>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -314,7 +443,7 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { HttpClient } from &#x27;@angular/common/http&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
-import { Repository } from &#x27;../modal&#x27;;
+import { Repository, GithubFileId } from &#x27;../modal&#x27;;
 
 @Injectable({
     providedIn: &#x27;root&#x27;,
@@ -325,8 +454,18 @@ export class GithubApiService {
 
     }
 
-    public getUserRepos(username: string): Observable&lt;Repository[]&gt; {
-        return this.http.get&lt;Repository[]&gt;(&#x27;https://api.github.com/users/&#x27; + username + &#x27;/repos?per_page&#x3D;100&#x27;);
+    /**
+     *
+     * @param username Username
+     * @param page_size Page size
+     * @param page Page to query starting at 1
+     */
+    public getUserRepos(username: string, page_size: number &#x3D; 25, page?: number): Observable&lt;Repository[]&gt; {
+        let url: string &#x3D; &#x27;https://api.github.com/users/&#x27; + username + &#x27;/repos?per_page&#x3D;&#x27; + page_size;
+        if (page) {
+            url +&#x3D; &#x27;&amp;page&#x3D;&#x27; + page;
+        }
+        return this.http.get&lt;Repository[]&gt;(url);
     }
 
     public getRepo(usernameOrFullname: string, reponame?: string): Observable&lt;Repository&gt; {
@@ -335,6 +474,12 @@ export class GithubApiService {
         } else {
             return this.http.get&lt;Repository&gt;(&#x27;https://api.github.com/repos/&#x27; + usernameOrFullname);
         }
+
+    }
+
+    public getRawFile&lt;T&gt;(file: GithubFileId): Observable&lt;T&gt; {
+        return this.http.get&lt;T&gt;(&#x27;https://raw.githubusercontent.com/&#x27; + file.username
+            + &#x27;/&#x27; + file.reponame + &#x27;/&#x27; + file.branch ? file.branch : &#x27;master&#x27; + &#x27;/&#x27; + file.filepath);
 
     }
 }

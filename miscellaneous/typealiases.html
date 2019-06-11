@@ -27,97 +27,64 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content module">
+               <div class="content miscellaneous-typealiases">
                    <div class="content-data">
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 <ol class="breadcrumb">
-    <li>Modules</li>
-    <li>ReposRoutingModule</li>
+  <li>Miscellaneous</li>
+  <li>Type aliases</li>
 </ol>
 
+<section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <ul class="index-list">
+                        <li>
+                            <a href="#DependencyInfo" title="src/app/modules/common/npm-package-info/dependendy-info.ts"><b>DependencyInfo</b>&nbsp;&nbsp;&nbsp;(src/.../dependendy-info.ts)</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
 
-<ul class="nav nav-tabs" role="tablist">
-    <li  class="active" >
-        <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
-    </li>
-    <li >
-        <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
-    </li>
-</ul>
-
-<div class="tab-content">
-    <div class="tab-pane fade active in" id="c-info">
-
-        <p class="comment">
-            <h3>File</h3>
-        </p>
-        <p class="comment">
-            <code>src/app/modules/routing/repos/repos-routing.module.ts</code>
-        </p>
-
-
-
-
-        <div class="container-fluid module">
-            <div class="row">
-            </div>
-        </div>
-
-
-    </div>
-
-
-    <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
-import { RouterModule, Routes } from &#x27;@angular/router&#x27;;
-import { ReposResolver } from &#x27;./repos.resolver&#x27;;
-import { RepoResolver } from &#x27;./repo.resolver&#x27;;
-import { ReposOverviewComponent } from &#x27;./repos-overview.component&#x27;;
-
-const tripPassagesRoute: Routes &#x3D; [
-    {
-        path: &#x27;&#x27;,
-        component: ReposOverviewComponent,
-        resolve: {
-            repos: ReposResolver,
-        },
-        pathMatch: &#x27;full&#x27;
-    },
-    {
-        path: &#x27;:page&#x27;,
-        component: ReposOverviewComponent,
-        resolve: {
-            repos: ReposResolver,
-        },
-    }
-];
-
-@NgModule({
-    exports: [
-        RouterModule,
-    ],
-    imports: [
-        RouterModule.forChild(tripPassagesRoute),
-    ],
-})
-export class ReposRoutingModule { }
-</code></pre>
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
+    <h3>src/app/modules/common/npm-package-info/dependendy-info.ts</h3>
+    <section>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DependencyInfo"></a>
+                    <span class="name"><b>DependencyInfo</b><a href="#DependencyInfo"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>[string, string]</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
 
 
                    </div><div class="search-results">
@@ -136,8 +103,8 @@ export class ReposRoutingModule { }
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'module';
-            var COMPODOC_CURRENT_PAGE_URL = 'ReposRoutingModule.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-typealiases';
+            var COMPODOC_CURRENT_PAGE_URL = 'typealiases.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

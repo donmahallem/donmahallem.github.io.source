@@ -72,11 +72,29 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
 import { Routes, RouterModule } from &#x27;@angular/router&#x27;;
+import { HomeComponent } from &#x27;./home.component&#x27;;
+import { NotFoundComponent } from &#x27;./not-found.component&#x27;;
 
 const routes: Routes &#x3D; [
   {
-    loadChildren: () &#x3D;&gt; &quot;import(&#x27;./modules/routing/repos/repos.module&#x27;).then(m &#x3D;&gt; m.ReposModule)&quot;,
+    loadChildren: () &#x3D;&gt; &quot;import(&#x27;./modules/routing/repos&#x27;).then(m &#x3D;&gt; m.ReposModule)&quot;,
     path: &#x27;repos&#x27;,
+  },
+  {
+    loadChildren: () &#x3D;&gt; &quot;import(&#x27;./modules/routing/repo&#x27;).then(m &#x3D;&gt; m.RepoModule)&quot;,
+    path: &#x27;repo&#x27;,
+  },
+  {
+    path: &#x27;&#x27;,
+    component: HomeComponent
+  },
+  {
+    component: NotFoundComponent,
+    path: &#x27;404&#x27;
+  },
+  {
+    path: &#x27;**&#x27;,
+    redirectTo: &#x27;404&#x27;
   }];
 
 @NgModule({

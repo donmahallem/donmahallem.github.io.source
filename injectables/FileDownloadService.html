@@ -27,7 +27,7 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content guard">
+               <div class="content injectable">
                    <div class="content-data">
 
 
@@ -36,11 +36,9 @@
 
 
 
-
-
 <ol class="breadcrumb">
-    <li>Guards</li>
-    <li>RepoResolver</li>
+  <li>Injectables</li>
+  <li>FileDownloadService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -53,27 +51,18 @@
 </ul>
 
 <div class="tab-content">
-        <div class="tab-pane fade active in" id="c-info">
-            <p class="comment">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
             <h3>File</h3>
-            </p>
-            <p class="comment">
-                <code>src/app/modules/routing/repo/repo.resolver.ts</code>
-            </p>
-
-                <p class="comment">
-                <h3>Description</h3>
-                </p>
-                <p class="comment">
-                    <p>Resolves information for a stop provided in the route parameter &#39;stopId&#39;
-Redirects to /stops if the server responds with an 404 status</p>
-
-                </p>
+        </p>
+        <p class="comment">
+            <code>src/app/services/file-download.service.ts</code>
+        </p>
 
 
 
 
-                <section>
+            <section>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
@@ -88,7 +77,7 @@ Redirects to /stops if the server responds with an 404 status</p>
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#resolve">resolve</a>
+                                <a href="#getRawFile">getRawFile</a>
                             </li>
                         </ul>
                     </td>
@@ -102,26 +91,23 @@ Redirects to /stops if the server responds with an 404 status</p>
     </table>
 </section>
 
-                <section>
+            <section>
     <h3 id="constructor">Constructor</h3>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                                <span class="modifier">Public</span>
-                        <code>constructor(api: <a href="../injectables/GithubApiService.html">GithubApiService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+<code>constructor(http: <a href="https://angular.io/api/common/http/HttpClient" target="_blank">HttpClient</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/modules/routing/repo/repo.resolver.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/services/file-download.service.ts:9</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Constructor</p>
-</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -130,41 +116,20 @@ Redirects to /stops if the server responds with an 404 status</p>
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
-                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>api</td>
+                                                        <td>http</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/GithubApiService.html" target="_self" >GithubApiService</a></code>
+                                                                        <code><a href="https://angular.io/api/common/http/HttpClient" target="_blank" >HttpClient</a></code>
                                                         </td>
                                                   
                                                     <td>
                                                             No
                                                     </td>
                                                     
-                                                        <td>
-                                                                <code><p>the {</p>
-</code>
-                                                        </td>
-                                                </tr>
-                                                <tr>
-                                                        <td>router</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                        <td>
-                                                                <code><p>the {</p>
-</code>
-                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -175,7 +140,7 @@ Redirects to /stops if the server responds with an 404 status</p>
         </table>
 </section>
 
-                <section>
+            <section>
     
     <h3 id="methods">
         Methods
@@ -184,36 +149,42 @@ Redirects to /stops if the server responds with an 404 status</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="resolve"></a>
+                    <a name="getRawFile"></a>
                     <span class="name">
                         <b>
                             <span class="modifier">Public</span>
-                            resolve
+                            getRawFile
                         </b>
-                        <a href="#resolve"><span class="icon ion-ios-link"></span></a>
+                        <a href="#getRawFile"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>resolve(route: <a href="https://angular.io/api/router/ActivatedRouteSnapshot" target="_blank">ActivatedRouteSnapshot</a>, state: <a href="https://angular.io/api/router/RouterStateSnapshot" target="_blank">RouterStateSnapshot</a>)</code>
+                    <code>getRawFile(url: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="28"
-                            class="link-to-prism">src/app/modules/routing/repo/repo.resolver.ts:28</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="15"
+                            class="link-to-prism">src/app/services/file-download.service.ts:15</a></div>
                 </td>
             </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <b>Type parameters :</b>
+                    <ul class="type-parameters">
+                        <li>T</li>
+                    </ul>
+                </td>
+            </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Resolves the stop information via the stopId param inside the route</p>
-</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -223,14 +194,13 @@ Redirects to /stops if the server responds with an 404 status</p>
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
-                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>route</td>
+                                    <td>url</td>
                                     <td>
-                                                <code><a href="https://angular.io/api/router/ActivatedRouteSnapshot" target="_blank" >ActivatedRouteSnapshot</a></code>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                     </td>
 
                                     <td>
@@ -238,26 +208,6 @@ Redirects to /stops if the server responds with an 404 status</p>
                                     </td>
 
 
-                                    <td>
-                                        <p>The RouteSnapshot</p>
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>state</td>
-                                    <td>
-                                                <code><a href="https://angular.io/api/router/RouterStateSnapshot" target="_blank" >RouterStateSnapshot</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                    <td>
-                                        <p>The RouterState</p>
-
-                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -265,7 +215,7 @@ Redirects to /stops if the server responds with an 404 status</p>
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>Observable&lt;any&gt;</code>
+                        <b>Returns : </b>    <code>Observable&lt;T&gt;</code>
 
                     </div>
                     <div class="io-description">
@@ -276,51 +226,36 @@ Redirects to /stops if the server responds with an 404 status</p>
         </tbody>
     </table>
 </section>
-        </div>
+
+    </div>
 
 
-        <div class="tab-pane fade  tab-source-code" id="c-source">
-            <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpErrorResponse } from &#x27;@angular/common/http&#x27;;
-import { Injectable } from &#x27;@angular/core&#x27;;
-import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from &#x27;@angular/router&#x27;;
-import { EMPTY, Observable } from &#x27;rxjs&#x27;;
-import { catchError } from &#x27;rxjs/operators&#x27;;
-import { GithubApiService } from &#x27;src/app/services&#x27;;
-import { environment } from &#x27;src/environments/environment.prod&#x27;;
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { HttpClient } from &#x27;@angular/common/http&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
+import { Repository, GithubFileId } from &#x27;../modal&#x27;;
 
-/**
- * Resolves information for a stop provided in the route parameter &#x27;stopId&#x27;
- * Redirects to /stops if the server responds with an 404 status
- */
-@Injectable()
-export class RepoResolver implements Resolve&lt;any&gt; {
+@Injectable({
+    providedIn: &#x27;root&#x27;,
+})
+export class FileDownloadService {
 
-    /**
-     * Constructor
-     * @param api the {@ApiService}
-     * @param router the {@Router}
-     */
-    public constructor(private api: GithubApiService, private router: Router) { }
+    constructor(private http: HttpClient) {
 
-    /**
-     * Resolves the stop information via the stopId param inside the route
-     * @param route The RouteSnapshot
-     * @param state The RouterState
-     */
-    public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable&lt;any&gt; {
-        return this.api
-            .getRepo(environment.github.username, route.params.reponame)
-            .pipe(catchError((err: any | HttpErrorResponse) &#x3D;&gt; {
-                if (err.status &#x3D;&#x3D;&#x3D; 404) {
-                    this.router.navigate([&#x27;stops&#x27;]);
-                }
-                return EMPTY;
-            }));
+    }
+
+    public getRawFile&lt;T&gt;(url: string): Observable&lt;T&gt; {
+        return this.http.get&lt;T&gt;(url);
+
     }
 }
 </code></pre>
-        </div>
+    </div>
+
 </div>
+
+
 
 
 
@@ -346,8 +281,8 @@ export class RepoResolver implements Resolve&lt;any&gt; {
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'guard';
-            var COMPODOC_CURRENT_PAGE_URL = 'RepoResolver.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'FileDownloadService.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

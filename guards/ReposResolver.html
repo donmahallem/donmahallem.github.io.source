@@ -77,6 +77,22 @@ Redirects to /stops if the server responds with an 404 status</p>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#INT_REGEX">INT_REGEX</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -89,6 +105,10 @@ Redirects to /stops if the server responds with an 404 status</p>
                             <li>
                                     <span class="modifier">Public</span>
                                 <a href="#resolve">resolve</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#validatePage">validatePage</a>
                             </li>
                         </ul>
                     </td>
@@ -114,7 +134,7 @@ Redirects to /stops if the server responds with an 404 status</p>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/modules/routing/repos/repos.resolver.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/modules/routing/repos/repos.resolver.ts:17</a></div>
                             </td>
                         </tr>
 
@@ -204,8 +224,8 @@ Redirects to /stops if the server responds with an 404 status</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="29"
-                            class="link-to-prism">src/app/modules/routing/repos/repos.resolver.ts:29</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="34"
+                            class="link-to-prism">src/app/modules/routing/repos/repos.resolver.ts:34</a></div>
                 </td>
             </tr>
 
@@ -275,6 +295,78 @@ Redirects to /stops if the server responds with an 404 status</p>
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validatePage"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            validatePage
+                        </b>
+                        <a href="#validatePage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>validatePage(value: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="25"
+                            class="link-to-prism">src/app/modules/routing/repos/repos.resolver.ts:25</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>value</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
         </div>
 
@@ -283,8 +375,8 @@ Redirects to /stops if the server responds with an 404 status</p>
             <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpErrorResponse } from &#x27;@angular/common/http&#x27;;
 import { Injectable } from &#x27;@angular/core&#x27;;
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from &#x27;@angular/router&#x27;;
-import { EMPTY, Observable } from &#x27;rxjs&#x27;;
-import { catchError } from &#x27;rxjs/operators&#x27;;
+import { EMPTY, Observable, from } from &#x27;rxjs&#x27;;
+import { catchError, tap, map } from &#x27;rxjs/operators&#x27;;
 import { GithubApiService } from &#x27;src/app/services&#x27;;
 import { environment } from &#x27;src/environments/environment.prod&#x27;;
 import { Repository } from &#x27;src/app/modal&#x27;;
@@ -296,6 +388,7 @@ import { Repository } from &#x27;src/app/modal&#x27;;
 @Injectable()
 export class ReposResolver implements Resolve&lt;Repository[]&gt; {
 
+    private readonly INT_REGEX: RegExp &#x3D; /^([1-9]+|0*[1-9][0-9]+)$/;
     /**
      * Constructor
      * @param api the {@ApiService}
@@ -303,17 +396,33 @@ export class ReposResolver implements Resolve&lt;Repository[]&gt; {
      */
     public constructor(private api: GithubApiService, private router: Router) { }
 
+    public validatePage(value: any) {
+        return this.INT_REGEX.test(value);
+    }
+
     /**
      * Resolves the stop information via the stopId param inside the route
      * @param route The RouteSnapshot
      * @param state The RouterState
      */
     public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable&lt;Repository[]&gt; {
+        let page &#x3D; 1;
+        if (route.params.page) {
+            if (!this.validatePage(route.params.page)) {
+                this.router.navigate([&#x27;repos&#x27;, &#x27;list&#x27;]);
+                return EMPTY;
+            }
+            page &#x3D; route.params.page;
+        }
         return this.api
-            .getUserRepos(environment.github.username)
-            .pipe(catchError((err: any | HttpErrorResponse) &#x3D;&gt; {
+            .getUserRepos(environment.github.username, 25, page)
+            .pipe(tap((value) &#x3D;&gt; {
+                if (value.length &#x3D;&#x3D;&#x3D; 0 &amp;&amp; page !&#x3D;&#x3D; 1) {
+                    throw new HttpErrorResponse({ status: 404 });
+                }
+            }), catchError((err: any | HttpErrorResponse) &#x3D;&gt; {
                 if (err.status &#x3D;&#x3D;&#x3D; 404) {
-                    this.router.navigate([&#x27;stops&#x27;]);
+                    this.router.navigate([&#x27;404&#x27;]);
                 }
                 return EMPTY;
             }));
