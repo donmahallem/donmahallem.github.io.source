@@ -1,0 +1,15 @@
+<h2 class="mat-h2" i18n="npm package file|title@@npmPackageInfoTitle">Npm Package Info</h2>
+<p class="mat-caption" i18n="npm package file|subtitle@@npmPackageInfoSubtitle">Information about the package.json file
+    located at the
+    repository root directory.</p>
+<app-npm-package-list [packages]="dependencies"
+    i18n-header="npm package file|package list dependencies header@@npmPackageListDependencies" header="Dependencies">
+</app-npm-package-list>
+<app-npm-package-list [packages]="devDependencies"
+    i18n-header="npm package file|package list dev dependencies header@@npmPackageListDevDependencies"
+    header="Development Dependencies">
+</app-npm-package-list>
+<app-npm-package-list [packages]="optionalDependencies"
+    i18n-header="npm package file|package list optional dependencies header@@npmPackageListOptionalDependencies"
+    header="Optional Dependencies">
+</app-npm-package-list>

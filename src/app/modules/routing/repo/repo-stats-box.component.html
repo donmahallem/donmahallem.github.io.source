@@ -1,0 +1,16 @@
+<app-repo-stats-box-item icon="star" i18n="repo stats box|number of stars@@repoStatsBoxStarCount">{starCount, plural, =0
+    {No stars} =1 {One star} =2 {Two stars} other {{{starCount}} stars}}
+</app-repo-stats-box-item>
+<app-repo-stats-box-item icon="call_split" i18n="repo stats box|number of forks@@repoStatsBoxForkCount">
+    {forkCount, plural, =0 {No forks} =1 {One fork} =2 {Two forks} other {{{forkCount}} forks}}
+</app-repo-stats-box-item>
+<app-repo-stats-box-item icon="warning" i18n="repo stats box|number of issues@@repoStatsBoxIssueCount">
+    {issueCount, plural, =0 {No issues} =1 {One issue} =2 {Two issues} other {{{issueCount}} issues}}
+</app-repo-stats-box-item>
+<app-repo-stats-box-item icon="mail_outline" i18n="repo stats box|number of subscribers@@repoStatsBoxSubscriberCount">
+    {subscriberCount, plural, =0 {No subscribers} =1 {One subscriber} =2 {Two subscribers} other {{{subscriberCount}}
+    subscribers}}
+</app-repo-stats-box-item>
+<app-repo-stats-box-item icon="language" i18n="repo stats box|repository language@@repoStatsBoxLanguage">
+    {language, select, unknown {Unknown} other {{{language}}}}
+</app-repo-stats-box-item>

@@ -54,8 +54,8 @@ const main = async () => {
     });
     page.on('console', msg => console.log('PAGE LOG:', msg.text()));
 
-    await page.setRequestInterception(true);
-    /*page.on('request', interceptedRequest => {
+    /*await page.setRequestInterception(true);
+    page.on('request', interceptedRequest => {
         console.log("req uri", interceptedRequest.url());
         interceptedRequest.continue();
     });*/

@@ -8,7 +8,7 @@ $maxContent: 800px;
 }
 @media (min-width: #{$maxContent+1}){
     :host{
-        background: rgba(255, 255, 255, 0.1);
+        //background: black;//rgba(255, 255, 255, 0.1);
         main{
             width:$maxContent;
             margin:0px auto;

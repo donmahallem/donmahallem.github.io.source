@@ -39,6 +39,7 @@ jobs:
     - cd ./dist/prerender
     - yes | cp -rf ./ ./../../dist/DonMahallem
     - cd ../../
+    - cp ./prerender/google48141c515afad065.html ./dist/DonMahallem/google48141c515afad065.html
     - cp ./dist/DonMahallem/index.html ./dist/DonMahallem/404.html
     if: branch = master
     deploy:

@@ -1,0 +1,9 @@
+:host{
+    display:flex;
+    flex-direction: column;
+    justify-content: stretch;
+    overflow:auto;
+    app-npm-package-list{
+        margin-top:10px;
+    }
+}
