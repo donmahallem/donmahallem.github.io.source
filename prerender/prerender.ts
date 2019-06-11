@@ -131,6 +131,21 @@ const main = async () => {
     // closes Chromium and finishes the express server.
     browser.close();
     server.close();
+
+
+    let sitemap: string = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+    for (let page of RENDERED_PAGES) {
+        sitemap += "<url><loc>";
+        sitemap += "https://donmahallem.github.io/" + page;
+        sitemap += "</loc><lastmod>";
+        sitemap += "" + (new Date()).toISOString().split('T')[0] + "</lastmod>";
+        sitemap += "<changefreq>daily</changefreq>";
+        sitemap += "<priority>0.5</priority>"
+        sitemap += "</url>";
+    }
+    sitemap += "</urlset>";
+
+    await writeFile(join(DIST_OUTPUT_PATH, "sitemap.xml"), sitemap);
 };
 
 // run the main asyn function
