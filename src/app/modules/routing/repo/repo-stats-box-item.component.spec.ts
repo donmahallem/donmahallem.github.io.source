@@ -10,7 +10,12 @@ import { By } from '@angular/platform-browser';
   selector: 'mat-icon',
   template: '',
 })
-export class TestMatIconComponent { }
+export class TestMatIconComponent {
+  @Input()
+  public fontSet: string;
+  @Input()
+  public fontIcon: string;
+}
 @Component({
   template: '<app-repo-stats-box-item [icon]="useIcon">{{content}}</app-repo-stats-box-item>',
 })
@@ -46,11 +51,15 @@ describe('modules/routing/repo/repo-stats-box-item.component', () => {
       let testComponent: TestParentComponent;
       let testChild: RepoStatsBoxItemComponent;
       let testChildDebugElement: DebugElement;
+      let matIcon: TestMatIconComponent;
+      let matIconFixture: DebugElement;
       beforeEach(() => {
         parentFixture = TestBed.createComponent(TestParentComponent);
         testComponent = parentFixture.debugElement.componentInstance;
         testChildDebugElement = parentFixture.debugElement.query(By.directive(RepoStatsBoxItemComponent));
         testChild = testChildDebugElement.componentInstance;
+        matIconFixture = testChildDebugElement.query(By.directive(TestMatIconComponent));
+        matIcon = matIconFixture.componentInstance;
       });
       ['star', 'home'].forEach((testText: string) => {
         it('it should display "' + testText + '"', () => {
@@ -59,6 +68,7 @@ describe('modules/routing/repo/repo-stats-box-item.component', () => {
           parentFixture.detectChanges();
           expect(testChild.icon).toEqual(testText);
           expect(testChildDebugElement.nativeElement.textContent.trim()).toEqual(testText);
+          expect(matIcon.fontIcon).toEqual(testText);
         });
       });
     });
