@@ -63,9 +63,9 @@ const main = async () => {
         if (response.status() !== 200) {
             console.log("response url: ", response.url());
             console.log("response code: ", response.status());
-            console.log("response status text: ", response.statusText());
-            const tttext = await response.text();
-            console.log("response text: ", tttext);
+            //console.log("response status text: ", response.statusText());
+            //const tttext = await response.text();
+            //console.log("response text: ", tttext);
         }
         // do something here
     });
