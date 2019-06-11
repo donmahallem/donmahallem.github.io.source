@@ -18,21 +18,16 @@ let RENDERED_PAGES: string[] = [];
 const timeout: (ms: number) => Promise<any> = (ms: number): Promise<any> =>
     new Promise((resolve) => setTimeout(resolve, ms));
 const main = async () => {
-
+    const DIST_BASE_PATH = join(__dirname, "..", "dist", "DonMahallem")
+    const DIST_OUTPUT_PATH = join(__dirname, "..", "dist", "prerender")
     // starting an Express.js server to serve the static files while puppeter prerender the pages
     const app = express();
 
     // setting the html content from the index.html file
-    const index = (await readFile(join(__dirname, "..",
-        "dist",
-        "DonMahallem",
+    const index = (await readFile(join(DIST_BASE_PATH,
         "index.html"))).toString();
     const subRoute = express.Router();
-    subRoute.get("*.*", express.static(join(__dirname, "..",
-        "dist",
-        "DonMahallem"), {
-
-        }));
+    subRoute.get("*.*", express.static(DIST_BASE_PATH, {}));
     subRoute.get("*", (req, res) => res.send(index));
     app.use(subRoute);
 
@@ -52,15 +47,34 @@ const main = async () => {
 
     // creating a new Tap/Page
     const page = await browser.newPage();
+    page.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36");
     page.on("pageerror", (err) => {
         const theTempValue = err.toString();
         console.log("Page error: " + theTempValue);
     });
+    page.on('console', msg => console.log('PAGE LOG:', msg.text()));
+
+    await page.setRequestInterception(true);
+    /*page.on('request', interceptedRequest => {
+        console.log("req uri", interceptedRequest.url());
+        interceptedRequest.continue();
+    });*/
+    page.on('response', async response => {
+        if (response.status() !== 200) {
+            console.log("response url: ", response.url());
+            console.log("response code: ", response.status());
+            console.log("response status text: ", response.statusText());
+            const tttext = await response.text();
+            console.log("response text: ", tttext);
+        }
+        // do something here
+    });
     do {
         const p = PAGES[0];
 
+        const uri: string = `${HOST}/${p}`;
         // requesting the first page in PAGES array
-        await page.goto(`${HOST}/${p}`, { waitUntil: "networkidle0" });
+        await page.goto(uri, { waitUntil: "networkidle0" });
 
         // getting the html content after the Chromium finish rendering.
         let result = await page.evaluate(() => document.documentElement.outerHTML);
@@ -68,9 +82,9 @@ const main = async () => {
         // defining the html file name that will be created
         let file = "";
         if (p) {
-            file = join(process.cwd(), "dist", "DonMahallem", p, "index.html");
+            file = join(DIST_OUTPUT_PATH, p, "index.html");
         } else {
-            file = join(process.cwd(), "dist", "DonMahallem", "index.html");
+            file = join(DIST_OUTPUT_PATH, "index.html");
         }
         const dir = dirname(file);
 
@@ -87,11 +101,12 @@ const main = async () => {
 
         // add this page to the RENDERED PAGES array
         RENDERED_PAGES = [...RENDERED_PAGES, p];
-
+        //console.log(RENDERED_PAGES);
         // set PAGES with the pages that still need to be rendered
 
         /// uniq(PAGES.concat(result.match(/href="\/[\/\w\d\-]*"/g).map(s => s.match(/\/([\/\w\d\-]*)/)[1]))),
         const matchedUrls: RegExpMatchArray | null = result.match(/href="\/[\/\w\d\-]*"/g);
+        //console.log("MatchedUrls", matchedUrls);
         if (matchedUrls) {
             const matchedPath = matchedUrls.map((s: string) => {
                 const match = s.match(/\/([\/\w\d\-]*)/);
@@ -102,6 +117,11 @@ const main = async () => {
             });
             PAGES = difference(
                 uniq(PAGES.concat(matchedPath)),
+                RENDERED_PAGES,
+            );
+        } else {
+            PAGES = difference(
+                PAGES,
                 RENDERED_PAGES,
             );
         }

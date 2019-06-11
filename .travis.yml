@@ -34,8 +34,11 @@ jobs:
   - stage: github pages release
     node_js: 'stable'
     script:
-    - ng build --aot --prod --base-href=./
+    - ng build --aot --prod --base-href=/
     - npm run prerender
+    - cd ./dist/prerender
+    - yes | cp -rf ./ ./../../dist/DonMahallem
+    - cd ../../
     - cp ./dist/DonMahallem/index.html ./dist/DonMahallem/404.html
     if: branch = master
     deploy:
