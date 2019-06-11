@@ -34,7 +34,9 @@ export class RepoDetailComponent implements AfterViewInit, OnDestroy {
     }
 
     public ngOnDestroy(): void {
-        this.updateSubscription.unsubscribe();
+        if (this.updateSubscription) {
+            this.updateSubscription.unsubscribe();
+        }
     }
 
     public isJavascript(): boolean {
