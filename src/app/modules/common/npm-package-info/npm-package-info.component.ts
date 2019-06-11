@@ -14,9 +14,6 @@ import { DependencyInfo } from './dependendy-info';
     providers: [NpmPackageService],
 })
 export class NpmPackageInfoComponent implements AfterViewInit, OnDestroy {
-
-    @HostBinding('role')
-    public ariaRole = 'complementary';
     private loadSubscription: Subscription;
     public dependencies: DependencyInfo[] = [];
     public devDependencies: DependencyInfo[] = [];

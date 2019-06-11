@@ -6,5 +6,5 @@
 <h4>{{repository?.language}}</h4>
 <ng-container *ngIf="isJavascript()">
     <mat-divider></mat-divider>
-    <app-npm-package-info [packageUrl]="npmPackageUrl"></app-npm-package-info>
+    <app-npm-package-info [packageUrl]="npmPackageUrl" role="complementary"></app-npm-package-info>
 </ng-container>
