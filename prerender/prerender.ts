@@ -60,7 +60,7 @@ const main = async () => {
         interceptedRequest.continue();
     });*/
     page.on('response', async response => {
-        if (response.status() !== 200) {
+        if (response.status() !== 200 && response.status() !== 304) {
             console.log("response url: ", response.url());
             console.log("response code: ", response.status());
             //console.log("response status text: ", response.statusText());
