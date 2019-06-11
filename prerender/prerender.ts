@@ -47,7 +47,7 @@ const main = async () => {
 
     // creating a new Tap/Page
     const page = await browser.newPage();
-    page.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36");
+    page.setUserAgent("Mozilla/5.0 (" + Math.random() + ") AppleWebKit/" + Math.random() + " (KHTML, like Gecko) Chrome/" + Math.random() + " Safari/" + Math.random());
     page.on("pageerror", (err) => {
         const theTempValue = err.toString();
         console.log("Page error: " + theTempValue);
@@ -74,6 +74,7 @@ const main = async () => {
 
         const uri: string = `${HOST}/${p}`;
         // requesting the first page in PAGES array
+        console.log("Querying", uri);
         await page.goto(uri, { waitUntil: "networkidle0" });
 
         // getting the html content after the Chromium finish rendering.
