@@ -73,7 +73,7 @@
     "lodash": "^4.17.11",
     "mz": "^2.7.0",
     "protractor": "~5.4.0",
-    "puppeteer": "^1.18.0",
+    "puppeteer": "^1.18.1",
     "ts-node": "~8.3.0",
     "tslint": "~5.17.0",
     "typescript": "~3.4.3"
