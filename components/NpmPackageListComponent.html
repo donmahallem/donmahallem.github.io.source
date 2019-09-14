@@ -515,7 +515,7 @@ span.package-title{
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><mat-expansion-panel [disabled]="isDisabled()">    <mat-expansion-panel-header>        <mat-panel-title>{{header}}</mat-panel-title>        <mat-panel-description>{getPackageCount(), plural,            =0 {No package detected}            =1 {One package detected}            =2 {Two packages detected}            other {{{getPackageCount()}} packages detected}}        </mat-panel-description>    </mat-expansion-panel-header>    <mat-nav-list dense>        <a *ngFor="let dep of packages" mat-list-item            href="https://www.npmjs.com/package/{{dep[0]}}/v/{{derangeVersion(dep[1])}}" target="_blank"            i18n-title="npm package list|Version Title Tag@@npm_version_title_tag"            title="Package Dependency {{dep[0]}} with Version: {{dep[1]}}">            <mat-icon matListIcon>archive</mat-icon>            <h3 matLine>{{dep[0]}}</h3>            <p matLine i18n="npm package list|The npm version@@version_x">Version: {{dep[1]}}</p>        </a>    </mat-nav-list></mat-expansion-panel></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'NpmPackageInfoComponent', 'selector': 'app-npm-package-info'},{'name': 'NpmPackageListComponent', 'selector': 'app-npm-package-list'},{'name': 'ObjectTreeComponent', 'selector': 'app-object-tree'},{'name': 'RepoDetailComponent', 'selector': 'app-repo-detail'},{'name': 'RepoListComponent', 'selector': 'app-repo-list'},{'name': 'ReposListItemComponent', 'selector': 'app-repos-list-item'},{'name': 'ReposOverviewComponent', 'selector': 'app-repos-overview'},{'name': 'RepoStatsBoxComponent', 'selector': 'app-repo-stats-box'},{'name': 'RepoStatsBoxItemComponent', 'selector': 'app-repo-stats-box-item'}];
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'NpmPackageInfoComponent', 'selector': 'app-npm-package-info'},{'name': 'NpmPackageListComponent', 'selector': 'app-npm-package-list'},{'name': 'ObjectTreeComponent', 'selector': 'app-object-tree'},{'name': 'RepoDetailComponent', 'selector': 'app-repo-detail'},{'name': 'RepoListComponent', 'selector': 'app-repo-list'},{'name': 'ReposOverviewComponent', 'selector': 'app-repos-overview'},{'name': 'RepoStatsBoxComponent', 'selector': 'app-repo-stats-box'},{'name': 'RepoStatsBoxItemComponent', 'selector': 'app-repo-stats-box-item'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'NpmPackageListComponent'};
 </script>
@@ -530,6 +530,7 @@ span.package-title{
 
 
 
+                   
 
 
 

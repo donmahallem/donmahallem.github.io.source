@@ -439,7 +439,7 @@ export class RepoStatsBoxComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><app-repo-stats-box-item icon="star" i18n="repo stats box|number of stars@@repoStatsBoxStarCount">{starCount, plural, =0    {No stars} =1 {One star} =2 {Two stars} other {{{starCount}} stars}}</app-repo-stats-box-item><app-repo-stats-box-item icon="call_split" i18n="repo stats box|number of forks@@repoStatsBoxForkCount">    {forkCount, plural, =0 {No forks} =1 {One fork} =2 {Two forks} other {{{forkCount}} forks}}</app-repo-stats-box-item><app-repo-stats-box-item icon="warning" i18n="repo stats box|number of issues@@repoStatsBoxIssueCount">    {issueCount, plural, =0 {No issues} =1 {One issue} =2 {Two issues} other {{{issueCount}} issues}}</app-repo-stats-box-item><app-repo-stats-box-item icon="mail_outline" i18n="repo stats box|number of subscribers@@repoStatsBoxSubscriberCount">    {subscriberCount, plural, =0 {No subscribers} =1 {One subscriber} =2 {Two subscribers} other {{{subscriberCount}}    subscribers}}</app-repo-stats-box-item><app-repo-stats-box-item icon="language" i18n="repo stats box|repository language@@repoStatsBoxLanguage">    {language, select, unknown {Unknown} other {{{language}}}}</app-repo-stats-box-item></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'NpmPackageInfoComponent', 'selector': 'app-npm-package-info'},{'name': 'NpmPackageListComponent', 'selector': 'app-npm-package-list'},{'name': 'ObjectTreeComponent', 'selector': 'app-object-tree'},{'name': 'RepoDetailComponent', 'selector': 'app-repo-detail'},{'name': 'RepoListComponent', 'selector': 'app-repo-list'},{'name': 'ReposListItemComponent', 'selector': 'app-repos-list-item'},{'name': 'ReposOverviewComponent', 'selector': 'app-repos-overview'},{'name': 'RepoStatsBoxComponent', 'selector': 'app-repo-stats-box'},{'name': 'RepoStatsBoxItemComponent', 'selector': 'app-repo-stats-box-item'}];
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'NpmPackageInfoComponent', 'selector': 'app-npm-package-info'},{'name': 'NpmPackageListComponent', 'selector': 'app-npm-package-list'},{'name': 'ObjectTreeComponent', 'selector': 'app-object-tree'},{'name': 'RepoDetailComponent', 'selector': 'app-repo-detail'},{'name': 'RepoListComponent', 'selector': 'app-repo-list'},{'name': 'ReposOverviewComponent', 'selector': 'app-repos-overview'},{'name': 'RepoStatsBoxComponent', 'selector': 'app-repo-stats-box'},{'name': 'RepoStatsBoxItemComponent', 'selector': 'app-repo-stats-box-item'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'RepoStatsBoxComponent'};
 </script>
@@ -454,6 +454,7 @@ export class RepoStatsBoxComponent {
 
 
 
+                   
 
 
 

@@ -428,7 +428,7 @@ export class ObjectTreeComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><mat-tree [dataSource]="dataSource" [treeControl]="treeControl">    <!-- This is the tree node template for leaf nodes -->    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>        <!-- use a disabled button to provide padding for tree leaf -->        <button mat-icon-button disabled></button>        {{node.name}}    </mat-tree-node>    <!-- This is the tree node template for expandable nodes -->    <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>        <button mat-icon-button matTreeNodeToggle [attr.aria-label]="\'toggle \' + node.name">            <mat-icon class="mat-icon-rtl-mirror">                {{treeControl.isExpanded(node) ? \'expand_more\' : \'chevron_right\'}}            </mat-icon>        </button>        {{node.name}}    </mat-tree-node></mat-tree></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'NpmPackageInfoComponent', 'selector': 'app-npm-package-info'},{'name': 'NpmPackageListComponent', 'selector': 'app-npm-package-list'},{'name': 'ObjectTreeComponent', 'selector': 'app-object-tree'},{'name': 'RepoDetailComponent', 'selector': 'app-repo-detail'},{'name': 'RepoListComponent', 'selector': 'app-repo-list'},{'name': 'ReposListItemComponent', 'selector': 'app-repos-list-item'},{'name': 'ReposOverviewComponent', 'selector': 'app-repos-overview'},{'name': 'RepoStatsBoxComponent', 'selector': 'app-repo-stats-box'},{'name': 'RepoStatsBoxItemComponent', 'selector': 'app-repo-stats-box-item'}];
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'NpmPackageInfoComponent', 'selector': 'app-npm-package-info'},{'name': 'NpmPackageListComponent', 'selector': 'app-npm-package-list'},{'name': 'ObjectTreeComponent', 'selector': 'app-object-tree'},{'name': 'RepoDetailComponent', 'selector': 'app-repo-detail'},{'name': 'RepoListComponent', 'selector': 'app-repo-list'},{'name': 'ReposOverviewComponent', 'selector': 'app-repos-overview'},{'name': 'RepoStatsBoxComponent', 'selector': 'app-repo-stats-box'},{'name': 'RepoStatsBoxItemComponent', 'selector': 'app-repo-stats-box-item'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ObjectTreeComponent'};
 </script>
@@ -443,6 +443,7 @@ export class ObjectTreeComponent {
 
 
 
+                   
 
 
 

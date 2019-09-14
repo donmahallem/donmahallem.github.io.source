@@ -716,7 +716,7 @@ export class RepoDetailComponent implements AfterViewInit, OnDestroy {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><h1 class="mat-display-1">{{repository?.full_name}}</h1><h3 class="mat-display-4" *ngIf="hasDescription()">{{repository?.description}}</h3><app-repo-stats-box [repository]="repository"></app-repo-stats-box><app-object-tree></app-object-tree><a href="{{repository?.html_url}}">On Github</a><h4>{{repository?.language}}</h4><ng-container *ngIf="isJavascript()">    <mat-divider></mat-divider>    <app-npm-package-info [packageUrl]="npmPackageUrl" role="complementary"></app-npm-package-info></ng-container></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'NpmPackageInfoComponent', 'selector': 'app-npm-package-info'},{'name': 'NpmPackageListComponent', 'selector': 'app-npm-package-list'},{'name': 'ObjectTreeComponent', 'selector': 'app-object-tree'},{'name': 'RepoDetailComponent', 'selector': 'app-repo-detail'},{'name': 'RepoListComponent', 'selector': 'app-repo-list'},{'name': 'ReposListItemComponent', 'selector': 'app-repos-list-item'},{'name': 'ReposOverviewComponent', 'selector': 'app-repos-overview'},{'name': 'RepoStatsBoxComponent', 'selector': 'app-repo-stats-box'},{'name': 'RepoStatsBoxItemComponent', 'selector': 'app-repo-stats-box-item'}];
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'NpmPackageInfoComponent', 'selector': 'app-npm-package-info'},{'name': 'NpmPackageListComponent', 'selector': 'app-npm-package-list'},{'name': 'ObjectTreeComponent', 'selector': 'app-object-tree'},{'name': 'RepoDetailComponent', 'selector': 'app-repo-detail'},{'name': 'RepoListComponent', 'selector': 'app-repo-list'},{'name': 'ReposOverviewComponent', 'selector': 'app-repos-overview'},{'name': 'RepoStatsBoxComponent', 'selector': 'app-repo-stats-box'},{'name': 'RepoStatsBoxItemComponent', 'selector': 'app-repo-stats-box-item'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'RepoDetailComponent'};
 </script>
@@ -731,6 +731,7 @@ export class RepoDetailComponent implements AfterViewInit, OnDestroy {
 
 
 
+                   
 
 
 
