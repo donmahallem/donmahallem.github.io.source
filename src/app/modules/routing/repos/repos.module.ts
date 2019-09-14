@@ -12,14 +12,12 @@ import {
 import { ReposResolver } from './repos.resolver';
 import { RepoListComponent } from './repo-list.component';
 import { ReposRoutingModule } from './repos-routing.module';
-import { ReposListItemComponent } from './repos-list-item.component';
 import { ObjectTreeModule } from '../../common';
 import { RepoResolver } from './repo.resolver';
 import { ReposOverviewComponent } from './repos-overview.component';
 @NgModule({
     declarations: [
         RepoListComponent,
-        ReposListItemComponent,
         ReposOverviewComponent
     ],
     imports: [
