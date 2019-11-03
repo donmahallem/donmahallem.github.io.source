@@ -58,7 +58,7 @@
     "@angular/compiler-cli": "~8.0.0",
     "@angular/language-service": "~8.2.12",
     "@compodoc/compodoc": "~1.1.11",
-    "@types/jasmine": "~3.4.4",
+    "@types/jasmine": "~3.4.5",
     "@types/jasminewd2": "~2.0.8",
     "@types/node": "~12.12.0",
     "codelyzer": "~5.2.0",
