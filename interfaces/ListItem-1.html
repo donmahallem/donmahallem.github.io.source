@@ -61,7 +61,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/modules/routing/repos/repos-overview.component.ts</code>
+            <code>src/app/modules/routing/repos/repo-list.component.ts</code>
         </p>
 
 
@@ -222,10 +222,10 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, AfterViewInit, OnDestroy, NgZone, ChangeDetectorRef, ChangeDetectionStrategy } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, AfterViewInit, OnDestroy, NgZone, ChangeDetectorRef, ChangeDetectionStrategy, Input } from &#x27;@angular/core&#x27;;
 import { Repository } from &#x27;src/app/modal&#x27;;
 import { ActivatedRoute } from &#x27;@angular/router&#x27;;
-import { Subscription, merge, combineLatest } from &#x27;rxjs&#x27;;
+import { Subscription } from &#x27;rxjs&#x27;;
 import { map } from &#x27;rxjs/operators&#x27;;
 interface ListItem {
     repo: Repository;
@@ -234,54 +234,32 @@ interface ListItem {
     header: string;
 }
 @Component({
-    selector: &#x27;app-repos-overview&#x27;,
-    templateUrl: &#x27;./repos-overview.component.html&#x27;,
-    styleUrls: [&#x27;./repos-overview.component.scss&#x27;],
+    selector: &#x27;app-repo-list&#x27;,
+    templateUrl: &#x27;./repo-list.component.html&#x27;,
+    styleUrls: [&#x27;./repo-list.component.scss&#x27;],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ReposOverviewComponent implements AfterViewInit, OnDestroy {
-    public repos: Repository[] &#x3D; [];
-    public page &#x3D; 1;
-    private updateSubscription: Subscription;
-
-    public constructor(private activatedRoute: ActivatedRoute,
-                       private cdRef: ChangeDetectorRef) {
+export class RepoListComponent {
+    public items: ListItem[] &#x3D; [];
+    public constructor(private cdRef: ChangeDetectorRef) {
 
     }
-
-    public ngAfterViewInit(): void {
-        this.updateSubscription &#x3D; this.activatedRoute
-            .data
-            .pipe(map((data: { repos: Repository[] }): Repository[] &#x3D;&gt; {
-                return data.repos;
-            })).subscribe((repos) &#x3D;&gt; {
-                this.update(repos);
-            });
-    }
-    public getCurrentPage(): number {
-        const params: any &#x3D; this.activatedRoute.snapshot.params;
-        if (params.page) {
-            return parseInt(params.page, 10);
-        } else {
-            return 1;
-        }
-    }
-
-    public hasNextPage(): boolean {
-        return this.repos.length &#x3D;&#x3D;&#x3D; 25;
-    }
-
-    public hasPreviousPage(): boolean {
-        return this.getCurrentPage() &gt; 1;
-    }
-    public update(repos: Repository[]): void {
-        this.repos &#x3D; repos;
-        this.page &#x3D; this.getCurrentPage();
+    @Input()
+    public set repositories(repos: Repository[]) {
+        this.items &#x3D; repos.sort((a, b) &#x3D;&gt; {
+            return a.name.localeCompare(b.name);
+        }).map((value: Repository, idx: number, arr: Repository[]): ListItem &#x3D;&gt; {
+            const previousLetter: string &#x3D; idx &gt; 0 ? arr[idx - 1].name.charAt(0).toUpperCase() : &#x27;&#x27;;
+            const currentLetter: string &#x3D; arr[idx].name.charAt(0).toUpperCase();
+            const nextLetter: string &#x3D; idx &lt; arr.length - 1 ? arr[idx + 1].name.charAt(0).toUpperCase() : &#x27;&#x27;;
+            return {
+                repo: value,
+                hasDivider: idx &#x3D;&#x3D;&#x3D; arr.length - 1 ? false : currentLetter !&#x3D;&#x3D; nextLetter,
+                hasHeader: idx &#x3D;&#x3D;&#x3D; 0 ? true : currentLetter !&#x3D;&#x3D; previousLetter,
+                header: currentLetter
+            };
+        });
         this.cdRef.detectChanges();
-    }
-
-    public ngOnDestroy(): void {
-        this.updateSubscription.unsubscribe();
     }
 }
 </code></pre>
