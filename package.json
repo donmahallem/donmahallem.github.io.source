@@ -15,7 +15,8 @@
     "prerender": "ng run DonMahallem:prerender",
     "dev:ssr": "ng run DonMahallem:serve-ssr",
     "serve:ssr": "node dist/DonMahallem/server/main.js",
-    "build:ssr": "ng build --prod && ng run DonMahallem:server:production"
+    "build:ssr": "ng build --prod && ng run DonMahallem:server:production",
+    "prepare:prerender": "ts-node --project tsconfig.prerender.json ./prerender/create-prerender.ts"
   },
   "publishConfig": {
     "access": "public"
@@ -68,6 +69,7 @@
     "@types/jasmine": "3.6.9",
     "@types/jasminewd2": "2.0.8",
     "@types/node": "12.11.1",
+    "@types/node-fetch": "2.5.8",
     "codelyzer": "6.0.1",
     "express": "4.17.1",
     "jasmine-core": "3.7.1",
@@ -79,6 +81,7 @@
     "karma-jasmine-html-reporter": "1.5.4",
     "lodash": "4.17.21",
     "mz": "2.7.0",
+    "node-fetch": "^2.6.1",
     "protractor": "7.0.0",
     "puppeteer": "8.0.0",
     "ts-node": "9.1.1",
