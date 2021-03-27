@@ -12,7 +12,10 @@
     "compodoc": "npx compodoc -p tsconfig.json -d ./docs",
     "test": "ng test --watch=false --browsers=ChromeHeadless --code-coverage",
     "docs": "npm run compodoc",
-    "prerender": "ts-node --project tsconfig.prerender.json ./prerender/prerender.ts"
+    "prerender": "ng run DonMahallem:prerender",
+    "dev:ssr": "ng run DonMahallem:serve-ssr",
+    "serve:ssr": "node dist/DonMahallem/server/main.js",
+    "build:ssr": "ng build --prod && ng run DonMahallem:server:production"
   },
   "publishConfig": {
     "access": "public"
@@ -44,7 +47,10 @@
     "@angular/material": "~11.2.6",
     "@angular/platform-browser": "~11.2.7",
     "@angular/platform-browser-dynamic": "~11.2.7",
+    "@angular/platform-server": "~11.2.7",
     "@angular/router": "~11.2.7",
+    "@nguniversal/express-engine": "^11.2.1",
+    "express": "^4.15.2",
     "material-design-icons": "~3.0.1",
     "rxjs": "~6.6.6",
     "tslib": "~2.1.0",
@@ -57,6 +63,8 @@
     "@angular/language-service": "11.2.7",
     "@angular/localize": "11.2.7",
     "@compodoc/compodoc": "1.1.11",
+    "@nguniversal/builders": "^11.2.1",
+    "@types/express": "^4.17.0",
     "@types/jasmine": "3.6.9",
     "@types/jasminewd2": "2.0.8",
     "@types/node": "12.11.1",
