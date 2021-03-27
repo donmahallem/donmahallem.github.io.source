@@ -32,6 +32,7 @@ const create = async (): Promise<void> => {
             break;
         }
     }
+    console.log('Total Repos', data.length);
     const outputFile: string = data
         .map((repo: any, idx: number): string => {
             return `repo/${repo.name}`;
