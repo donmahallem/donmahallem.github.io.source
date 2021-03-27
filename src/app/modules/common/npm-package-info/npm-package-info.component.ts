@@ -1,10 +1,7 @@
-import { Component, AfterViewInit, OnDestroy, NgZone, ChangeDetectorRef, ChangeDetectionStrategy, Input, HostBinding } from '@angular/core';
-import { Repository, GithubFileId, NpmPackage } from 'src/app/modal';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription, from, EMPTY } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
-import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material';
-import { FlatTreeControl } from '@angular/cdk/tree';
+import { Component, AfterViewInit, OnDestroy, ChangeDetectorRef, Input } from '@angular/core';
+import { NpmPackage } from 'src/app/modal';
+import { Subscription, EMPTY } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { NpmPackageService } from './npm-package.service';
 import { DependencyInfo } from './dependendy-info';
 @Component({
@@ -19,7 +16,7 @@ export class NpmPackageInfoComponent implements AfterViewInit, OnDestroy {
     public devDependencies: DependencyInfo[] = [];
     public optionalDependencies: DependencyInfo[] = [];
     constructor(private packageService: NpmPackageService,
-                private changeDetectorRef: ChangeDetectorRef) {
+        private changeDetectorRef: ChangeDetectorRef) {
 
     }
     @Input()

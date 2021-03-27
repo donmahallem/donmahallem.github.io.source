@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { distinct, flatMap } from 'rxjs/operators';
+import { distinct, mergeMap } from 'rxjs/operators';
 import { NpmPackage } from '../../../modal';
 import { FileDownloadService } from 'src/app/services/file-download.service';
 
@@ -24,7 +24,7 @@ export class NpmPackageService {
         return this.packageSubject
             .pipe(
                 distinct(),
-                flatMap((file: string): Observable<NpmPackage> => {
+                mergeMap((file: string): Observable<NpmPackage> => {
                     return this.downloadService.getRawFile<NpmPackage>(file);
                 })
             );
