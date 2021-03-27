@@ -31,7 +31,7 @@ jobs:
           npm ci
       - name: Build
         run: |
-          ng build --aot --prod --base-href=/
+          npx ng build --aot --prod --base-href=/
           npm run prerender
           cd ./dist/prerender
           yes | cp -rf ./ ./../../dist/DonMahallem
