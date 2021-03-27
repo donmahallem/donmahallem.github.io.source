@@ -1,4 +1,4 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+import { TestBed, async, ComponentFixture, waitForAsync } from '@angular/core/testing';
 import { Component, Input, DebugElement } from '@angular/core';
 import { Repository } from 'src/app/modal';
 import { By } from '@angular/platform-browser';
@@ -48,7 +48,7 @@ export class TestParentComponent {
 // tslint:enable:directive-selector
 describe('modules/routing/repos/repos-list.component', () => {
   describe('ReposListComponent', () => {
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [
         ],

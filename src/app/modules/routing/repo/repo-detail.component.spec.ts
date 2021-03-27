@@ -1,4 +1,4 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { RepoDetailComponent } from './repo-detail.component';
 import { Component, Input } from '@angular/core';
@@ -36,7 +36,7 @@ export class TestAppRepoStatsBoxComponent {
 // tslint:enable:directive-selector
 describe('modules/routing/repo/repo-detail.component', () => {
   describe('RepoDetailComponent', () => {
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [
           RouterTestingModule

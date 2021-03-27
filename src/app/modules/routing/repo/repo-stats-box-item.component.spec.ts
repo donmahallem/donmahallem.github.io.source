@@ -1,6 +1,5 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
-import { Component, Input, DebugElement } from '@angular/core';
-import { Repository } from 'src/app/modal';
+import { TestBed, waitForAsync, ComponentFixture } from '@angular/core/testing';
+import { Component, DebugElement } from '@angular/core';
 import { RepoStatsBoxItemComponent } from './repo-stats-box-item.component';
 import { By } from '@angular/platform-browser';
 
@@ -23,7 +22,7 @@ export class TestParentComponent {
 // tslint:enable:directive-selector
 describe('modules/routing/repo/repo-stats-box-item.component', () => {
   describe('RepoStatsBoxItemComponent', () => {
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [
         ],
