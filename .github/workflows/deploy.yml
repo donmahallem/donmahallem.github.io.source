@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - master
-      #- dev
+      - prerender2
 
 jobs:
   build-and-deploy:
