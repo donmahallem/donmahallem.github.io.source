@@ -1,0 +1,53 @@
+name: Deploy to Github Pages
+on:
+  push:
+    branches:
+      - master
+      - dev
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    name: Deploy App
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - name: Setup Node
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: '14'
+      - name: Setup Cache
+        uses: actions/cache@v2.1.4
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-node14-npm-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install
+        run: |
+          npm ci
+      - name: Build
+        run: |
+          ng build --aot --prod --base-href=/
+          npm run prerender
+          cd ./dist/prerender
+          yes | cp -rf ./ ./../../dist/DonMahallem
+          cd ../../
+          cp ./prerender/google48141c515afad065.html ./dist/DonMahallem/google48141c515afad065.html
+          cp ./dist/DonMahallem/index.html ./dist/DonMahallem/404.html
+      - name: Install SSH Client
+        uses: webfactory/ssh-agent@v0.5.1
+        with:
+          ssh-private-key: ${{ secrets.APP_DEPLOY_KEY }}
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          SSH: true
+          BRANCH: master # The branch the action should deploy to.
+          FOLDER: dist/DonMahallem # The folder the action should deploy.
+          REPOSITORY_NAME: donmahallem/donmahallem.github.io
+          TARGET_FOLDER: .
+          CLEAN: true
