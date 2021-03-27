@@ -27,7 +27,7 @@ const create = async (): Promise<void> => {
         const resp: any[] = await getPage(page);
         console.log(`Got ${resp.length} items`);
         console.groupEnd();
-        data.push(resp);
+        data.push(...resp);
         if (resp.length < 100) {
             break;
         }
