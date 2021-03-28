@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - master
-      #- dev
+      - prerender2
 
 jobs:
   build-and-deploy:
@@ -31,13 +31,12 @@ jobs:
           npm ci
       - name: Build
         run: |
-          npx ng build --aot --prod --base-href=/
-          npm run prerender
-          cd ./dist/prerender
-          yes | cp -rf ./ ./../../dist/DonMahallem
-          cd ../../
-          cp ./prerender/google48141c515afad065.html ./dist/DonMahallem/google48141c515afad065.html
-          cp ./dist/DonMahallem/index.html ./dist/DonMahallem/404.html
+          npm run prepare:prerender
+          npm run prerender -- --routes-file ./prerender.txt
+          cp ./prerender/google48141c515afad065.html ./dist/DonMahallem/browser/google48141c515afad065.html
+          cp ./dist/DonMahallem/browser/index.html ./dist/DonMahallem/browser/404.html
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Install SSH Client
         uses: webfactory/ssh-agent@v0.5.1
         with:
@@ -47,7 +46,7 @@ jobs:
         with:
           SSH: true
           BRANCH: master # The branch the action should deploy to.
-          FOLDER: dist/DonMahallem # The folder the action should deploy.
+          FOLDER: dist/DonMahallem/browser/ # The folder the action should deploy.
           REPOSITORY_NAME: donmahallem/donmahallem.github.io
           TARGET_FOLDER: .
           CLEAN: true

@@ -18,7 +18,7 @@ import { NotFoundComponent } from './not-found.component';
   imports: [
     BrowserAnimationsModule,
     HttpClientModule,
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     MatToolbarModule
   ],
