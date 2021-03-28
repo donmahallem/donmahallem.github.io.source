@@ -4,6 +4,7 @@ import fetch, { Response } from 'node-fetch';
 const username: string = 'DonMahallem';
 const pageSize: number = 100;
 const BEARER: string = (process.env.TOKEN) ? `Bearer ${process.env.TOKEN}` : '';
+console.log('Query with Bearer', BEARER != '');
 const getPage = async (page: number): Promise<any[]> => {
     return fetch(`https://api.github.com/users/${username}/repos?per_page=${pageSize}&page=${page}`, {
         headers: {
