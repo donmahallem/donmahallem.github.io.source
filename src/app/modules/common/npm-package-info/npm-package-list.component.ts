@@ -1,20 +1,24 @@
+/*!
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
+ */
+
 import { Component, Input } from '@angular/core';
-import { NpmPackageService } from './npm-package.service';
 import { DependencyInfo } from './dependendy-info';
+import { NpmPackageService } from './npm-package.service';
 @Component({
+    providers: [NpmPackageService],
     selector: 'app-npm-package-list',
-    templateUrl: './npm-package-list.component.html',
     styleUrls: ['./npm-package-list.component.scss'],
-    providers: [NpmPackageService]
+    templateUrl: './npm-package-list.component.html',
 })
 export class NpmPackageListComponent {
 
     @Input()
     public packages: DependencyInfo[] = [];
     @Input()
-    public header = '';
+    public header: any = '';
     @Input()
-    public description = '';
+    public description: any = '';
 
     public derangeVersion(version: string): string {
         return version.match(/[0-9].*/)[0];

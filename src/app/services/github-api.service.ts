@@ -1,7 +1,11 @@
-import { Injectable } from '@angular/core';
+/*!
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
+ */
+
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Repository, GithubFileId } from '../modal';
+import { IGithubFileId, IRepository } from '../modal';
 
 @Injectable({
     providedIn: 'root',
@@ -15,29 +19,29 @@ export class GithubApiService {
     /**
      *
      * @param username Username
-     * @param page_size Page size
+     * @param pageSize Page size
      * @param page Page to query starting at 1
      */
-    public getUserRepos(username: string, page_size: number = 25, page?: number): Observable<Repository[]> {
-        let url: string = 'https://api.github.com/users/' + username + '/repos?per_page=' + page_size;
+    public getUserRepos(username: string, pageSize: number = 25, page?: number): Observable<IRepository[]> {
+        let url: string = `https://api.github.com/users/${username}/repos?per_page=${pageSize}`;
         if (page) {
-            url += '&page=' + page;
+            url += `&page=${page}`;
         }
-        return this.http.get<Repository[]>(url);
+        return this.http.get<IRepository[]>(url);
     }
 
-    public getRepo(usernameOrFullname: string, reponame?: string): Observable<Repository> {
+    public getRepo(usernameOrFullname: string, reponame?: string): Observable<IRepository> {
         if (reponame) {
-            return this.http.get<Repository>('https://api.github.com/repos/' + usernameOrFullname + '/' + reponame);
+            return this.http.get<IRepository>(`https://api.github.com/repos/${usernameOrFullname}/${reponame}`);
         } else {
-            return this.http.get<Repository>('https://api.github.com/repos/' + usernameOrFullname);
+            return this.http.get<IRepository>(`https://api.github.com/repos/${usernameOrFullname}`);
         }
 
     }
 
-    public getRawFile<T>(file: GithubFileId): Observable<T> {
-        return this.http.get<T>('https://raw.githubusercontent.com/' + file.username
-            + '/' + file.reponame + '/' + file.branch ? file.branch : 'master' + '/' + file.filepath);
+    public getRawFile<T>(file: IGithubFileId): Observable<T> {
+        return this.http.get<T>(`https://raw.githubusercontent.com/${file.username}/${file.reponame}`
+            + `/${file.branch ? file.branch : 'master'}/${file.filepath}`);
 
     }
 }

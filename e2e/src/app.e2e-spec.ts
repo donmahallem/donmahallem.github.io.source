@@ -1,21 +1,25 @@
-import { AppPage } from './app.po';
-import { browser, logging } from 'protractor';
+/*!
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
+ */
 
-describe('workspace-project App', () => {
+import { browser, logging } from 'protractor';
+import { AppPage } from './app.po';
+
+describe('workspace-project App', (): void => {
   let page: AppPage;
 
-  beforeEach(() => {
+  beforeEach((): void => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display welcome message', (): void => {
     page.navigateTo();
     expect(page.getTitleText()).toEqual('Welcome to DonMahallem!');
   });
 
-  afterEach(async () => {
+  afterEach(async (): Promise<void> => {
     // Assert that there are no errors emitted from the browser
-    const logs = await browser.manage().logs().get(logging.Type.BROWSER);
+    const logs: any = await browser.manage().logs().get(logging.Type.BROWSER);
     expect(logs).not.toContain(jasmine.objectContaining({
       level: logging.Level.SEVERE,
     } as logging.Entry));

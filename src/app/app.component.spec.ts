@@ -1,7 +1,11 @@
-import { TestBed, waitForAsync } from '@angular/core/testing';
+/*!
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
+ */
+
+import { Component } from '@angular/core';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { Component } from '@angular/core';
 
 // tslint:disable:component-selector
 // tslint:disable:directive-selector
@@ -12,23 +16,23 @@ import { Component } from '@angular/core';
 export class TestMatToolbarComponent { }
 // tslint:enable:component-selector
 // tslint:enable:directive-selector
-describe('app.component', () => {
-  describe('AppComponent', () => {
-    beforeEach(waitForAsync(() => {
+describe('app.component', (): void => {
+  describe('AppComponent', (): void => {
+    beforeEach(waitForAsync((): void => {
       TestBed.configureTestingModule({
-        imports: [
-          RouterTestingModule
-        ],
         declarations: [
           AppComponent,
-          TestMatToolbarComponent
+          TestMatToolbarComponent,
+        ],
+        imports: [
+          RouterTestingModule,
         ],
       }).compileComponents();
     }));
 
-    it('should create the app', () => {
-      const fixture = TestBed.createComponent(AppComponent);
-      const app = fixture.debugElement.componentInstance;
+    it('should create the app', (): void => {
+      const fixture: ComponentFixture<AppComponent> = TestBed.createComponent(AppComponent);
+      const app: AppComponent = fixture.debugElement.componentInstance;
       expect(app).toBeTruthy();
     });
 

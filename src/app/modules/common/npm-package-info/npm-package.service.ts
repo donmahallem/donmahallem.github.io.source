@@ -1,8 +1,12 @@
+/*!
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
+ */
+
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { distinct, mergeMap } from 'rxjs/operators';
-import { NpmPackage } from '../../../modal';
 import { FileDownloadService } from 'src/app/services/file-download.service';
+import { INpmPackage } from '../../../modal';
 
 @Injectable()
 export class NpmPackageService {
@@ -20,13 +24,13 @@ export class NpmPackageService {
         return this.packageSubject.value;
     }
 
-    public observePackage(): Observable<NpmPackage> {
+    public observePackage(): Observable<INpmPackage> {
         return this.packageSubject
             .pipe(
                 distinct(),
-                mergeMap((file: string): Observable<NpmPackage> => {
-                    return this.downloadService.getRawFile<NpmPackage>(file);
-                })
+                mergeMap((file: string): Observable<INpmPackage> => {
+                    return this.downloadService.getRawFile<INpmPackage>(file);
+                }),
             );
     }
 }

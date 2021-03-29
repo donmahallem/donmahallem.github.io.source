@@ -1,3 +1,7 @@
+/*!
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
+ */
+
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -13,13 +17,13 @@ import { ObjectTreeComponent } from './object-tree.component';
         ObjectTreeComponent,
         MatTreeModule,
         MatIconModule,
-        MatButtonModule
+        MatButtonModule,
     ],
     imports: [
         CommonModule,
         MatTreeModule,
         MatIconModule,
-        MatButtonModule
+        MatButtonModule,
     ],
 })
 export class ObjectTreeModule { }

@@ -1,4 +1,8 @@
-export interface Repository {
+/*!
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
+ */
+
+export interface IRepository {
     'id': number;
     'node_id': string;
     'name': string;
@@ -22,7 +26,7 @@ export interface Repository {
         'events_url': string,
         'received_events_url': string,
         'type': string,
-        'site_admin': boolean
+        'site_admin': boolean,
     };
     'html_url': string;
     'description': string;
@@ -91,7 +95,7 @@ export interface Repository {
         'name': string,
         'spdx_id': string,
         'url': string,
-        'node_id': string
+        'node_id': string,
     };
     'forks': number;
     'open_issues': number;

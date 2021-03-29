@@ -1,7 +1,10 @@
-import { Injectable } from '@angular/core';
+/*!
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
+ */
+
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Repository, GithubFileId } from '../modal';
 
 @Injectable({
     providedIn: 'root',
