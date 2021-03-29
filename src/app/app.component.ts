@@ -1,13 +1,16 @@
+/*!
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
+ */
+
 import { Component } from '@angular/core';
-import { GithubApiService } from './services';
 
 @Component({
   selector: 'app-root',
+  styleUrls: ['./app.component.scss'],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'DonMahallem';
+  title: string = 'DonMahallem';
   constructor() {
     // Not Empty
   }

@@ -1,14 +1,13 @@
-import { Component, AfterViewInit, OnDestroy, NgZone, ChangeDetectorRef, ChangeDetectionStrategy, Input } from '@angular/core';
-import { Repository } from 'src/app/modal';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { environment } from 'src/environments/environment.prod';
+/*!
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
+ */
+
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'app-repo-stats-box-item',
+    styleUrls: ['./repo-stats-box-item.component.scss'],
     templateUrl: './repo-stats-box-item.component.html',
-    styleUrls: ['./repo-stats-box-item.component.scss']
 })
 export class RepoStatsBoxItemComponent {
     @Input()

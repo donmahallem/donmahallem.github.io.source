@@ -1,34 +1,38 @@
+/*!
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
+ */
+
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home.component';
 import { NotFoundComponent } from './not-found.component';
 
 const routes: Routes = [
   {
-    loadChildren: () => import('./modules/routing/repos').then(m => m.ReposModule),
+    loadChildren: (): any => import('./modules/routing/repos').then((m: any): any => m.ReposModule),
     path: 'repos',
   },
   {
-    loadChildren: () => import('./modules/routing/repo').then(m => m.RepoModule),
+    loadChildren: (): any => import('./modules/routing/repo').then((m: any): any => m.RepoModule),
     path: 'repo',
   },
   {
+    component: HomeComponent,
     path: '',
-    component: HomeComponent
   },
   {
     component: NotFoundComponent,
-    path: '404'
+    path: '404',
   },
   {
     path: '**',
-    redirectTo: '404'
+    redirectTo: '404',
   }];
 
 @NgModule({
+  exports: [RouterModule],
   imports: [RouterModule.forRoot(routes, {
-    initialNavigation: 'enabled'
-})],
-  exports: [RouterModule]
+    initialNavigation: 'enabled',
+  })],
 })
 export class AppRoutingModule { }

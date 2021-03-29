@@ -1,36 +1,35 @@
-import { Component, AfterViewInit, OnDestroy, NgZone, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
-import { Repository } from 'src/app/modal';
+/*!
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
+ */
+
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription, merge, combineLatest } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-interface ListItem {
-    repo: Repository;
-    hasHeader: boolean;
-    hasDivider: boolean;
-    header: string;
-}
+import { IRepository } from 'src/app/modal';
+
 @Component({
+    changeDetection: ChangeDetectionStrategy.OnPush,
     selector: 'app-repos-overview',
-    templateUrl: './repos-overview.component.html',
     styleUrls: ['./repos-overview.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    templateUrl: './repos-overview.component.html',
 })
 export class ReposOverviewComponent implements AfterViewInit, OnDestroy {
-    public repos: Repository[] = [];
-    public page = 1;
+    public repos: IRepository[] = [];
+    public page: number = 1;
     private updateSubscription: Subscription;
 
     public constructor(private activatedRoute: ActivatedRoute,
-                       private cdRef: ChangeDetectorRef) {
+        private cdRef: ChangeDetectorRef) {
 
     }
 
     public ngAfterViewInit(): void {
         this.updateSubscription = this.activatedRoute
             .data
-            .pipe(map((data: { repos: Repository[] }): Repository[] => {
+            .pipe(map((data: { repos: IRepository[] }): IRepository[] => {
                 return data.repos;
-            })).subscribe((repos) => {
+            })).subscribe((repos: IRepository[]): void => {
                 this.update(repos);
             });
     }
@@ -50,7 +49,7 @@ export class ReposOverviewComponent implements AfterViewInit, OnDestroy {
     public hasPreviousPage(): boolean {
         return this.getCurrentPage() > 1;
     }
-    public update(repos: Repository[]): void {
+    public update(repos: IRepository[]): void {
         this.repos = repos;
         this.page = this.getCurrentPage();
         this.cdRef.detectChanges();

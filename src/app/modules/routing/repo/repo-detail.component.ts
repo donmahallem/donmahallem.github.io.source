@@ -1,34 +1,37 @@
-import { Component, AfterViewInit, OnDestroy, NgZone, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
-import { Repository } from 'src/app/modal';
-import { ActivatedRoute } from '@angular/router';
+/*!
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
+ */
+
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Data } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { environment } from 'src/environments/environment.prod';
+import { IRepository } from 'src/app/modal';
 
 @Component({
+    changeDetection: ChangeDetectionStrategy.OnPush,
     selector: 'app-repo-detail',
-    templateUrl: './repo-detail.component.html',
     styleUrls: ['./repo-detail.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    templateUrl: './repo-detail.component.html',
 })
 export class RepoDetailComponent implements AfterViewInit, OnDestroy {
-    public repository: Repository = undefined;
+    public repository: IRepository = undefined;
     private updateSubscription: Subscription;
     public constructor(private activatedRoute: ActivatedRoute,
-                       private cdRef: ChangeDetectorRef) {
+        private cdRef: ChangeDetectorRef) {
 
     }
 
     public ngAfterViewInit(): void {
         this.updateSubscription = this.activatedRoute
             .data
-            .pipe(map(data => data.repo))
-            .subscribe((repo: Repository) => {
+            .pipe(map((data: Data): IRepository => data.repo))
+            .subscribe((repo: IRepository): void => {
                 this.setRepository(repo);
             });
     }
 
-    public setRepository(repo: Repository): void {
+    public setRepository(repo: IRepository): void {
         this.repository = repo;
         this.cdRef.detectChanges();
     }
@@ -48,7 +51,7 @@ export class RepoDetailComponent implements AfterViewInit, OnDestroy {
     }
 
     public get npmPackageUrl(): string {
-        return 'https://raw.githubusercontent.com/' + this.repository.full_name + '/master/package.json';
+        return `https://raw.githubusercontent.com/${this.repository.full_name}/master/package.json`;
     }
 
     public hasDescription(): boolean {

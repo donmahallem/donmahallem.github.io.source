@@ -1,3 +1,7 @@
+/*!
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
+ */
+
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,7 +14,7 @@ import { NpmPackageListComponent } from './npm-package-list.component';
 @NgModule({
     declarations: [
         NpmPackageInfoComponent,
-        NpmPackageListComponent
+        NpmPackageListComponent,
     ],
     exports: [
         CommonModule,
@@ -19,7 +23,7 @@ import { NpmPackageListComponent } from './npm-package-list.component';
         MatIconModule,
         MatButtonModule,
         MatExpansionModule,
-        MatListModule
+        MatListModule,
     ],
     imports: [
         CommonModule,
@@ -27,7 +31,7 @@ import { NpmPackageListComponent } from './npm-package-list.component';
         MatIconModule,
         MatButtonModule,
         MatExpansionModule,
-        MatListModule
+        MatListModule,
     ],
 })
 export class NpmPackageInfoModule { }
