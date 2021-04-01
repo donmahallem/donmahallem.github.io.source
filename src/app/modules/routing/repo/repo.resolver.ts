@@ -1,3 +1,7 @@
+/*!
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
+ */
+
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
@@ -28,7 +32,7 @@ export class RepoResolver implements Resolve<any> {
     public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
         return this.api
             .getRepo(environment.github.username, route.params.reponame)
-            .pipe(catchError((err: any | HttpErrorResponse) => {
+            .pipe(catchError((err: any | HttpErrorResponse): Observable<void> => {
                 if (err.status === 404) {
                     this.router.navigate(['stops']);
                 }

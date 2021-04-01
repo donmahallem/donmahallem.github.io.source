@@ -1,31 +1,34 @@
+/*!
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
+ */
+
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { GithubApiService } from './services';
-import { HttpClientModule } from '@angular/common/http';
-import { MatToolbarModule } from '@angular/material';
 import { HomeComponent } from './home.component';
 import { NotFoundComponent } from './not-found.component';
+import { GithubApiService } from './services';
 
 @NgModule({
+  bootstrap: [AppComponent],
   declarations: [
     AppComponent,
     HomeComponent,
-    NotFoundComponent
+    NotFoundComponent,
   ],
   imports: [
     BrowserAnimationsModule,
     HttpClientModule,
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
-    MatToolbarModule
+    MatToolbarModule,
   ],
   providers: [
-    GithubApiService
+    GithubApiService,
   ],
-  bootstrap: [AppComponent]
 })
 export class AppModule { }

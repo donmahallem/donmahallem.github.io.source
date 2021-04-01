@@ -1,8 +1,12 @@
+/*!
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
+ */
+
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import {
-    MatSnackBarModule, MatTreeModule, MatIconModule, MatButtonModule,
-} from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTreeModule } from '@angular/material/tree';
 import { ObjectTreeComponent } from './object-tree.component';
 @NgModule({
     declarations: [
@@ -13,13 +17,13 @@ import { ObjectTreeComponent } from './object-tree.component';
         ObjectTreeComponent,
         MatTreeModule,
         MatIconModule,
-        MatButtonModule
+        MatButtonModule,
     ],
     imports: [
         CommonModule,
         MatTreeModule,
         MatIconModule,
-        MatButtonModule
+        MatButtonModule,
     ],
 })
 export class ObjectTreeModule { }

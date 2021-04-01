@@ -1,6 +1,10 @@
-export const environment = {
-  production: true,
+/*!
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
+ */
+
+export const environment: any = {
   github: {
-    username: 'donmahallem'
-  }
+    username: 'donmahallem',
+  },
+  production: true,
 };

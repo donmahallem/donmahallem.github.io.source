@@ -1,24 +1,22 @@
+/*!
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
+ */
+
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import {
-    MatIconModule,
-    MatListModule,
-    MatProgressSpinnerModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatGridListModule,
-    MatDividerModule,
-} from '@angular/material';
-import { ReposResolver } from './repos.resolver';
-import { RepoListComponent } from './repo-list.component';
-import { ReposRoutingModule } from './repos-routing.module';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatListModule } from '@angular/material/list';
 import { ObjectTreeModule } from '../../common';
+import { RepoListComponent } from './repo-list.component';
 import { RepoResolver } from './repo.resolver';
 import { ReposOverviewComponent } from './repos-overview.component';
+import { ReposRoutingModule } from './repos-routing.module';
+import { ReposResolver } from './repos.resolver';
 @NgModule({
     declarations: [
         RepoListComponent,
-        ReposOverviewComponent
+        ReposOverviewComponent,
     ],
     imports: [
         CommonModule,
@@ -26,11 +24,11 @@ import { ReposOverviewComponent } from './repos-overview.component';
         MatGridListModule,
         MatDividerModule,
         MatListModule,
-        ObjectTreeModule
+        ObjectTreeModule,
     ],
     providers: [
         ReposResolver,
-        RepoResolver
+        RepoResolver,
     ],
 })
 export class ReposModule { }

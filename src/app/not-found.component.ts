@@ -1,12 +1,16 @@
+/*!
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
+ */
+
 import { Component, Input } from '@angular/core';
-import { Repository } from 'src/app/modal';
+import { IRepository } from 'src/app/modal';
 
 @Component({
     selector: 'app-not-found',
+    styleUrls: ['./not-found.component.scss'],
     templateUrl: './not-found.component.html',
-    styleUrls: ['./not-found.component.scss']
 })
 export class NotFoundComponent {
     @Input()
-    public repository: Repository;
+    public repository: IRepository;
 }

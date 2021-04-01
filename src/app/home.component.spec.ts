@@ -1,23 +1,27 @@
-import { TestBed, async } from '@angular/core/testing';
+/*!
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
+ */
+
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HomeComponent } from './home.component';
 
-describe('home.component', () => {
-  describe('HomeComponent', () => {
-    beforeEach(async(() => {
+describe('home.component', (): void => {
+  describe('HomeComponent', (): void => {
+    beforeEach(waitForAsync((): void => {
       TestBed.configureTestingModule({
-        imports: [
-          RouterTestingModule
-        ],
         declarations: [
-          HomeComponent
+          HomeComponent,
+        ],
+        imports: [
+          RouterTestingModule,
         ],
       }).compileComponents();
     }));
 
-    it('should create the app', () => {
-      const fixture = TestBed.createComponent(HomeComponent);
-      const app = fixture.debugElement.componentInstance;
+    it('should create the app', (): void => {
+      const fixture: ComponentFixture<HomeComponent> = TestBed.createComponent(HomeComponent);
+      const app: HomeComponent = fixture.debugElement.componentInstance;
       expect(app).toBeTruthy();
     });
 

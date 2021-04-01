@@ -1,18 +1,18 @@
-import { Component, AfterViewInit, OnDestroy, NgZone, ChangeDetectorRef, ChangeDetectionStrategy, Input } from '@angular/core';
-import { Repository } from 'src/app/modal';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { environment } from 'src/environments/environment.prod';
+/*!
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
+ */
+
+import { Component, Input } from '@angular/core';
+import { IRepository } from 'src/app/modal';
 
 @Component({
     selector: 'app-repo-stats-box',
+    styleUrls: ['./repo-stats-box.component.scss'],
     templateUrl: './repo-stats-box.component.html',
-    styleUrls: ['./repo-stats-box.component.scss']
 })
 export class RepoStatsBoxComponent {
     @Input()
-    public repository: Repository = undefined;
+    public repository: IRepository = undefined;
     public get starCount(): number {
         if (this.repository && this.repository.stargazers_count) {
             return this.repository.stargazers_count;

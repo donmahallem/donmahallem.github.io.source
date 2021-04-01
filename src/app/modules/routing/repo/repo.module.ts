@@ -1,26 +1,25 @@
+/*!
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
+ */
+
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import {
-    MatIconModule,
-    MatListModule,
-    MatProgressSpinnerModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatGridListModule,
-    MatDividerModule,
-} from '@angular/material';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 import { ObjectTreeModule } from '../../common';
-import { RepoDetailComponent } from './repo-detail.component';
-import { RepoResolver } from './repo.resolver';
-import { RepoRoutingModule } from './repo-routing.module';
 import { NpmPackageInfoModule } from '../../common/npm-package-info';
-import { RepoStatsBoxComponent } from './repo-stats-box.component';
+import { RepoDetailComponent } from './repo-detail.component';
+import { RepoRoutingModule } from './repo-routing.module';
 import { RepoStatsBoxItemComponent } from './repo-stats-box-item.component';
+import { RepoStatsBoxComponent } from './repo-stats-box.component';
+import { RepoResolver } from './repo.resolver';
 @NgModule({
     declarations: [
         RepoDetailComponent,
         RepoStatsBoxComponent,
-        RepoStatsBoxItemComponent
+        RepoStatsBoxItemComponent,
     ],
     imports: [
         CommonModule,
@@ -30,10 +29,10 @@ import { RepoStatsBoxItemComponent } from './repo-stats-box-item.component';
         MatListModule,
         ObjectTreeModule,
         NpmPackageInfoModule,
-        MatIconModule
+        MatIconModule,
     ],
     providers: [
-        RepoResolver
+        RepoResolver,
     ],
 })
 export class RepoModule { }

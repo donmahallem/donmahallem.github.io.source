@@ -1,14 +1,20 @@
+/*!
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
+ */
+
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import {
-    MatSnackBarModule, MatTreeModule, MatIconModule, MatButtonModule, MatExpansionModule, MatListModule,
-} from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatTreeModule } from '@angular/material/tree';
 import { NpmPackageInfoComponent } from './npm-package-info.component';
 import { NpmPackageListComponent } from './npm-package-list.component';
 @NgModule({
     declarations: [
         NpmPackageInfoComponent,
-        NpmPackageListComponent
+        NpmPackageListComponent,
     ],
     exports: [
         CommonModule,
@@ -17,7 +23,7 @@ import { NpmPackageListComponent } from './npm-package-list.component';
         MatIconModule,
         MatButtonModule,
         MatExpansionModule,
-        MatListModule
+        MatListModule,
     ],
     imports: [
         CommonModule,
@@ -25,7 +31,7 @@ import { NpmPackageListComponent } from './npm-package-list.component';
         MatIconModule,
         MatButtonModule,
         MatExpansionModule,
-        MatListModule
+        MatListModule,
     ],
 })
 export class NpmPackageInfoModule { }

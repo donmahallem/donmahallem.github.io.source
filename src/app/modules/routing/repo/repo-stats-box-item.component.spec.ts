@@ -1,11 +1,15 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
-import { Component, Input, DebugElement } from '@angular/core';
-import { Repository } from 'src/app/modal';
-import { RepoStatsBoxItemComponent } from './repo-stats-box-item.component';
+/*!
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
+ */
+
+import { Component, DebugElement } from '@angular/core';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { RepoStatsBoxItemComponent } from './repo-stats-box-item.component';
 
 // tslint:disable:component-selector
 // tslint:disable:directive-selector
+// tslint:disable:max-classes-per-file
 @Component({
   selector: 'mat-icon',
   template: '',
@@ -21,39 +25,40 @@ export class TestParentComponent {
 
 // tslint:enable:component-selector
 // tslint:enable:directive-selector
-describe('modules/routing/repo/repo-stats-box-item.component', () => {
-  describe('RepoStatsBoxItemComponent', () => {
-    beforeEach(async(() => {
+// tslint:enable:max-classes-per-file
+describe('modules/routing/repo/repo-stats-box-item.component', (): void => {
+  describe('RepoStatsBoxItemComponent', (): void => {
+    beforeEach(waitForAsync((): void => {
       TestBed.configureTestingModule({
-        imports: [
-        ],
         declarations: [
           TestMatIconComponent,
           RepoStatsBoxItemComponent,
-          TestParentComponent
+          TestParentComponent,
+        ],
+        imports: [
         ],
       }).compileComponents();
     }));
 
-    it('should create the app', () => {
-      const fixture = TestBed.createComponent(RepoStatsBoxItemComponent);
-      const app = fixture.debugElement.componentInstance;
+    it('should create the app', (): void => {
+      const fixture: ComponentFixture<RepoStatsBoxItemComponent> = TestBed.createComponent(RepoStatsBoxItemComponent);
+      const app: RepoStatsBoxItemComponent = fixture.debugElement.componentInstance;
       expect(app).toBeTruthy();
     });
 
-    describe('layout', () => {
+    describe('layout', (): void => {
       let parentFixture: ComponentFixture<TestParentComponent>;
       let testComponent: TestParentComponent;
       let testChild: RepoStatsBoxItemComponent;
       let testChildDebugElement: DebugElement;
-      beforeEach(() => {
+      beforeEach((): void => {
         parentFixture = TestBed.createComponent(TestParentComponent);
         testComponent = parentFixture.debugElement.componentInstance;
         testChildDebugElement = parentFixture.debugElement.query(By.directive(RepoStatsBoxItemComponent));
         testChild = testChildDebugElement.componentInstance;
       });
-      ['star', 'home'].forEach((testText: string) => {
-        it('it should display "' + testText + '"', () => {
+      ['star', 'home'].forEach((testText: string): void => {
+        it(`it should display "${testText}"`, (): void => {
           testComponent.useIcon = testText;
           testComponent.content = testText;
           parentFixture.detectChanges();
