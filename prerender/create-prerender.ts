@@ -22,9 +22,11 @@ const getPage = async (page: number): Promise<any[]> => {
 
 }
 const create = async (): Promise<void> => {
-    const data: any[] = [];
-    for (let page = 0; page < 4; page++) {
+    const data: string[] = [];
+    const outputPages: string[] = ['', 'repos', '404'];
+    for (let page: number = 0; page < 10; page++) {
         console.group(`Repo Page ${page} by ${username}`);
+        outputPages.push(`repos/${page}`);
         const resp: any[] = await getPage(page);
         console.log(`Got ${resp.length} items`);
         console.groupEnd();
@@ -34,10 +36,11 @@ const create = async (): Promise<void> => {
         }
     }
     console.log('Total Repos', data.length);
-    const outputFile: string = data
+    outputPages.push(...data
         .map((repo: any, idx: number): string => {
             return `repo/${repo.name}`;
-        }).join('\r\n');
+        }));
+    const outputFile: string = outputPages.join('\r\n');
     await fsp.writeFile('./prerender.txt', outputFile, 'utf8');
 }
 
