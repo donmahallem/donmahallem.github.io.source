@@ -2,7 +2,7 @@
  * Source https://github.com/donmahallem/donmahallem.github.io.source
  */
 
-import 'zone.js/dist/zone-node';
+import 'zone.js/node';
 
 import { ngExpressEngine } from '@nguniversal/express-engine';
 import * as express from 'express';
