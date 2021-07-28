@@ -22,6 +22,6 @@ import { AppModule } from './app.module';
         return 'http://localhost:4200/api';
       },
     },
-  ]
+  ],
 })
 export class AppServerModule { }
