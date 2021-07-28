@@ -6,10 +6,11 @@ import 'zone.js/node';
 
 import { ngExpressEngine } from '@nguniversal/express-engine';
 import * as express from 'express';
-import { join } from 'path';
+import { join, resolve } from 'path';
 
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
+import { API_ENDPOINT } from 'src/app/api-endpoint';
 import { AppServerModule } from './src/main.server';
 
 // tslint:disable:typedef
@@ -22,11 +23,26 @@ export const app: any = (): express.Express => {
   // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
   server.engine('html', ngExpressEngine({
     bootstrap: AppServerModule,
+    providers: [{
+      provide: API_ENDPOINT, useFactory: (): string => {
+        console.log('SSR');
+        return 'localhost:4200/api';
+      },
+    }],
   }));
 
   server.set('view engine', 'html');
   server.set('views', distFolder);
 
+  server.get('/api/repos/:user/:repo', (req, res, next) => {
+    const dataPath: string = resolve(join('./', 'dist', 'data', 'repos', req.params.user, req.params.repo));
+    if (existsSync(dataPath)) {
+      res.set('Content-Type', 'application/json');
+      res.sendFile(dataPath);
+    } else {
+      next();
+    }
+  });
   // Example Express Rest API endpoints
   // server.get('/api/**', (req, res) => { });
   // Serve static files from /browser
@@ -36,7 +52,17 @@ export const app: any = (): express.Express => {
 
   // All regular routes use the Universal engine
   server.get('*', (req, res) => {
-    res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
+    res.render(indexHtml, {
+      providers: [{
+        provide: APP_BASE_HREF, useValue: req.baseUrl,
+      }, {
+        provide: API_ENDPOINT,
+        useFactory: (): string => {
+          return 'localhost:4200/api';
+        },
+      }],
+      req,
+    });
   });
 
   return server;
