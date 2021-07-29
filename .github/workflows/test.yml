@@ -41,6 +41,8 @@ jobs:
         run: npm run lint
       - name: Run Docs
         run: npm run docs
+      - name: Test Prerender
+        run: npm run prerender
   finish:
     needs: test_suite
     name: Finish Test
