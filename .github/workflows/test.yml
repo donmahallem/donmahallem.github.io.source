@@ -43,6 +43,8 @@ jobs:
         run: npm run docs
       - name: Test Prerender
         run: npm run prerender
+        env:
+          API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   finish:
     needs: test_suite
     name: Finish Test
