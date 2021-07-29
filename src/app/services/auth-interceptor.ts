@@ -10,6 +10,21 @@ import { Inject, Injectable } from '@angular/core';
 import { tap, Observable } from 'rxjs';
 import { API_TOKEN } from '../api-endpoint';
 
+const logRatelimit: (title: string, resp: HttpResponse<any> | HttpErrorResponse) => void =
+    (title: string, resp: HttpResponse<any> | HttpErrorResponse): void => {
+        const keys: string[] = [
+            'x-ratelimit-limit',
+            'x-ratelimit-used',
+            'x-ratelimit-reset',
+        ];
+        console.group(title);
+        for (const key of keys) {
+            if (resp.headers.has(key)) {
+                console.log(`${key}: ${resp.headers.get(key)}`);
+            }
+        }
+        console.groupEnd();
+    };
 /** When accessing api.github.com it does add optional auth headers */
 @Injectable({
     providedIn: 'root',
@@ -33,22 +48,11 @@ export class AuthInterceptor implements HttpInterceptor {
             return next.handle(authReq)
                 .pipe(tap((item: HttpEvent<any>): void => {
                     if (item instanceof HttpResponse) {
-                        console.log(`Response Code ${item.status}`);
+                        logRatelimit(`Response Code ${item.status}`, item);
                     }
                 }, (err: HttpErrorResponse): void => {
                     if (err.status === 403) {
-                        const keys: string[] = [
-                            'x-ratelimit-limit',
-                            'x-ratelimit-used',
-                            'x-ratelimit-reset',
-                        ];
-                        console.group(`Response Error Code ${err.status}`);
-                        for (const key of keys) {
-                            if (err.headers.has(key)) {
-                                console.log(`${key}: ${err.headers.get(key)}`);
-                            }
-                        }
-                        console.groupEnd();
+                        logRatelimit(`Response Code ${err.status}`, err);
                     }
                 }));
         }
