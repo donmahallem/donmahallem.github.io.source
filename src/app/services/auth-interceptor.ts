@@ -3,13 +3,14 @@
  */
 
 import {
-    HttpEvent, HttpHandler, HttpInterceptor, HttpRequest,
+    HttpErrorResponse,
+    HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse,
 } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { tap, Observable } from 'rxjs';
 import { API_TOKEN } from '../api-endpoint';
 
-/** Pass untouched request through to the next request handler. */
+/** When accessing api.github.com it does add optional auth headers */
 @Injectable({
     providedIn: 'root',
 })
@@ -23,10 +24,33 @@ export class AuthInterceptor implements HttpInterceptor {
         Observable<HttpEvent<any>> {
         const parsedUrl: URL = new URL(req.url);
         if (parsedUrl.protocol.startsWith('https') &&
-            parsedUrl.host.localeCompare('api.github.com') &&
+            parsedUrl.host.localeCompare('api.github.com') === 0 &&
             this.apiToken) {
             console.log('Auth Header added');
             req.headers.set('Authorization', `Bearer ${this.apiToken}`);
+            return next.handle(req)
+                .pipe(tap((item: HttpEvent<any>): void => {
+                    if (item instanceof HttpResponse) {
+                        console.log(item.status, item.headers.keys());
+                    } else {
+                        console.log(`Response Code`);
+                    }
+                }, (err: HttpErrorResponse): void => {
+                    if (err.status === 403) {
+                        const keys: string[] = [
+                            'x-ratelimit-limit',
+                            'x-ratelimit-used',
+                            'x-ratelimit-reset',
+                        ];
+                        console.group(`Response Error Code ${err.status}`);
+                        for (const key of keys) {
+                            if (err.headers.has(key)) {
+                                console.log(`${key}: ${err.headers.get(key)}`);
+                            }
+                        }
+                        console.groupEnd();
+                    }
+                }));
         }
         return next.handle(req);
     }
