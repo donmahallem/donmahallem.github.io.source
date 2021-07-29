@@ -27,8 +27,10 @@ export class AuthInterceptor implements HttpInterceptor {
             parsedUrl.host.localeCompare('api.github.com') === 0 &&
             this.apiToken) {
             console.log('Auth Header added');
-            req.headers.set('authorization', `Bearer ${this.apiToken}`);
-            return next.handle(req)
+            const authReq: HttpRequest<any> = req.clone({
+                headers: req.headers.set('Authorization', `Bearer ${this.apiToken}`),
+            });
+            return next.handle(authReq)
                 .pipe(tap((item: HttpEvent<any>): void => {
                     if (item instanceof HttpResponse) {
                         console.log(`Response Code ${item.status}`);
