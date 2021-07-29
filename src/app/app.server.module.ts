@@ -4,7 +4,7 @@
 
 import { NgModule } from '@angular/core';
 import { ServerModule } from '@angular/platform-server';
-import { API_ENDPOINT } from './api-endpoint';
+import { API_TOKEN } from './api-endpoint';
 
 import { AppComponent } from './app.component';
 import { AppModule } from './app.module';
@@ -17,9 +17,13 @@ import { AppModule } from './app.module';
   ],
   providers: [
     {
-      provide: API_ENDPOINT,
+      provide: API_TOKEN,
       useFactory: (): string => {
-        return 'http://localhost:4200/api';
+        if (process?.env?.API_TOKEN) {
+          return process?.env?.API_TOKEN;
+        } else {
+          return undefined;
+        }
       },
     },
   ],

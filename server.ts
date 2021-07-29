@@ -10,7 +10,7 @@ import { join, resolve } from 'path';
 
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
-import { API_ENDPOINT } from 'src/app/api-endpoint';
+import { API_TOKEN } from 'src/app/api-endpoint';
 import { AppServerModule } from './src/main.server';
 
 // tslint:disable:typedef
@@ -24,7 +24,7 @@ export const app: any = (): express.Express => {
   server.engine('html', ngExpressEngine({
     bootstrap: AppServerModule,
     providers: [{
-      provide: API_ENDPOINT, useFactory: (): string => {
+      provide: API_TOKEN, useFactory: (): string => {
         console.log('SSR');
         return 'localhost:4200/api';
       },
@@ -56,7 +56,7 @@ export const app: any = (): express.Express => {
       providers: [{
         provide: APP_BASE_HREF, useValue: req.baseUrl,
       }, {
-        provide: API_ENDPOINT,
+        provide: API_TOKEN,
         useFactory: (): string => {
           return 'localhost:4200/api';
         },
