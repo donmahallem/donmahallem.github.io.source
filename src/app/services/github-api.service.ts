@@ -3,19 +3,16 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { API_ENDPOINT } from '../api-endpoint';
 import { IGithubFileId, IRepository } from '../modal';
 
 @Injectable({
     providedIn: 'root',
 })
 export class GithubApiService {
-
-    constructor(private http: HttpClient,
-        @Inject(API_ENDPOINT) public endpoint: string) {
-
+    public readonly API_ENDPOINT: string = 'https://api.github.com';
+    constructor(private http: HttpClient) {
     }
 
     /**
@@ -25,7 +22,7 @@ export class GithubApiService {
      * @param page Page to query starting at 1
      */
     public getUserRepos(username: string, pageSize: number = 25, page?: number): Observable<IRepository[]> {
-        let url: string = `${this.endpoint}/users/${username}/repos?per_page=${pageSize}`;
+        let url: string = `${this.API_ENDPOINT}/users/${username}/repos?per_page=${pageSize}`;
         if (page) {
             url += `&page=${page}`;
         }
@@ -34,9 +31,9 @@ export class GithubApiService {
 
     public getRepo(usernameOrFullname: string, reponame?: string): Observable<IRepository> {
         if (reponame) {
-            return this.http.get<IRepository>(`${this.endpoint}/repos/${usernameOrFullname}/${reponame}`);
+            return this.http.get<IRepository>(`${this.API_ENDPOINT}/repos/${usernameOrFullname}/${reponame}`);
         } else {
-            return this.http.get<IRepository>(`${this.endpoint}/repos/${usernameOrFullname}`);
+            return this.http.get<IRepository>(`${this.API_ENDPOINT}/repos/${usernameOrFullname}`);
         }
     }
 

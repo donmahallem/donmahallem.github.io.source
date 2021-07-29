@@ -171,7 +171,8 @@
             "browserTarget": "DonMahallem:build:production",
             "serverTarget": "DonMahallem:server:production",
             "routes": [
-              "/"
+              "/",
+              "/repos"
             ]
           },
           "configurations": {

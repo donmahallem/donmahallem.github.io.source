@@ -4,9 +4,9 @@
 
 import { InjectionToken } from '@angular/core';
 
-export const API_ENDPOINT: InjectionToken<string> = new InjectionToken<string>('api_endpoint', {
+export const API_TOKEN: InjectionToken<string> = new InjectionToken<string>('api_endpoint', {
     factory: (): string => {
-        return 'https://api.github.com';
+        return undefined;
     },
-    providedIn: 'platform',
+    providedIn: 'root',
 });
