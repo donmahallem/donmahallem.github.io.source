@@ -39,6 +39,8 @@ jobs:
           npm run prerender -- --routes-file ./prerender.txt
           cp ./prerender/google48141c515afad065.html ./dist/DonMahallem/browser/google48141c515afad065.html
           cp ./dist/DonMahallem/browser/index.html ./dist/DonMahallem/browser/404.html
+        env:
+          API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Install SSH Client
         uses: webfactory/ssh-agent@v0.5.3
         with:
