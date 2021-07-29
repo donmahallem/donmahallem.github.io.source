@@ -25,7 +25,8 @@ export class AuthInterceptor implements HttpInterceptor {
         if (parsedUrl.protocol === 'https' &&
             parsedUrl.host === 'api.github.com' &&
             this.apiToken) {
-            req.headers.set('Authorization', `token ${this.apiToken}`);
+            console.log('Intercept Auth Header');
+            req.headers.set('Authorization', `Bearer ${this.apiToken}`);
         }
         return next.handle(req);
     }
