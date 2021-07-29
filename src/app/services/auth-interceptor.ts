@@ -22,11 +22,10 @@ export class AuthInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler):
         Observable<HttpEvent<any>> {
         const parsedUrl: URL = new URL(req.url);
-        if (parsedUrl.protocol === 'https' &&
-            parsedUrl.host === 'api.github.com' &&
+        if (parsedUrl.protocol.startsWith('https') &&
+            parsedUrl.host.localeCompare('api.github.com') &&
             this.apiToken) {
-            console.log('Intercept Auth Header');
-            req.headers.set('Authorization', `Bearer ${this.apiToken}`);
+            req.headers.set('Authorization', `token ${this.apiToken}`);
         }
         return next.handle(req);
     }
