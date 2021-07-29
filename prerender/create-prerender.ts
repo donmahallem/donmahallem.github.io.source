@@ -54,6 +54,11 @@ const create = async (): Promise<void> => {
         await fsp.writeFile(dirPath, JSON.stringify(repo));
     }
     console.log('Total Pages Filtered', outputPages.length);
+    for (let i: number = 0; i < outputPages.length; i++) {
+        if (!outputPages[i].startsWith('/')) {
+            outputPages[i] = `/${outputPages[i]}`;
+        }
+    }
     const outputFile: string = outputPages.join('\r\n');
     await fsp.writeFile('./prerender.txt', outputFile, 'utf8');
 }
