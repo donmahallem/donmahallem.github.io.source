@@ -3,6 +3,7 @@
  */
 
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { ServerModule } from '@angular/platform-server';
 import { API_TOKEN } from './api-endpoint';
 
@@ -12,6 +13,7 @@ import { AppModule } from './app.module';
 @NgModule({
   bootstrap: [AppComponent],
   imports: [
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppModule,
     ServerModule,
   ],

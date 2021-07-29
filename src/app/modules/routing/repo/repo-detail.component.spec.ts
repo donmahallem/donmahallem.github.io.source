@@ -68,6 +68,21 @@ describe('modules/routing/repo/repo-detail.component', (): void => {
     });
 
     describe('methods', (): void => {
+      let fixture: ComponentFixture<RepoDetailComponent>;
+      let app: RepoDetailComponent;
+      beforeEach((): void => {
+        fixture = TestBed.createComponent(RepoDetailComponent);
+        app = fixture.debugElement.componentInstance;
+      });
+      describe('hasDescription()', (): void => {
+        it('should return false if no repository is set', (): void => {
+          expect(app.hasDescription()).toBeFalse();
+        });
+        it('should return true if a description is set', (): void => {
+          app.repository = { description: 'test description' } as any;
+          expect(app.hasDescription()).toBeTrue();
+        });
+      });
       it('requires implementation');
     });
 

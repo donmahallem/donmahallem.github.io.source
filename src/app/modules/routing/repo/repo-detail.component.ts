@@ -55,9 +55,6 @@ export class RepoDetailComponent implements AfterViewInit, OnDestroy {
     }
 
     public hasDescription(): boolean {
-        if (this.repository) {
-            return typeof this.repository.description === 'string';
-        }
-        return false;
+        return typeof this?.repository?.description === 'string';
     }
 }
