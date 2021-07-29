@@ -39,7 +39,7 @@ export class ReposResolver implements Resolve<IRepository[]> {
         let page: number = 1;
         if (route.params.page) {
             if (!this.validatePage(route.params.page)) {
-                this.router.navigate(['repos', 'list']);
+                this.router.navigate(['repos']);
                 return EMPTY;
             }
             page = route.params.page;

@@ -172,7 +172,8 @@
             "serverTarget": "DonMahallem:server:production",
             "routes": [
               "/",
-              "/repos"
+              "/repos",
+              "/repos/1"
             ]
           },
           "configurations": {
