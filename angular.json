@@ -173,7 +173,13 @@
             "routes": [
               "/",
               "/repos",
-              "/repos/1"
+              "/repos/1",
+              "/repos",
+              "/404",
+              "/repos/1",
+              "/repos/2",
+              "/repo/AdminLTE",
+              "/repo/andlol",
             ]
           },
           "configurations": {

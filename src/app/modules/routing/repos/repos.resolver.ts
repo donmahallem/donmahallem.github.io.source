@@ -2,8 +2,9 @@
  * Source https://github.com/donmahallem/donmahallem.github.io.source
  */
 
+import { isPlatformBrowser } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
 import { EMPTY, Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
@@ -24,7 +25,9 @@ export class ReposResolver implements Resolve<IRepository[]> {
      * @param api the {@ApiService}
      * @param router the {@Router}
      */
-    public constructor(private api: GithubApiService, private router: Router) { }
+    public constructor(@Inject(PLATFORM_ID) public platformId: object,
+        private api: GithubApiService,
+        private router: Router) { }
 
     public validatePage(value: any): boolean {
         return this.INT_REGEX.test(value);
@@ -51,8 +54,12 @@ export class ReposResolver implements Resolve<IRepository[]> {
                     throw new HttpErrorResponse({ status: 404 });
                 }
             }), catchError((err: any | HttpErrorResponse): Observable<IRepository[]> => {
-                if (err.status === 404) {
+                if (err.status === 404 && isPlatformBrowser(this.platformId)) {
                     this.router.navigate(['404']);
+                    return EMPTY;
+                } else if (err.status === 403) {
+                    console.log('Rate limit');
+                    return EMPTY;
                 }
                 return EMPTY;
             }));
