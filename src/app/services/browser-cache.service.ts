@@ -1,0 +1,70 @@
+/*!
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
+ */
+
+import { Injectable } from '@angular/core';
+import { DBSchema, IDBPDatabase, IDBPObjectStore, IDBPTransaction, openDB, StoreNames } from 'idb';
+import { UserRepositoriesResponse, UserRepositoryResponse } from '../modal';
+import { CacheService } from './cache.service';
+
+interface CacheDBSchema extends DBSchema {
+    repositories: {
+        value: UserRepositoryResponse;
+        key: string;
+        indexes: { 'full_name': string };
+    };
+}
+const KEY_PATH: string = 'full_name';
+type Database = IDBPDatabase<CacheDBSchema>;
+type DatabaseTransaction<NAME extends StoreNames<CacheDBSchema>[], MODE extends IDBTransactionMode = 'readonly'> = IDBPTransaction<CacheDBSchema, NAME, MODE>;
+@Injectable({
+    providedIn: 'root',
+})
+export class BrowserCacheService extends CacheService {
+
+    private db: Database
+    constructor() {
+        super();
+    }
+
+    public getDb(): Promise<Database> {
+        return openDB('repositories', 1, {
+            upgrade(db: Database, old: number, newVersion: number, tx): void {
+                // Create a store of objects
+                const store: IDBPObjectStore<CacheDBSchema, "repositories"[], "repositories", "versionchange"> =
+                    db.createObjectStore('repositories', { autoIncrement: false, keyPath: KEY_PATH });
+                // Create an index on the 'date' property of the objects.
+                store.createIndex('full_name', KEY_PATH);
+            },
+        });
+    }
+
+    /**
+     *
+     * @param username Username
+     * @param pageSize Page size
+     * @param page Page to query starting at 1
+     */
+    public async get(id: string): Promise<UserRepositoryResponse> {
+        const db: Database = await this.getDb();
+        const data: UserRepositoryResponse = await db.get('repositories', id);
+        db.close();
+        return (await this.getDb()).get('repositories', id);
+    }
+
+    public async getAll(): Promise<UserRepositoriesResponse> {
+        return (await this.getDb()).getAll('repositories');
+    }
+
+    public async put(repos: UserRepositoryResponse | UserRepositoriesResponse): Promise<void> {
+        const db: Database = await this.getDb();
+        if (Array.isArray(repos)) {
+            const tx: DatabaseTransaction<['repositories'], 'readwrite'> = db.transaction('repositories', 'readwrite', { durability: 'strict' });
+            for (const rep of repos) {
+                await tx.store.put(rep);
+            }
+            return await tx.done;
+        }
+        await db.put('repositories', repos);
+    }
+}

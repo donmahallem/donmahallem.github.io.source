@@ -6,7 +6,7 @@ import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, O
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { IRepository } from 'src/app/modal';
+import { UserRepositoriesResponse } from 'src/app/modal';
 
 @Component({
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,7 +15,7 @@ import { IRepository } from 'src/app/modal';
     templateUrl: './repos-overview.component.html',
 })
 export class ReposOverviewComponent implements AfterViewInit, OnDestroy {
-    public repos: IRepository[] = [];
+    public repos: UserRepositoriesResponse = [];
     public page: number = 1;
     private updateSubscription: Subscription;
 
@@ -27,9 +27,9 @@ export class ReposOverviewComponent implements AfterViewInit, OnDestroy {
     public ngAfterViewInit(): void {
         this.updateSubscription = this.activatedRoute
             .data
-            .pipe(map((data: { repos: IRepository[] }): IRepository[] => {
+            .pipe(map((data: { repos: UserRepositoriesResponse }): UserRepositoriesResponse => {
                 return data.repos;
-            })).subscribe((repos: IRepository[]): void => {
+            })).subscribe((repos: UserRepositoriesResponse): void => {
                 this.update(repos);
             });
     }
@@ -49,7 +49,7 @@ export class ReposOverviewComponent implements AfterViewInit, OnDestroy {
     public hasPreviousPage(): boolean {
         return this.getCurrentPage() > 1;
     }
-    public update(repos: IRepository[]): void {
+    public update(repos: UserRepositoriesResponse): void {
         this.repos = repos;
         this.page = this.getCurrentPage();
         this.cdRef.detectChanges();

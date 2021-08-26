@@ -9,6 +9,7 @@ import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@a
 import { EMPTY, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { GithubApiService } from 'src/app/services';
+import { CachedGithubApiService } from 'src/app/services/cached-github-api.service';
 import { environment } from 'src/environments/environment.prod';
 
 /**
@@ -24,7 +25,7 @@ export class RepoResolver implements Resolve<any> {
      * @param router the {@Router}
      */
     public constructor(@Inject(PLATFORM_ID) public platformId: object,
-        private api: GithubApiService,
+        private api: CachedGithubApiService,
         private router: Router) { }
 
     /**

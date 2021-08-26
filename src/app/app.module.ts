@@ -3,15 +3,19 @@
  */
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { firstValueFrom } from 'rxjs';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home.component';
+import { UserRepositoriesResponse } from './modal';
 import { NotFoundComponent } from './not-found.component';
 import { AuthInterceptor, GithubApiService } from './services';
+import { BrowserCacheService } from './services/browser-cache.service';
+import { CacheService } from './services/cache.service';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -30,6 +34,22 @@ import { AuthInterceptor, GithubApiService } from './services';
   providers: [
     GithubApiService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    {
+      provide: CacheService,
+      useClass: BrowserCacheService,
+    },
+    {
+      provide: APP_INITIALIZER, useFactory: (kk: GithubApiService): () => Promise<void> => {
+        return async (): Promise<void> => {
+          for (let i = 0; i < 20; i++) {
+            const items: UserRepositoriesResponse = await firstValueFrom(kk.getUserRepos('donmahallem', 25, i));
+            if (items.length < 25) {
+              break;
+            }
+          }
+        }
+      }, deps: [GithubApiService], multi: true
+    }
   ],
 })
 export class AppModule { }
