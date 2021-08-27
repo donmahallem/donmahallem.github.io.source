@@ -3,8 +3,9 @@ on:
   push:
     branches:
       - master
-      - prerender2
-
+      - deployapi
+  schedule:
+    - cron: "* */2 * * *"
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -34,14 +35,6 @@ jobs:
           npm run prepare:prerender2
         env:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build
-        timeout-minutes: 30
-        run: |
-          npm run prerender -- --routes-file ./prerender.txt
-          cp ./prerender/google48141c515afad065.html ./dist/DonMahallem/browser/google48141c515afad065.html
-          cp ./dist/DonMahallem/browser/index.html ./dist/DonMahallem/browser/404.html
-        env:
-          API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Install SSH Client
         uses: webfactory/ssh-agent@v0.5.3
         with:
@@ -50,8 +43,8 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           SSH: true
-          BRANCH: master # The branch the action should deploy to.
-          FOLDER: dist/DonMahallem/browser/ # The folder the action should deploy.
-          REPOSITORY_NAME: donmahallem/donmahallem.github.io
+          BRANCH: api # The branch the action should deploy to.
+          FOLDER: ./src/assets # The folder the action should deploy.
+          REPOSITORY_NAME: donmahallem/donmahallem.github.io.source
           TARGET_FOLDER: .
           CLEAN: true
