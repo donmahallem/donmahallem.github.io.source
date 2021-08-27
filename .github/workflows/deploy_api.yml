@@ -35,10 +35,6 @@ jobs:
           npm run prepare:prerender2
         env:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Install SSH Client
-        uses: webfactory/ssh-agent@v0.5.3
-        with:
-          ssh-private-key: ${{ secrets.APP_DEPLOY_KEY }}
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
