@@ -16,7 +16,8 @@
     "dev:ssr": "ng run DonMahallem:serve-ssr",
     "serve:ssr": "node dist/DonMahallem/server/main.js",
     "build:ssr": "ng build --prod && ng run DonMahallem:server:production",
-    "prepare:prerender": "ts-node --project tsconfig.prerender.json ./prerender/create-prerender.ts"
+    "prepare:prerender": "ts-node --project tsconfig.prerender.json ./prerender/create-prerender.ts",
+    "prepare:prerender2": "ts-node --project tsconfig.prerender.json ./prerender/create-prerender2.ts"
   },
   "publishConfig": {
     "access": "public"
