@@ -38,9 +38,9 @@ jobs:
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
-          SSH: true
           BRANCH: api # The branch the action should deploy to.
           FOLDER: ./src/assets # The folder the action should deploy.
-          REPOSITORY_NAME: donmahallem/donmahallem.github.io.source
           TARGET_FOLDER: .
           CLEAN: true
+        env:
+          token: ${{ secrets.GITHUB_TOKEN }}
