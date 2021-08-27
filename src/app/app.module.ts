@@ -2,8 +2,9 @@
  * Source https://github.com/donmahallem/donmahallem.github.io.source
  */
 
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule, PLATFORM_ID } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -39,16 +40,18 @@ import { CacheService } from './services/cache.service';
       useClass: BrowserCacheService,
     },
     {
-      provide: APP_INITIALIZER, useFactory: (kk: GithubApiService): () => Promise<void> => {
+      provide: APP_INITIALIZER, useFactory: (kk: GithubApiService, platformId: any): () => Promise<void> => {
+        console.log(isPlatformServer(platformId));
         return async (): Promise<void> => {
           for (let i = 0; i < 20; i++) {
+            console.log('KK', i);
             const items: UserRepositoriesResponse = await firstValueFrom(kk.getUserRepos('donmahallem', 25, i));
             if (items.length < 25) {
               break;
             }
           }
         }
-      }, deps: [GithubApiService], multi: true
+      }, deps: [GithubApiService, PLATFORM_ID], multi: true
     }
   ],
 })

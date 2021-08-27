@@ -5,6 +5,7 @@
 import { Injectable } from '@angular/core';
 import { Mutex, MutexInterface } from 'async-mutex';
 import { UserRepositoriesResponse, UserRepositoryResponse } from '../modal';
+import { OfflineDatabase } from '../offline-database';
 import { CacheService } from './cache.service';
 
 @Injectable({
@@ -13,9 +14,8 @@ import { CacheService } from './cache.service';
 export class ServerCacheService extends CacheService {
 
     private mutex: Mutex = new Mutex();
-    constructor(private db: Map<string, UserRepositoryResponse>) {
+    constructor(private db: OfflineDatabase) {
         super();
-        console.log("Construct");
     }
 
     /**
@@ -26,16 +26,16 @@ export class ServerCacheService extends CacheService {
      */
     public async get(id: string): Promise<UserRepositoryResponse> {
         const release: MutexInterface.Releaser = await this.mutex.acquire();
-        const result: UserRepositoryResponse = this.db.get(id);
+        const result: UserRepositoryResponse = this.db.db.get(id);
         console.log(`Getting cached ${id}. Was ${result ? 'found' : 'not found'}`);
-        console.log('Keys', Array.from(this.db.keys()));
+        console.log('Keys', Array.from(this.db.db.keys()));
         release();
         return result;
     }
 
     public async getAll(): Promise<UserRepositoriesResponse> {
         const release: MutexInterface.Releaser = await this.mutex.acquire();
-        const items: UserRepositoriesResponse = Array.from(this.db.values());
+        const items: UserRepositoriesResponse = Array.from(this.db.db.values());
         release();
         return items;
     }
@@ -45,10 +45,10 @@ export class ServerCacheService extends CacheService {
         if (Array.isArray(repos)) {
             console.log(`Inserting ${repos.length} items`);
             for (const repo of repos) {
-                this.db.set(repo.full_name, repo);
+                this.db.db.set(repo.full_name, repo);
             }
         } else {
-            this.db.set(repos.full_name, repos);
+            this.db.db.set(repos.full_name, repos);
         }
         release();
     }

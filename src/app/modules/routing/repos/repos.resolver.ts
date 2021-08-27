@@ -27,7 +27,7 @@ export class ReposResolver implements Resolve<UserRepositoriesResponse> {
      * @param router the {@Router}
      */
     public constructor(@Inject(PLATFORM_ID) public platformId: object,
-        private api: CachedGithubApiService,
+        private api: GithubApiService,
         private router: Router) { }
 
     public validatePage(value: any): boolean {

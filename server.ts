@@ -52,13 +52,14 @@ export const app: any = (): express.Express => {
 
   // All regular routes use the Universal engine
   server.get('*', (req, res) => {
+    console.log("Base url", req.baseUrl, req.hostname, req.originalUrl, req.url, req.app.settings, req.socket.localPort);
     res.render(indexHtml, {
       providers: [{
         provide: APP_BASE_HREF, useValue: req.baseUrl,
       }, {
         provide: API_TOKEN,
         useFactory: (): string => {
-          return 'localhost:4200/api';
+          return `${req.hostname}:${req.socket.localPort}`;
         },
       }],
       req,

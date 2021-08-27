@@ -25,7 +25,7 @@ export class RepoResolver implements Resolve<any> {
      * @param router the {@Router}
      */
     public constructor(@Inject(PLATFORM_ID) public platformId: object,
-        private api: CachedGithubApiService,
+        private api: GithubApiService,
         private router: Router) { }
 
     /**
