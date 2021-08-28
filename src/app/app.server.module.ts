@@ -17,8 +17,8 @@ import { OfflineGithubApiService } from './services/offline-github-api.service';
 import { ServerCacheService } from './services/server-cache.service';
 
 const offlineDB: OfflineDatabase = new OfflineDatabase();
-export const BROWSER_STORAGE: InjectionToken<OfflineDatabase> =
-  new InjectionToken<OfflineDatabase>('Browser Storage', {
+export const SERVER_CACHE_STORAGE: InjectionToken<OfflineDatabase> =
+  new InjectionToken<OfflineDatabase>('ServerCacheStorage', {
     factory: (): OfflineDatabase => offlineDB,
     providedIn: 'root',
   });
@@ -41,12 +41,16 @@ export const BROWSER_STORAGE: InjectionToken<OfflineDatabase> =
       },
     },
     {
-      deps: [BROWSER_STORAGE],
+      provide: SERVER_CACHE_STORAGE,
+      useFactory: (): OfflineDatabase => offlineDB,
+    },
+    {
+      deps: [SERVER_CACHE_STORAGE],
       provide: CacheService,
       useClass: ServerCacheService,
     },
     {
-      deps: [HttpClient],
+      deps: [HttpClient, CacheService],
       provide: GithubApiService,
       useClass: OfflineGithubApiService,
     },

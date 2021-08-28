@@ -2,19 +2,17 @@
  * Source https://github.com/donmahallem/donmahallem.github.io.source
  */
 
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Mutex, MutexInterface } from 'async-mutex';
+import { SERVER_CACHE_STORAGE } from '../app.server.module';
 import { UserRepositoriesResponse, UserRepositoryResponse } from '../modal';
 import { OfflineDatabase } from '../offline-database';
 import { CacheService } from './cache.service';
 
-@Injectable({
-    providedIn: 'root',
-})
 export class ServerCacheService extends CacheService {
 
     private mutex: Mutex = new Mutex();
-    constructor(private db: OfflineDatabase) {
+    constructor(public db: OfflineDatabase) {
         super();
     }
 
@@ -28,7 +26,7 @@ export class ServerCacheService extends CacheService {
         const release: MutexInterface.Releaser = await this.mutex.acquire();
         const result: UserRepositoryResponse = this.db.db.get(id);
         console.log(`Getting cached ${id}. Was ${result ? 'found' : 'not found'}`);
-        console.log('Keys', Array.from(this.db.db.keys()));
+        console.log('Num Keys', Array.from(this.db.db.keys()).length);
         release();
         return result;
     }
