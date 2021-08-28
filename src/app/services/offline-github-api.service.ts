@@ -3,7 +3,7 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { from, map, mergeMap, Observable, of, tap } from 'rxjs';
+import { from, map, mergeMap, of, tap, Observable } from 'rxjs';
 import { IGithubFileId, UserRepositoriesResponse, UserRepositoryResponse } from '../modal';
 import { ServerCacheService } from './server-cache.service';
 
