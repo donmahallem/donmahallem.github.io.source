@@ -25,7 +25,6 @@ export const app: any = (): express.Express => {
     bootstrap: AppServerModule,
     providers: [{
       provide: API_TOKEN, useFactory: (): string => {
-        console.log('SSR');
         return 'localhost:4200/api';
       },
     }],
@@ -52,15 +51,9 @@ export const app: any = (): express.Express => {
 
   // All regular routes use the Universal engine
   server.get('*', (req, res) => {
-    console.log("Base url", req.baseUrl, req.hostname, req.originalUrl, req.url, req.app.settings, req.socket.localPort);
     res.render(indexHtml, {
       providers: [{
         provide: APP_BASE_HREF, useValue: req.baseUrl,
-      }, {
-        provide: API_TOKEN,
-        useFactory: (): string => {
-          return `${req.hostname}:${req.socket.localPort}`;
-        },
       }],
       req,
     });

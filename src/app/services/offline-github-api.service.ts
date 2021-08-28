@@ -11,8 +11,8 @@ import { IGithubFileId, UserRepositoriesResponse, UserRepositoryResponse } from 
 
 
 export class OfflineGithubApiService {
-    private baseHref: string = 'localhost:56516';
-    constructor(private http: HttpClient, @Inject(API_TOKEN) private baseHref2: string) {
+    public readonly API_ENDPOINT: string = 'https://raw.githubusercontent.com/donmahallem/donmahallem.github.io.source/api';
+    constructor(private http: HttpClient) {
     }
 
     /**
@@ -22,15 +22,15 @@ export class OfflineGithubApiService {
      * @param page Page to query starting at 1
      */
     public getUserRepos(username: string, pageSize: number = 25, page?: number): Observable<UserRepositoriesResponse> {
-        let url: string = `${this.baseHref}/assets/repos/${page}.json`;
+        const url: string = `${this.API_ENDPOINT}/repos/${page}.json`;
         return this.http.get<UserRepositoriesResponse>(url);
     }
 
     public getRepo(usernameOrFullname: string, reponame?: string): Observable<UserRepositoryResponse> {
         if (reponame) {
-            return this.http.get<UserRepositoryResponse>(`${this.baseHref}/assets/repo/${usernameOrFullname}/${reponame}.json`);
+            return this.http.get<UserRepositoryResponse>(`${this.API_ENDPOINT}/repo/${usernameOrFullname}/${reponame}.json`);
         } else {
-            return this.http.get<UserRepositoryResponse>(`${this.baseHref}/assets/repo/${usernameOrFullname}.json`);
+            return this.http.get<UserRepositoryResponse>(`${this.API_ENDPOINT}/repo/${usernameOrFullname}.json`);
         }
     }
 

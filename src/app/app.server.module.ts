@@ -57,7 +57,7 @@ export const BROWSER_STORAGE = new InjectionToken<OfflineDatabase>('Browser Stor
     {
       provide: GithubApiService,
       useClass: OfflineGithubApiService,
-      deps: [HttpClient, API_TOKEN],
+      deps: [HttpClient],
     }
   ],
 })

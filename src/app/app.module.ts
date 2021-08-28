@@ -38,20 +38,6 @@ import { CacheService } from './services/cache.service';
     {
       provide: CacheService,
       useClass: BrowserCacheService,
-    },
-    {
-      provide: APP_INITIALIZER, useFactory: (kk: GithubApiService, platformId: any): () => Promise<void> => {
-        console.log(isPlatformServer(platformId));
-        return async (): Promise<void> => {
-          for (let i = 0; i < 20; i++) {
-            console.log('KK', i);
-            const items: UserRepositoriesResponse = await firstValueFrom(kk.getUserRepos('donmahallem', 25, i));
-            if (items.length < 25) {
-              break;
-            }
-          }
-        }
-      }, deps: [GithubApiService, PLATFORM_ID], multi: true
     }
   ],
 })
