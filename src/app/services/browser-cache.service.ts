@@ -3,11 +3,11 @@
  */
 
 import { Injectable } from '@angular/core';
-import { DBSchema, IDBPDatabase, IDBPObjectStore, IDBPTransaction, openDB, StoreNames } from 'idb';
+import { openDB, DBSchema, IDBPDatabase, IDBPObjectStore, IDBPTransaction, StoreNames } from 'idb';
 import { UserRepositoriesResponse, UserRepositoryResponse } from '../modal';
 import { CacheService } from './cache.service';
 
-interface CacheDBSchema extends DBSchema {
+interface ICacheDBSchema extends DBSchema {
     repositories: {
         value: UserRepositoryResponse;
         key: string;
@@ -15,14 +15,13 @@ interface CacheDBSchema extends DBSchema {
     };
 }
 const KEY_PATH: string = 'full_name';
-type Database = IDBPDatabase<CacheDBSchema>;
-type DatabaseTransaction<NAME extends StoreNames<CacheDBSchema>[], MODE extends IDBTransactionMode = 'readonly'> = IDBPTransaction<CacheDBSchema, NAME, MODE>;
+type Database = IDBPDatabase<ICacheDBSchema>;
+type DatabaseTransaction<NAME extends StoreNames<ICacheDBSchema>[], MODE extends IDBTransactionMode = 'readonly'> = IDBPTransaction<ICacheDBSchema, NAME, MODE>;
 @Injectable({
     providedIn: 'root',
 })
 export class BrowserCacheService extends CacheService {
 
-    private db: Database
     constructor() {
         super();
     }
@@ -31,7 +30,7 @@ export class BrowserCacheService extends CacheService {
         return openDB('repositories', 1, {
             upgrade(db: Database, old: number, newVersion: number, tx): void {
                 // Create a store of objects
-                const store: IDBPObjectStore<CacheDBSchema, "repositories"[], "repositories", "versionchange"> =
+                const store: IDBPObjectStore<ICacheDBSchema, 'repositories'[], 'repositories', 'versionchange'> =
                     db.createObjectStore('repositories', { autoIncrement: false, keyPath: KEY_PATH });
                 // Create an index on the 'date' property of the objects.
                 store.createIndex('full_name', KEY_PATH);
@@ -49,11 +48,14 @@ export class BrowserCacheService extends CacheService {
         const db: Database = await this.getDb();
         const data: UserRepositoryResponse = await db.get('repositories', id);
         db.close();
-        return (await this.getDb()).get('repositories', id);
+        return data;
     }
 
     public async getAll(): Promise<UserRepositoriesResponse> {
-        return (await this.getDb()).getAll('repositories');
+        const db: Database = await this.getDb();
+        const datas: UserRepositoriesResponse = await db.getAll('repositories');
+        db.close();
+        return datas;
     }
 
     public async put(repos: UserRepositoryResponse | UserRepositoriesResponse): Promise<void> {
