@@ -2,9 +2,7 @@
  * Source https://github.com/donmahallem/donmahallem.github.io.source
  */
 
-import { Inject, Injectable } from '@angular/core';
 import { Mutex, MutexInterface } from 'async-mutex';
-import { SERVER_CACHE_STORAGE } from '../app.server.module';
 import { UserRepositoriesResponse, UserRepositoryResponse } from '../modal';
 import { OfflineDatabase } from '../offline-database';
 import { CacheService } from './cache.service';
