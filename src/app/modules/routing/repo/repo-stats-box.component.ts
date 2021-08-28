@@ -3,7 +3,7 @@
  */
 
 import { Component, Input } from '@angular/core';
-import { IRepository } from 'src/app/modal';
+import { UserRepositoryResponse } from 'src/app/modal';
 
 @Component({
     selector: 'app-repo-stats-box',
@@ -12,7 +12,7 @@ import { IRepository } from 'src/app/modal';
 })
 export class RepoStatsBoxComponent {
     @Input()
-    public repository: IRepository = undefined;
+    public repository: UserRepositoryResponse = undefined;
 
     public get starCount(): number {
         return this?.repository?.stargazers_count || 0;

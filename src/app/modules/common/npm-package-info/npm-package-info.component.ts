@@ -7,6 +7,7 @@ import { EMPTY, Observable, Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { INpmPackage } from 'src/app/modal';
 import { DependencyInfo } from './dependendy-info';
+import { NpmPackageUtil } from './npm-package-util';
 import { NpmPackageService } from './npm-package.service';
 @Component({
     providers: [NpmPackageService],
@@ -14,14 +15,14 @@ import { NpmPackageService } from './npm-package.service';
     styleUrls: ['./npm-package-info.component.scss'],
     templateUrl: './npm-package-info.component.html',
 })
-export class NpmPackageInfoComponent implements AfterViewInit, OnDestroy {
+export class NpmPackageInfoComponent extends NpmPackageUtil implements AfterViewInit, OnDestroy {
     private loadSubscription: Subscription;
     public dependencies: DependencyInfo[] = [];
     public devDependencies: DependencyInfo[] = [];
     public optionalDependencies: DependencyInfo[] = [];
     constructor(private packageService: NpmPackageService,
         private changeDetectorRef: ChangeDetectorRef) {
-
+        super();
     }
     @Input()
     public set packageUrl(url: string) {
@@ -47,10 +48,6 @@ export class NpmPackageInfoComponent implements AfterViewInit, OnDestroy {
                 this.optionalDependencies = this.convertMapToArray(pack.optionalDependencies);
                 this.changeDetectorRef.detectChanges();
             });
-    }
-
-    public derangeVersion(version: string): string {
-        return version.match(/[0-9].*/)[0];
     }
 
     public ngOnDestroy(): void {

@@ -2,14 +2,26 @@
  * Source https://github.com/donmahallem/donmahallem.github.io.source
  */
 
-import { NgModule } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { InjectionToken, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ServerModule } from '@angular/platform-server';
 import { API_TOKEN } from './api-endpoint';
+import { CacheService } from './services/cache.service';
 
 import { AppComponent } from './app.component';
 import { AppModule } from './app.module';
+import { OfflineDatabase } from './offline-database';
+import { GithubApiService } from './services';
+import { OfflineGithubApiService } from './services/offline-github-api.service';
+import { ServerCacheService } from './services/server-cache.service';
 
+const offlineDB: OfflineDatabase = new OfflineDatabase();
+export const SERVER_CACHE_STORAGE: InjectionToken<OfflineDatabase> =
+  new InjectionToken<OfflineDatabase>('ServerCacheStorage', {
+    factory: (): OfflineDatabase => offlineDB,
+    providedIn: 'root',
+  });
 @NgModule({
   bootstrap: [AppComponent],
   imports: [
@@ -27,6 +39,20 @@ import { AppModule } from './app.module';
           return undefined;
         }
       },
+    },
+    {
+      provide: SERVER_CACHE_STORAGE,
+      useFactory: (): OfflineDatabase => offlineDB,
+    },
+    {
+      deps: [SERVER_CACHE_STORAGE],
+      provide: CacheService,
+      useClass: ServerCacheService,
+    },
+    {
+      deps: [HttpClient, CacheService],
+      provide: GithubApiService,
+      useClass: OfflineGithubApiService,
     },
   ],
 })

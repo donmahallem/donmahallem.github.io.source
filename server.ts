@@ -25,7 +25,6 @@ export const app: any = (): express.Express => {
     bootstrap: AppServerModule,
     providers: [{
       provide: API_TOKEN, useFactory: (): string => {
-        console.log('SSR');
         return 'localhost:4200/api';
       },
     }],
@@ -55,11 +54,6 @@ export const app: any = (): express.Express => {
     res.render(indexHtml, {
       providers: [{
         provide: APP_BASE_HREF, useValue: req.baseUrl,
-      }, {
-        provide: API_TOKEN,
-        useFactory: (): string => {
-          return 'localhost:4200/api';
-        },
       }],
       req,
     });
