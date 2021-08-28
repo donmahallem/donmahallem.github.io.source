@@ -35,7 +35,7 @@ export class TestNpmPackageInfoComponent {
 })
 export class TestAppRepoStatsBoxComponent {
   @Input()
-  public repository: UserRepositoryResponse
+  public repository: UserRepositoryResponse;
 }
 // tslint:enable:component-selector
 // tslint:enable:directive-selector

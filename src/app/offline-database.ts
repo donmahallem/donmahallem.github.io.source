@@ -1,4 +1,8 @@
-import { UserRepositoriesResponse, UserRepositoryResponse } from "./modal";
+/*!
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
+ */
+
+import { UserRepositoriesResponse, UserRepositoryResponse } from './modal';
 
 export class OfflineDatabase {
 

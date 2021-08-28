@@ -2,10 +2,9 @@
  * Source https://github.com/donmahallem/donmahallem.github.io.source
  */
 
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { from, map, mergeMap, Observable, of } from 'rxjs';
-import { IGithubFileId, UserRepositoriesResponse, UserRepositoryResponse } from '../modal';
+import { from, map, mergeMap, of, Observable } from 'rxjs';
+import { UserRepositoriesResponse, UserRepositoryResponse } from '../modal';
 import { CacheService } from './cache.service';
 import { GithubApiService } from './github-api.service';
 
@@ -35,18 +34,17 @@ export class CachedGithubApiService {
     public getRepo(usernameOrFullname: string, reponame?: string): Observable<UserRepositoryResponse> {
         const mergedReponame: string = reponame ? `${usernameOrFullname}/${reponame}` : usernameOrFullname;
         return from(this.cacheService.get(mergedReponame))
-            .pipe(mergeMap((value: UserRepositoryResponse): Observable<UserRepositoryResponse> => {
-                if (value) {
-                    console.log("Retrieved Cached item");
-                    return of(value);
+            .pipe(mergeMap((cachedRepo: UserRepositoryResponse): Observable<UserRepositoryResponse> => {
+                if (cachedRepo) {
+                    return of(cachedRepo);
                 }
                 return this.api.getRepo(mergedReponame)
-                    .pipe(mergeMap((value: UserRepositoryResponse): Observable<UserRepositoryResponse> => {
-                        return from(this.cacheService.put(value))
+                    .pipe(mergeMap((repo: UserRepositoryResponse): Observable<UserRepositoryResponse> => {
+                        return from(this.cacheService.put(repo))
                             .pipe(map((): UserRepositoryResponse => {
-                                return value;
+                                return repo;
                             }));
-                    }));;
+                    }));
             }));
     }
 

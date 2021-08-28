@@ -10,7 +10,6 @@ import { EMPTY, Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { UserRepositoriesResponse } from 'src/app/modal';
 import { GithubApiService } from 'src/app/services';
-import { CachedGithubApiService } from 'src/app/services/cached-github-api.service';
 import { environment } from 'src/environments/environment.prod';
 
 /**

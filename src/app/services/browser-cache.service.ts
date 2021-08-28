@@ -16,7 +16,8 @@ interface ICacheDBSchema extends DBSchema {
 }
 const KEY_PATH: string = 'full_name';
 type Database = IDBPDatabase<ICacheDBSchema>;
-type DatabaseTransaction<NAME extends StoreNames<ICacheDBSchema>[], MODE extends IDBTransactionMode = 'readonly'> = IDBPTransaction<ICacheDBSchema, NAME, MODE>;
+type DatabaseTransaction<NAME extends StoreNames<ICacheDBSchema>[], MODE extends IDBTransactionMode = 'readonly'>
+    = IDBPTransaction<ICacheDBSchema, NAME, MODE>;
 @Injectable({
     providedIn: 'root',
 })
@@ -28,7 +29,10 @@ export class BrowserCacheService extends CacheService {
 
     public getDb(): Promise<Database> {
         return openDB('repositories', 1, {
-            upgrade(db: Database, old: number, newVersion: number, tx): void {
+            upgrade(db: Database,
+                old: number,
+                newVersion: number,
+                tx: DatabaseTransaction<'repositories'[], 'versionchange'>): void {
                 // Create a store of objects
                 const store: IDBPObjectStore<ICacheDBSchema, 'repositories'[], 'repositories', 'versionchange'> =
                     db.createObjectStore('repositories', { autoIncrement: false, keyPath: KEY_PATH });
@@ -65,7 +69,7 @@ export class BrowserCacheService extends CacheService {
             for (const rep of repos) {
                 await tx.store.put(rep);
             }
-            return await tx.done;
+            return tx.done;
         }
         await db.put('repositories', repos);
     }

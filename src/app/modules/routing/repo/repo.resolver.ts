@@ -9,7 +9,6 @@ import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@a
 import { EMPTY, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { GithubApiService } from 'src/app/services';
-import { CachedGithubApiService } from 'src/app/services/cached-github-api.service';
 import { environment } from 'src/environments/environment.prod';
 
 /**

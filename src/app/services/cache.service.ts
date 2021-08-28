@@ -5,8 +5,6 @@
 import { UserRepositoriesResponse, UserRepositoryResponse } from '../modal';
 
 export abstract class CacheService {
-
-
     /**
      *
      * @param username Username

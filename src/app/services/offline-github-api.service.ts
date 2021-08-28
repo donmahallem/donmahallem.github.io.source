@@ -2,13 +2,9 @@
  * Source https://github.com/donmahallem/donmahallem.github.io.source
  */
 
-import { APP_BASE_HREF } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { API_TOKEN } from '../api-endpoint';
 import { IGithubFileId, UserRepositoriesResponse, UserRepositoryResponse } from '../modal';
-
 
 export class OfflineGithubApiService {
     public readonly API_ENDPOINT: string = 'https://raw.githubusercontent.com/donmahallem/donmahallem.github.io.source/api';

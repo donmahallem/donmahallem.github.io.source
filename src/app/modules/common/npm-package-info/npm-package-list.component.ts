@@ -21,7 +21,6 @@ export class NpmPackageListComponent extends NpmPackageUtil {
     @Input()
     public description: any = '';
 
-
     public getPackageCount(): number {
         if (this.packages) {
             return this.packages.length;

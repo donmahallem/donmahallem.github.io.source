@@ -7,7 +7,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IGithubFileId, UserRepositoriesResponse, UserRepositoryResponse } from '../modal';
 
-
 @Injectable({
     providedIn: 'root',
 })
