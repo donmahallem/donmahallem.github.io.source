@@ -6,7 +6,7 @@ import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, O
 import { ActivatedRoute, Data } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { IRepository } from 'src/app/modal';
+import { UserRepositoryResponse } from 'src/app/modal';
 
 @Component({
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,7 +15,7 @@ import { IRepository } from 'src/app/modal';
     templateUrl: './repo-detail.component.html',
 })
 export class RepoDetailComponent implements AfterViewInit, OnDestroy {
-    public repository: IRepository = undefined;
+    public repository: UserRepositoryResponse = undefined;
     private updateSubscription: Subscription;
     public constructor(private activatedRoute: ActivatedRoute,
         private cdRef: ChangeDetectorRef) {
@@ -25,13 +25,13 @@ export class RepoDetailComponent implements AfterViewInit, OnDestroy {
     public ngAfterViewInit(): void {
         this.updateSubscription = this.activatedRoute
             .data
-            .pipe(map((data: Data): IRepository => data.repo))
-            .subscribe((repo: IRepository): void => {
+            .pipe(map((data: Data): UserRepositoryResponse => data.repo))
+            .subscribe((repo: UserRepositoryResponse): void => {
                 this.setRepository(repo);
             });
     }
 
-    public setRepository(repo: IRepository): void {
+    public setRepository(repo: UserRepositoryResponse): void {
         this.repository = repo;
         this.cdRef.detectChanges();
     }
@@ -55,9 +55,6 @@ export class RepoDetailComponent implements AfterViewInit, OnDestroy {
     }
 
     public hasDescription(): boolean {
-        if (this.repository) {
-            return typeof this.repository.description === 'string';
-        }
-        return false;
+        return typeof this?.repository?.description === 'string';
     }
 }

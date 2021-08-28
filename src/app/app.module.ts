@@ -12,6 +12,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home.component';
 import { NotFoundComponent } from './not-found.component';
 import { AuthInterceptor, GithubApiService } from './services';
+import { BrowserCacheService } from './services/browser-cache.service';
+import { CacheService } from './services/cache.service';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -30,6 +32,10 @@ import { AuthInterceptor, GithubApiService } from './services';
   providers: [
     GithubApiService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    {
+      provide: CacheService,
+      useClass: BrowserCacheService,
+    },
   ],
 })
 export class AppModule { }

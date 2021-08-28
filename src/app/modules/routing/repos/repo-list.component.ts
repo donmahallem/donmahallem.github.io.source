@@ -3,9 +3,9 @@
  */
 
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
-import { IRepository } from 'src/app/modal';
+import { UserRepositoriesResponse, UserRepositoryResponse } from 'src/app/modal';
 interface IListItem {
-    repo: IRepository;
+    repo: UserRepositoryResponse;
     hasHeader: boolean;
     hasDivider: boolean;
     header: string;
@@ -22,10 +22,10 @@ export class RepoListComponent {
 
     }
     @Input()
-    public set repositories(repos: IRepository[]) {
+    public set repositories(repos: UserRepositoriesResponse) {
         this.items = repos.sort((a: any, b: any): number => {
             return a.name.localeCompare(b.name);
-        }).map((value: IRepository, idx: number, arr: IRepository[]): IListItem => {
+        }).map((value: UserRepositoryResponse, idx: number, arr: UserRepositoriesResponse): IListItem => {
             const previousLetter: string = idx > 0 ? arr[idx - 1].name.charAt(0).toUpperCase() : '';
             const currentLetter: string = arr[idx].name.charAt(0).toUpperCase();
             const nextLetter: string = idx < arr.length - 1 ? arr[idx + 1].name.charAt(0).toUpperCase() : '';

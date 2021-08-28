@@ -3,7 +3,7 @@
  */
 
 import { Component, Input } from '@angular/core';
-import { IRepository } from 'src/app/modal';
+import { UserRepositoryResponse } from 'src/app/modal';
 
 @Component({
     selector: 'app-home',
@@ -12,5 +12,5 @@ import { IRepository } from 'src/app/modal';
 })
 export class HomeComponent {
     @Input()
-    public repository: IRepository;
+    public repository: UserRepositoryResponse;
 }

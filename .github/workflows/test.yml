@@ -15,7 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup Node
-        uses: actions/setup-node@v2.3.0
+        uses: actions/setup-node@v2.4.0
         with:
           node-version: ${{ matrix.node }}
       - name: Get npm cache directory
@@ -41,8 +41,15 @@ jobs:
         run: npm run lint
       - name: Run Docs
         run: npm run docs
+      - name: Create Prerender List
+        run: |
+          npm run prepare:prerender
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Test Prerender
-        run: npm run prerender
+        timeout-minutes: 30
+        run: |
+          npm run prerender -- --routes-file ./prerender.txt
         env:
           API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   finish:

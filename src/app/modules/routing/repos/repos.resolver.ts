@@ -8,7 +8,7 @@ import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
 import { EMPTY, Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { IRepository } from 'src/app/modal';
+import { UserRepositoriesResponse } from 'src/app/modal';
 import { GithubApiService } from 'src/app/services';
 import { environment } from 'src/environments/environment.prod';
 
@@ -17,7 +17,7 @@ import { environment } from 'src/environments/environment.prod';
  * Redirects to /stops if the server responds with an 404 status
  */
 @Injectable()
-export class ReposResolver implements Resolve<IRepository[]> {
+export class ReposResolver implements Resolve<UserRepositoriesResponse> {
 
     private readonly INT_REGEX: RegExp = /^([1-9]+|0*[1-9][0-9]+)$/;
     /**
@@ -38,7 +38,7 @@ export class ReposResolver implements Resolve<IRepository[]> {
      * @param route The RouteSnapshot
      * @param state The RouterState
      */
-    public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IRepository[]> {
+    public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<UserRepositoriesResponse> {
         let page: number = 1;
         if (route.params.page) {
             if (!this.validatePage(route.params.page)) {
@@ -53,7 +53,7 @@ export class ReposResolver implements Resolve<IRepository[]> {
                 if (value.length === 0 && page !== 1) {
                     throw new HttpErrorResponse({ status: 404 });
                 }
-            }), catchError((err: any | HttpErrorResponse): Observable<IRepository[]> => {
+            }), catchError((err: any | HttpErrorResponse): Observable<UserRepositoriesResponse> => {
                 if (err.status === 404 && isPlatformBrowser(this.platformId)) {
                     this.router.navigate(['404']);
                     return EMPTY;

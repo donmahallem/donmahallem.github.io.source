@@ -5,7 +5,7 @@
 import { Component, Input } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { IRepository } from 'src/app/modal';
+import { UserRepositoryResponse } from 'src/app/modal';
 import { RepoDetailComponent } from './repo-detail.component';
 
 // tslint:disable:component-selector
@@ -35,7 +35,7 @@ export class TestNpmPackageInfoComponent {
 })
 export class TestAppRepoStatsBoxComponent {
   @Input()
-  public repository: IRepository;
+  public repository: UserRepositoryResponse;
 }
 // tslint:enable:component-selector
 // tslint:enable:directive-selector
@@ -68,6 +68,21 @@ describe('modules/routing/repo/repo-detail.component', (): void => {
     });
 
     describe('methods', (): void => {
+      let fixture: ComponentFixture<RepoDetailComponent>;
+      let app: RepoDetailComponent;
+      beforeEach((): void => {
+        fixture = TestBed.createComponent(RepoDetailComponent);
+        app = fixture.debugElement.componentInstance;
+      });
+      describe('hasDescription()', (): void => {
+        it('should return false if no repository is set', (): void => {
+          expect(app.hasDescription()).toBeFalse();
+        });
+        it('should return true if a description is set', (): void => {
+          app.repository = { description: 'test description' } as any;
+          expect(app.hasDescription()).toBeTrue();
+        });
+      });
       it('requires implementation');
     });
 

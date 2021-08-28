@@ -4,6 +4,7 @@
 
 import { Component, Input } from '@angular/core';
 import { DependencyInfo } from './dependendy-info';
+import { NpmPackageUtil } from './npm-package-util';
 import { NpmPackageService } from './npm-package.service';
 @Component({
     providers: [NpmPackageService],
@@ -11,7 +12,7 @@ import { NpmPackageService } from './npm-package.service';
     styleUrls: ['./npm-package-list.component.scss'],
     templateUrl: './npm-package-list.component.html',
 })
-export class NpmPackageListComponent {
+export class NpmPackageListComponent extends NpmPackageUtil {
 
     @Input()
     public packages: DependencyInfo[] = [];
@@ -19,10 +20,6 @@ export class NpmPackageListComponent {
     public header: any = '';
     @Input()
     public description: any = '';
-
-    public derangeVersion(version: string): string {
-        return version.match(/[0-9].*/)[0];
-    }
 
     public getPackageCount(): number {
         if (this.packages) {
