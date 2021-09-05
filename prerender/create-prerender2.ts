@@ -50,14 +50,14 @@ const create = async (): Promise<void> => {
         if (!existsSync(dirname(dirPath))) {
             await fsp.mkdir(dirname(dirPath), { recursive: true });
         }
-        await fsp.writeFile(dirPath, JSON.stringify(repo));
+        await fsp.writeFile(dirPath, JSON.stringify(repo, null, 2));
     }
     for (let i = 0; i < dataPage.length; i++) {
         const dirPath: string = join('./src', 'assets', 'repos', `${i}.json`);
         if (!existsSync(dirname(dirPath))) {
             await fsp.mkdir(dirname(dirPath), { recursive: true });
         }
-        await fsp.writeFile(dirPath, JSON.stringify(dataPage[i]));
+        await fsp.writeFile(dirPath, JSON.stringify(dataPage[i], null, 2));
     }
 
     console.log('Total Pages Filtered', outputPages.length);
