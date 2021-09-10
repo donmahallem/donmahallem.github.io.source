@@ -66,7 +66,7 @@
   "deployments_url": "https://api.github.com/repos/donmahallem/github-release-action/deployments",
   "created_at": "2019-11-11T23:10:53Z",
   "updated_at": "2021-04-26T17:56:10Z",
-  "pushed_at": "2021-09-07T09:53:59Z",
+  "pushed_at": "2021-09-10T19:54:40Z",
   "git_url": "git://github.com/donmahallem/github-release-action.git",
   "ssh_url": "git@github.com:donmahallem/github-release-action.git",
   "clone_url": "https://github.com/donmahallem/github-release-action.git",
@@ -85,7 +85,7 @@
   "mirror_url": null,
   "archived": false,
   "disabled": false,
-  "open_issues_count": 10,
+  "open_issues_count": 11,
   "license": {
     "key": "apache-2.0",
     "name": "Apache License 2.0",
@@ -94,7 +94,7 @@
     "node_id": "MDc6TGljZW5zZTI="
   },
   "forks": 0,
-  "open_issues": 10,
+  "open_issues": 11,
   "watchers": 1,
   "default_branch": "master",
   "permissions": {
