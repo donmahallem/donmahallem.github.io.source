@@ -66,13 +66,13 @@
   "deployments_url": "https://api.github.com/repos/donmahallem/json-schema-action/deployments",
   "created_at": "2020-08-24T06:54:28Z",
   "updated_at": "2021-02-20T00:09:36Z",
-  "pushed_at": "2021-09-10T20:05:01Z",
+  "pushed_at": "2021-09-10T23:59:24Z",
   "git_url": "git://github.com/donmahallem/json-schema-action.git",
   "ssh_url": "git@github.com:donmahallem/json-schema-action.git",
   "clone_url": "https://github.com/donmahallem/json-schema-action.git",
   "svn_url": "https://github.com/donmahallem/json-schema-action",
   "homepage": null,
-  "size": 1657,
+  "size": 1654,
   "stargazers_count": 0,
   "watchers_count": 0,
   "language": "TypeScript",
@@ -85,7 +85,7 @@
   "mirror_url": null,
   "archived": false,
   "disabled": false,
-  "open_issues_count": 3,
+  "open_issues_count": 2,
   "license": {
     "key": "apache-2.0",
     "name": "Apache License 2.0",
@@ -94,7 +94,7 @@
     "node_id": "MDc6TGljZW5zZTI="
   },
   "forks": 0,
-  "open_issues": 3,
+  "open_issues": 2,
   "watchers": 0,
   "default_branch": "master",
   "permissions": {
