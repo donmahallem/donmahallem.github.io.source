@@ -87,6 +87,7 @@
   "disabled": false,
   "open_issues_count": 12,
   "license": null,
+  "allow_forking": true,
   "forks": 0,
   "open_issues": 12,
   "watchers": 0,

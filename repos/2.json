@@ -94,6 +94,7 @@
       "url": "https://api.github.com/licenses/apache-2.0",
       "node_id": "MDc6TGljZW5zZTI="
     },
+    "allow_forking": true,
     "forks": 0,
     "open_issues": 1,
     "watchers": 0,
@@ -195,6 +196,7 @@
     "disabled": false,
     "open_issues_count": 1,
     "license": null,
+    "allow_forking": true,
     "forks": 0,
     "open_issues": 1,
     "watchers": 0,
@@ -296,6 +298,7 @@
     "disabled": false,
     "open_issues_count": 0,
     "license": null,
+    "allow_forking": true,
     "forks": 0,
     "open_issues": 0,
     "watchers": 0,
@@ -397,6 +400,7 @@
     "disabled": false,
     "open_issues_count": 0,
     "license": null,
+    "allow_forking": true,
     "forks": 0,
     "open_issues": 0,
     "watchers": 0,
@@ -504,6 +508,7 @@
       "url": "https://api.github.com/licenses/apache-2.0",
       "node_id": "MDc6TGljZW5zZTI="
     },
+    "allow_forking": true,
     "forks": 1,
     "open_issues": 0,
     "watchers": 0,
@@ -611,6 +616,7 @@
       "url": "https://api.github.com/licenses/apache-2.0",
       "node_id": "MDc6TGljZW5zZTI="
     },
+    "allow_forking": true,
     "forks": 0,
     "open_issues": 1,
     "watchers": 0,
@@ -718,6 +724,7 @@
       "url": null,
       "node_id": "MDc6TGljZW5zZTA="
     },
+    "allow_forking": true,
     "forks": 0,
     "open_issues": 0,
     "watchers": 0,

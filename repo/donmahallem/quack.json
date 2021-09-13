@@ -72,7 +72,7 @@
   "clone_url": "https://github.com/donmahallem/quack.git",
   "svn_url": "https://github.com/donmahallem/quack",
   "homepage": null,
-  "size": 5628,
+  "size": 5589,
   "stargazers_count": 0,
   "watchers_count": 0,
   "language": "TypeScript",
@@ -93,6 +93,7 @@
     "url": "https://api.github.com/licenses/apache-2.0",
     "node_id": "MDc6TGljZW5zZTI="
   },
+  "allow_forking": true,
   "forks": 0,
   "open_issues": 1,
   "watchers": 0,
