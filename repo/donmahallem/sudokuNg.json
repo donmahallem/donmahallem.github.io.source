@@ -94,6 +94,7 @@
     "node_id": "MDc6TGljZW5zZTI="
   },
   "allow_forking": true,
+  "is_template": false,
   "visibility": "public",
   "forks": 0,
   "open_issues": 12,
