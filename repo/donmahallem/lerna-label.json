@@ -95,6 +95,14 @@
   },
   "allow_forking": true,
   "is_template": false,
+  "topics": [
+    "github-action",
+    "github-actions",
+    "lerna",
+    "monorepo",
+    "workflow",
+    "workflow-automation"
+  ],
   "visibility": "public",
   "forks": 0,
   "open_issues": 2,

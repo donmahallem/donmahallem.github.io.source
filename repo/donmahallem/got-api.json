@@ -89,6 +89,7 @@
   "license": null,
   "allow_forking": true,
   "is_template": false,
+  "topics": [],
   "visibility": "public",
   "forks": 0,
   "open_issues": 3,
