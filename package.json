@@ -67,7 +67,7 @@
     "@angular/language-service": "12.2.14",
     "@angular/localize": "12.2.14",
     "@compodoc/compodoc": "1.1.16",
-    "@donmahallem/tslint-config": "0.2.3",
+    "@donmahallem/tslint-config": "0.3.0",
     "@nguniversal/builders": "13.0.1",
     "@octokit/types": "6.34.0",
     "@types/express": "4.17.13",
