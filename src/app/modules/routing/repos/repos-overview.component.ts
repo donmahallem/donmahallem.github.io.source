@@ -1,6 +1,8 @@
-/*!
- * Source https://github.com/donmahallem/donmahallem.github.io.source
+/*
+ * Package @donmahallem/github-page
+ * Source https://donmahallem.github.io/donmahallem.github.io.source/
  */
+
 
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -16,7 +18,7 @@ import { UserRepositoriesResponse } from 'src/app/modal';
 })
 export class ReposOverviewComponent implements AfterViewInit, OnDestroy {
     public repos: UserRepositoriesResponse = [];
-    public page: number = 1;
+    public page = 1;
     private updateSubscription: Subscription;
 
     public constructor(private activatedRoute: ActivatedRoute,
@@ -34,7 +36,9 @@ export class ReposOverviewComponent implements AfterViewInit, OnDestroy {
             });
     }
     public getCurrentPage(): number {
-        const params: any = this.activatedRoute.snapshot.params;
+        const params: {
+            page?: string,
+        } = this.activatedRoute.snapshot.params;
         if (params.page) {
             return parseInt(params.page, 10);
         } else {

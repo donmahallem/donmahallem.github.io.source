@@ -1,6 +1,8 @@
-/*!
- * Source https://github.com/donmahallem/donmahallem.github.io.source
+/*
+ * Package @donmahallem/github-page
+ * Source https://donmahallem.github.io/donmahallem.github.io.source/
  */
+
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -31,8 +33,11 @@ import { CacheService } from './services/cache.service';
   ],
   providers: [
     GithubApiService,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     {
+      multi: true,
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+    }, {
       provide: CacheService,
       useClass: BrowserCacheService,
     },

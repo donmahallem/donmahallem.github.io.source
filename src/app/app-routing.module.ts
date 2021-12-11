@@ -1,19 +1,25 @@
-/*!
- * Source https://github.com/donmahallem/donmahallem.github.io.source
+/*
+ * Package @donmahallem/github-page
+ * Source https://donmahallem.github.io/donmahallem.github.io.source/
  */
+
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home.component';
+import { RepoModule } from './modules/routing/repo';
+import { ReposModule } from './modules/routing/repos';
 import { NotFoundComponent } from './not-found.component';
 
 const routes: Routes = [
   {
-    loadChildren: (): any => import('./modules/routing/repos').then((m: any): any => m.ReposModule),
+    loadChildren: (): Promise<ReposModule> => import('./modules/routing/repos')
+      .then((m: { ReposModule: ReposModule }): ReposModule => m.ReposModule),
     path: 'repos',
   },
   {
-    loadChildren: (): any => import('./modules/routing/repo').then((m: any): any => m.RepoModule),
+    loadChildren: (): Promise<RepoModule> => import('./modules/routing/repo')
+      .then((m: { RepoModule: RepoModule }): RepoModule => m.RepoModule),
     path: 'repo',
   },
   {

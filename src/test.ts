@@ -1,10 +1,17 @@
-/*!
- * Source https://github.com/donmahallem/donmahallem.github.io.source
+/*
+ * Package @donmahallem/github-page
+ * Source https://donmahallem.github.io/donmahallem.github.io.source/
  */
+
 
 // This file is required by karma.conf.js and loads recursively all the .spec and framework files
 
 // tslint:disable-next-line:ordered-imports
+/* eslint-disable @typescript-eslint/no-explicit-any,
+                  @typescript-eslint/no-unsafe-assignment,
+                  @typescript-eslint/no-unsafe-member-access,
+                  @typescript-eslint/no-unsafe-call
+*/
 import 'zone.js/testing';
 
 import { getTestBed } from '@angular/core/testing';
@@ -19,7 +26,7 @@ declare const require: any;
 getTestBed().initTestEnvironment(
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting(), {
-    teardown: { destroyAfterEach: false }
+  teardown: { destroyAfterEach: false }
 },
 );
 // Then we find all the tests.

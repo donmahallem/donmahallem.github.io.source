@@ -1,6 +1,8 @@
-/*!
- * Source https://github.com/donmahallem/donmahallem.github.io.source
+/*
+ * Package @donmahallem/github-page
+ * Source https://donmahallem.github.io/donmahallem.github.io.source/
  */
+
 
 import { Injectable } from '@angular/core';
 import { from, map, mergeMap, of, Observable } from 'rxjs';
@@ -21,7 +23,7 @@ export class CachedGithubApiService {
      * @param pageSize Page size
      * @param page Page to query starting at 1
      */
-    public getUserRepos(username: string, pageSize: number = 25, page?: number): Observable<UserRepositoriesResponse> {
+    public getUserRepos(username: string, pageSize = 25, page?: number): Observable<UserRepositoriesResponse> {
         return this.api.getUserRepos(username, pageSize, page)
             .pipe(mergeMap((value: UserRepositoriesResponse): Observable<UserRepositoriesResponse> => {
                 return from(this.cacheService.put(value))

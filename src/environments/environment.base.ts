@@ -3,5 +3,9 @@
  * Source https://donmahallem.github.io/donmahallem.github.io.source/
  */
 
-
-export * from './object-tree';
+export interface IEnvironment {
+    github: {
+        username: string
+    },
+    production: boolean
+};

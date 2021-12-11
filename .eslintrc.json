@@ -41,6 +41,15 @@
     },
     {
       "files": [
+        "*.spec.ts"
+      ],
+      "rules": {
+        "@angular-eslint/component-selector": 0,
+        "@typescript-eslint/no-floating-promises": 1
+      }
+    },
+    {
+      "files": [
         "*.html"
       ],
       "extends": [

@@ -1,6 +1,8 @@
-/*!
- * Source https://github.com/donmahallem/donmahallem.github.io.source
+/*
+ * Package @donmahallem/github-page
+ * Source https://donmahallem.github.io/donmahallem.github.io.source/
  */
+
 
 import { Component, Input } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
@@ -69,7 +71,7 @@ describe('modules/routing/repos/repos-list.component', (): void => {
 
     it('should create the app', (): void => {
       const fixture: ComponentFixture<RepoListComponent> = TestBed.createComponent(RepoListComponent);
-      const app: RepoListComponent = fixture.debugElement.componentInstance;
+      const app: RepoListComponent = fixture.debugElement.componentInstance as RepoListComponent;
       expect(app).toBeTruthy();
     });
   });

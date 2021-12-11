@@ -1,6 +1,8 @@
-/*!
- * Source https://github.com/donmahallem/donmahallem.github.io.source
+/*
+ * Package @donmahallem/github-page
+ * Source https://donmahallem.github.io/donmahallem.github.io.source/
  */
+
 
 import { Component, Input } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
@@ -59,7 +61,7 @@ describe('modules/routing/repo/repo-detail.component', (): void => {
 
     it('should create the app', (): void => {
       const fixture: ComponentFixture<RepoDetailComponent> = TestBed.createComponent(RepoDetailComponent);
-      const app: RepoDetailComponent = fixture.debugElement.componentInstance;
+      const app: RepoDetailComponent = fixture.debugElement.componentInstance as RepoDetailComponent;
       expect(app).toBeTruthy();
     });
 
@@ -72,14 +74,14 @@ describe('modules/routing/repo/repo-detail.component', (): void => {
       let app: RepoDetailComponent;
       beforeEach((): void => {
         fixture = TestBed.createComponent(RepoDetailComponent);
-        app = fixture.debugElement.componentInstance;
+        app = fixture.debugElement.componentInstance as RepoDetailComponent;
       });
       describe('hasDescription()', (): void => {
         it('should return false if no repository is set', (): void => {
           expect(app.hasDescription()).toBeFalse();
         });
         it('should return true if a description is set', (): void => {
-          app.repository = { description: 'test description' } as any;
+          app.repository = { description: 'test description' } as UserRepositoryResponse;
           expect(app.hasDescription()).toBeTrue();
         });
       });
