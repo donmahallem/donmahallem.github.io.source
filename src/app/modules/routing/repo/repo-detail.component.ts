@@ -1,6 +1,8 @@
-/*!
- * Source https://github.com/donmahallem/donmahallem.github.io.source
+/*
+ * Package @donmahallem/github-page
+ * Source https://donmahallem.github.io/donmahallem.github.io.source/
  */
+
 
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Data } from '@angular/router';
@@ -25,7 +27,7 @@ export class RepoDetailComponent implements AfterViewInit, OnDestroy {
     public ngAfterViewInit(): void {
         this.updateSubscription = this.activatedRoute
             .data
-            .pipe(map((data: Data): UserRepositoryResponse => data.repo))
+            .pipe(map((data: Data): UserRepositoryResponse => data.repo as UserRepositoryResponse))
             .subscribe((repo: UserRepositoryResponse): void => {
                 this.setRepository(repo);
             });

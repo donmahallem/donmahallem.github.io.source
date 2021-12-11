@@ -1,6 +1,8 @@
-/*!
- * Source https://github.com/donmahallem/donmahallem.github.io.source
+/*
+ * Package @donmahallem/github-page
+ * Source https://donmahallem.github.io/donmahallem.github.io.source/
  */
+
 
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -9,7 +11,6 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatListModule } from '@angular/material/list';
 import { ObjectTreeModule } from '../../common';
 import { RepoListComponent } from './repo-list.component';
-import { RepoResolver } from './repo.resolver';
 import { ReposOverviewComponent } from './repos-overview.component';
 import { ReposRoutingModule } from './repos-routing.module';
 import { ReposResolver } from './repos.resolver';
@@ -28,7 +29,6 @@ import { ReposResolver } from './repos.resolver';
     ],
     providers: [
         ReposResolver,
-        RepoResolver,
     ],
 })
 export class ReposModule { }

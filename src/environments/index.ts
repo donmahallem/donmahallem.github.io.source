@@ -3,5 +3,5 @@
  * Source https://donmahallem.github.io/donmahallem.github.io.source/
  */
 
-
-export * from './object-tree';
+export { environment } from './environment';
+export { IEnvironment } from './environment.base';

@@ -1,9 +1,12 @@
-/*!
- * Source https://github.com/donmahallem/donmahallem.github.io.source
+/*
+ * Package @donmahallem/github-page
+ * Source https://donmahallem.github.io/donmahallem.github.io.source/
  */
+
 
 import { Component, Input } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { UserRepositoryResponse } from 'src/app/modal';
 import { RepoStatsBoxComponent } from './repo-stats-box.component';
 
 // tslint:disable:component-selector
@@ -42,7 +45,7 @@ describe('modules/routing/repo/repo-stats-box.component', (): void => {
 
     it('should create the app', (): void => {
       const fixture: ComponentFixture<RepoStatsBoxComponent> = TestBed.createComponent(RepoStatsBoxComponent);
-      const app: RepoStatsBoxComponent = fixture.debugElement.componentInstance;
+      const app: RepoStatsBoxComponent = fixture.debugElement.componentInstance as RepoStatsBoxComponent;
       expect(app).toBeTruthy();
     });
 
@@ -55,7 +58,7 @@ describe('modules/routing/repo/repo-stats-box.component', (): void => {
       let testComponent: RepoStatsBoxComponent;
       beforeEach((): void => {
         fixture = TestBed.createComponent(RepoStatsBoxComponent);
-        testComponent = fixture.componentInstance;
+        testComponent = fixture.componentInstance ;
       });
       describe('starCount', (): void => {
         describe('getter', (): void => {
@@ -64,13 +67,13 @@ describe('modules/routing/repo/repo-stats-box.component', (): void => {
             expect(testComponent.starCount).toEqual(0);
           });
           it('should return 0 if "stargazers_count" property is not set', (): void => {
-            testComponent.repository = {} as any;
+            testComponent.repository = {} as UserRepositoryResponse;
             expect(testComponent.starCount).toEqual(0);
           });
           it('should return the stargazers_count property value', (): void => {
             testComponent.repository = {
               stargazers_count: 20,
-            } as any;
+            } as UserRepositoryResponse;
             expect(testComponent.starCount).toEqual(20);
           });
         });

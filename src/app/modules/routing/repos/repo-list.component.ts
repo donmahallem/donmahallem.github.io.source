@@ -1,6 +1,8 @@
-/*!
- * Source https://github.com/donmahallem/donmahallem.github.io.source
+/*
+ * Package @donmahallem/github-page
+ * Source https://donmahallem.github.io/donmahallem.github.io.source/
  */
+
 
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { UserRepositoriesResponse, UserRepositoryResponse } from 'src/app/modal';
@@ -23,7 +25,7 @@ export class RepoListComponent {
     }
     @Input()
     public set repositories(repos: UserRepositoriesResponse) {
-        this.items = repos.sort((a: any, b: any): number => {
+        this.items = repos.sort((a: UserRepositoriesResponse[0], b: UserRepositoriesResponse[0]): number => {
             return a.name.localeCompare(b.name);
         }).map((value: UserRepositoryResponse, idx: number, arr: UserRepositoriesResponse): IListItem => {
             const previousLetter: string = idx > 0 ? arr[idx - 1].name.charAt(0).toUpperCase() : '';

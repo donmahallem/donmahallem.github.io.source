@@ -1,6 +1,8 @@
-/*!
- * Source https://github.com/donmahallem/donmahallem.github.io.source
+/*
+ * Package @donmahallem/github-page
+ * Source https://donmahallem.github.io/donmahallem.github.io.source/
  */
+
 
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -21,7 +23,7 @@ describe('home.component', (): void => {
 
     it('should create the app', (): void => {
       const fixture: ComponentFixture<HomeComponent> = TestBed.createComponent(HomeComponent);
-      const app: HomeComponent = fixture.debugElement.componentInstance;
+      const app: HomeComponent = fixture.debugElement.componentInstance as HomeComponent;
       expect(app).toBeTruthy();
     });
 

@@ -1,6 +1,8 @@
-/*!
- * Source https://github.com/donmahallem/donmahallem.github.io.source
+/*
+ * Package @donmahallem/github-page
+ * Source https://donmahallem.github.io/donmahallem.github.io.source/
  */
+
 
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
@@ -12,29 +14,29 @@ interface IFoodNode {
 // tslint:disable:object-literal-sort-keys
 const TREE_DATA: IFoodNode[] = [
     {
-        name: 'Fruit',
         children: [
             { name: 'Apple' },
             { name: 'Banana' },
             { name: 'Fruit loops' },
         ],
+        name: 'Fruit',
     }, {
-        name: 'Vegetables',
         children: [
             {
-                name: 'Green',
                 children: [
                     { name: 'Broccoli' },
                     { name: 'Brussel sprouts' },
                 ],
+                name: 'Green',
             }, {
-                name: 'Orange',
                 children: [
                     { name: 'Pumpkins' },
                     { name: 'Carrots' },
                 ],
+                name: 'Orange',
             },
         ],
+        name: 'Vegetables',
     },
 ];
 interface IExampleFlatNode {
@@ -47,15 +49,15 @@ const TRANSFORMER: (node: IFoodNode, level: number) => ITransFormed
     = (node: IFoodNode, level: number): ITransFormed => {
         return {
             expandable: !!node.children && node.children.length > 0,
-            name: node.name,
             level,
+            name: node.name,
         };
     };
 @Component({
-    selector: 'app-object-tree',
-    templateUrl: './object-tree.component.html',
-    styleUrls: ['./object-tree.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-object-tree',
+    styleUrls: ['./object-tree.component.scss'],
+    templateUrl: './object-tree.component.html',
 })
 // tslint:disable
 export class ObjectTreeComponent {

@@ -1,6 +1,8 @@
-/*!
- * Source https://github.com/donmahallem/donmahallem.github.io.source
+/*
+ * Package @donmahallem/github-page
+ * Source https://donmahallem.github.io/donmahallem.github.io.source/
  */
+
 
 import { Mutex, MutexInterface } from 'async-mutex';
 import { UserRepositoriesResponse, UserRepositoryResponse } from '../modal';
@@ -19,6 +21,7 @@ export class ServerCacheService extends CacheService {
      * @param username Username
      * @param pageSize Page size
      * @param page Page to query starting at 1
+     * @param id
      */
     public async get(id: string): Promise<UserRepositoryResponse> {
         const release: MutexInterface.Releaser = await this.mutex.acquire();
