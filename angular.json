@@ -164,15 +164,27 @@
               "/repos/1",
               "/repos/2",
               "/repo/AdminLTE",
-              "/repo/andlol",
+              "/repo/andlol"
             ]
           },
           "configurations": {
             "production": {}
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "DonMahallem"
+  "defaultProject": "DonMahallem",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }
