@@ -16,7 +16,8 @@
     "dev:ssr": "ng run DonMahallem:serve-ssr",
     "serve:ssr": "node dist/DonMahallem/server/main.js",
     "build:ssr": "ng build --prod && ng run DonMahallem:server:production",
-    "prepare:prerender": "node --loader ts-node/esm  ./prerender/create-prerender.ts"
+    "prepare:prerender": "node --loader ts-node/esm  ./prerender/create-prerender.ts",
+    "all": "npm run build && npm run lint && npm run docs && npm run prepare:prerender"
   },
   "publishConfig": {
     "access": "public"
@@ -38,7 +39,7 @@
     "type": "git",
     "url": "https://github.com/donmahallem/donmahallem.github.io.source.git"
   },
-  "type": "module",
+  "type": "commonjs",
   "dependencies": {
     "@angular/animations": "~13.1.0",
     "@angular/cdk": "~13.1.0",
