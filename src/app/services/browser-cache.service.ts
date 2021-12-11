@@ -1,6 +1,8 @@
-/*!
- * Source https://github.com/donmahallem/donmahallem.github.io.source
+/*
+ * Package @donmahallem/github-page
+ * Source https://donmahallem.github.io/donmahallem.github.io.source/
  */
+
 
 import { Injectable } from '@angular/core';
 import { openDB, DBSchema, IDBPDatabase, IDBPObjectStore, IDBPTransaction, StoreNames } from 'idb';
@@ -14,7 +16,7 @@ interface ICacheDBSchema extends DBSchema {
         indexes: { 'full_name': string };
     };
 }
-const KEY_PATH: string = 'full_name';
+const KEY_PATH = 'full_name';
 type Database = IDBPDatabase<ICacheDBSchema>;
 type DatabaseTransaction<NAME extends StoreNames<ICacheDBSchema>[], MODE extends IDBTransactionMode = 'readonly'>
     = IDBPTransaction<ICacheDBSchema, NAME, MODE>;
@@ -47,6 +49,7 @@ export class BrowserCacheService extends CacheService {
      * @param username Username
      * @param pageSize Page size
      * @param page Page to query starting at 1
+     * @param id
      */
     public async get(id: string): Promise<UserRepositoryResponse> {
         const db: Database = await this.getDb();
@@ -65,7 +68,8 @@ export class BrowserCacheService extends CacheService {
     public async put(repos: UserRepositoryResponse | UserRepositoriesResponse): Promise<void> {
         const db: Database = await this.getDb();
         if (Array.isArray(repos)) {
-            const tx: DatabaseTransaction<['repositories'], 'readwrite'> = db.transaction('repositories', 'readwrite', { durability: 'strict' });
+            const tx: DatabaseTransaction<['repositories'], 'readwrite'> = db
+                .transaction('repositories', 'readwrite', { durability: 'strict' });
             for (const rep of repos) {
                 await tx.store.put(rep);
             }

@@ -15,11 +15,11 @@ jobs:
         with:
           persist-credentials: false
       - name: Setup Node
-        uses: actions/setup-node@v2.4.1
+        uses: actions/setup-node@v2.5.0
         with:
           node-version: '14'
       - name: Setup Cache
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v2.1.7
         with:
           path: |
             node_modules
@@ -43,7 +43,7 @@ jobs:
         env:
           API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Install SSH Client
-        uses: webfactory/ssh-agent@v0.5.3
+        uses: webfactory/ssh-agent@v0.5.4
         with:
           ssh-private-key: ${{ secrets.APP_DEPLOY_KEY }}
       - name: Deploy 🚀

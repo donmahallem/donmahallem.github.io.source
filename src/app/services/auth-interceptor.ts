@@ -1,6 +1,8 @@
-/*!
- * Source https://github.com/donmahallem/donmahallem.github.io.source
+/*
+ * Package @donmahallem/github-page
+ * Source https://donmahallem.github.io/donmahallem.github.io.source/
  */
+
 
 import {
     HttpErrorResponse,
@@ -57,6 +59,6 @@ export class AuthInterceptor implements HttpInterceptor {
                 }));
         }
         return next.handle(req)
-            .pipe(tap((): void => { }, console.error));
+            .pipe(tap({ error: console.error }));
     }
 }

@@ -1,6 +1,8 @@
-/*!
- * Source https://github.com/donmahallem/donmahallem.github.io.source
+/*
+ * Package @donmahallem/github-page
+ * Source https://donmahallem.github.io/donmahallem.github.io.source/
  */
+
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -21,8 +23,8 @@ export class GithubApiService {
      * @param pageSize Page size
      * @param page Page to query starting at 1
      */
-    public getUserRepos(username: string, pageSize: number = 25, page?: number): Observable<UserRepositoriesResponse> {
-        let url: string = `${this.API_ENDPOINT}/users/${username}/repos?per_page=${pageSize}`;
+    public getUserRepos(username: string, pageSize = 25, page?: number): Observable<UserRepositoriesResponse> {
+        let url = `${this.API_ENDPOINT}/users/${username}/repos?per_page=${pageSize}`;
         if (page) {
             url += `&page=${page}`;
         }

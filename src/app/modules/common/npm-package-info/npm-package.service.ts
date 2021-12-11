@@ -1,6 +1,8 @@
-/*!
- * Source https://github.com/donmahallem/donmahallem.github.io.source
+/*
+ * Package @donmahallem/github-page
+ * Source https://donmahallem.github.io/donmahallem.github.io.source/
  */
+
 
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -11,7 +13,7 @@ import { INpmPackage } from '../../../modal';
 @Injectable()
 export class NpmPackageService {
 
-    private packageSubject: BehaviorSubject<string> = new BehaviorSubject(undefined);
+    private packageSubject: BehaviorSubject<string> = new BehaviorSubject<string>(undefined);
     public constructor(private downloadService: FileDownloadService) {
 
     }

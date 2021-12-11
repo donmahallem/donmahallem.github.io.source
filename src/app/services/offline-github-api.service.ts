@@ -1,9 +1,11 @@
-/*!
- * Source https://github.com/donmahallem/donmahallem.github.io.source
+/*
+ * Package @donmahallem/github-page
+ * Source https://donmahallem.github.io/donmahallem.github.io.source/
  */
 
+
 import { HttpClient } from '@angular/common/http';
-import { from, map, mergeMap, of, tap, Observable } from 'rxjs';
+import { from, map, mergeMap, of, Observable, concatMap } from 'rxjs';
 import { IGithubFileId, UserRepositoriesResponse, UserRepositoryResponse } from '../modal';
 import { ServerCacheService } from './server-cache.service';
 
@@ -19,11 +21,12 @@ export class OfflineGithubApiService {
      * @param pageSize Page size
      * @param page Page to query starting at 1
      */
-    public getUserRepos(username: string, pageSize: number = 25, page?: number): Observable<UserRepositoriesResponse> {
-        const url: string = `${this.API_ENDPOINT}/repos/${page}.json`;
+    public getUserRepos(username: string, pageSize = 25, page?: number): Observable<UserRepositoriesResponse> {
+        const url = `${this.API_ENDPOINT}/repos/${page}.json`;
         return this.http.get<UserRepositoriesResponse>(url)
-            .pipe(tap((items: UserRepositoriesResponse): void => {
-                this.cache.put(items);
+            .pipe(concatMap(async (items: UserRepositoriesResponse): Promise<UserRepositoriesResponse> => {
+                await this.cache.put(items)
+                return items;
             }));
     }
 
