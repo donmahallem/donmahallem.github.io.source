@@ -5,7 +5,7 @@
 
 export interface IEnvironment {
     github: {
-        username: string
-    },
-    production: boolean
-};
+        username: string;
+    };
+    production: boolean;
+}

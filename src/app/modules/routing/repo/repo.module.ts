@@ -3,7 +3,6 @@
  * Source https://donmahallem.github.io/donmahallem.github.io.source/
  */
 
-
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
@@ -18,11 +17,7 @@ import { RepoStatsBoxItemComponent } from './repo-stats-box-item.component';
 import { RepoStatsBoxComponent } from './repo-stats-box.component';
 import { RepoResolver } from './repo.resolver';
 @NgModule({
-    declarations: [
-        RepoDetailComponent,
-        RepoStatsBoxComponent,
-        RepoStatsBoxItemComponent,
-    ],
+    declarations: [RepoDetailComponent, RepoStatsBoxComponent, RepoStatsBoxItemComponent],
     imports: [
         CommonModule,
         RepoRoutingModule,
@@ -33,8 +28,6 @@ import { RepoResolver } from './repo.resolver';
         NpmPackageInfoModule,
         MatIconModule,
     ],
-    providers: [
-        RepoResolver,
-    ],
+    providers: [RepoResolver],
 })
-export class RepoModule { }
+export class RepoModule {}

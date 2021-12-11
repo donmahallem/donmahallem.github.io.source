@@ -3,7 +3,6 @@
  * Source https://donmahallem.github.io/donmahallem.github.io.source/
  */
 
-
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { distinct, mergeMap } from 'rxjs/operators';
@@ -12,11 +11,8 @@ import { INpmPackage } from '../../../modal';
 
 @Injectable()
 export class NpmPackageService {
-
     private packageSubject: BehaviorSubject<string> = new BehaviorSubject<string>(undefined);
-    public constructor(private downloadService: FileDownloadService) {
-
-    }
+    public constructor(private downloadService: FileDownloadService) {}
 
     public set package(file: string) {
         this.packageSubject.next(file);
@@ -27,12 +23,11 @@ export class NpmPackageService {
     }
 
     public observePackage(): Observable<INpmPackage> {
-        return this.packageSubject
-            .pipe(
-                distinct(),
-                mergeMap((file: string): Observable<INpmPackage> => {
-                    return this.downloadService.getRawFile<INpmPackage>(file);
-                }),
-            );
+        return this.packageSubject.pipe(
+            distinct(),
+            mergeMap((file: string): Observable<INpmPackage> => {
+                return this.downloadService.getRawFile<INpmPackage>(file);
+            })
+        );
     }
 }

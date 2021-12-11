@@ -3,7 +3,6 @@
  * Source https://donmahallem.github.io/donmahallem.github.io.source/
  */
 
-
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RepoDetailComponent } from './repo-detail.component';
@@ -20,11 +19,7 @@ const repoRoutes: Routes = [
 ];
 
 @NgModule({
-    exports: [
-        RouterModule,
-    ],
-    imports: [
-        RouterModule.forChild(repoRoutes),
-    ],
+    exports: [RouterModule],
+    imports: [RouterModule.forChild(repoRoutes)],
 })
-export class RepoRoutingModule { }
+export class RepoRoutingModule {}

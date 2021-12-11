@@ -3,7 +3,6 @@
  * Source https://donmahallem.github.io/donmahallem.github.io.source/
  */
 
-
 import { Injectable } from '@angular/core';
 import { openDB, DBSchema, IDBPDatabase, IDBPObjectStore, IDBPTransaction, StoreNames } from 'idb';
 import { UserRepositoriesResponse, UserRepositoryResponse } from '../modal';
@@ -13,31 +12,32 @@ interface ICacheDBSchema extends DBSchema {
     repositories: {
         value: UserRepositoryResponse;
         key: string;
-        indexes: { 'full_name': string };
+        indexes: { full_name: string };
     };
 }
 const KEY_PATH = 'full_name';
 type Database = IDBPDatabase<ICacheDBSchema>;
-type DatabaseTransaction<NAME extends StoreNames<ICacheDBSchema>[], MODE extends IDBTransactionMode = 'readonly'>
-    = IDBPTransaction<ICacheDBSchema, NAME, MODE>;
+type DatabaseTransaction<NAME extends StoreNames<ICacheDBSchema>[], MODE extends IDBTransactionMode = 'readonly'> = IDBPTransaction<
+    ICacheDBSchema,
+    NAME,
+    MODE
+>;
 @Injectable({
     providedIn: 'root',
 })
 export class BrowserCacheService extends CacheService {
-
     constructor() {
         super();
     }
 
     public getDb(): Promise<Database> {
         return openDB('repositories', 1, {
-            upgrade(db: Database,
-                old: number,
-                newVersion: number,
-                tx: DatabaseTransaction<'repositories'[], 'versionchange'>): void {
+            upgrade(db: Database, old: number, newVersion: number, tx: DatabaseTransaction<'repositories'[], 'versionchange'>): void {
                 // Create a store of objects
-                const store: IDBPObjectStore<ICacheDBSchema, 'repositories'[], 'repositories', 'versionchange'> =
-                    db.createObjectStore('repositories', { autoIncrement: false, keyPath: KEY_PATH });
+                const store: IDBPObjectStore<ICacheDBSchema, 'repositories'[], 'repositories', 'versionchange'> = db.createObjectStore(
+                    'repositories',
+                    { autoIncrement: false, keyPath: KEY_PATH }
+                );
                 // Create an index on the 'date' property of the objects.
                 store.createIndex('full_name', KEY_PATH);
             },
@@ -68,8 +68,9 @@ export class BrowserCacheService extends CacheService {
     public async put(repos: UserRepositoryResponse | UserRepositoriesResponse): Promise<void> {
         const db: Database = await this.getDb();
         if (Array.isArray(repos)) {
-            const tx: DatabaseTransaction<['repositories'], 'readwrite'> = db
-                .transaction('repositories', 'readwrite', { durability: 'strict' });
+            const tx: DatabaseTransaction<['repositories'], 'readwrite'> = db.transaction('repositories', 'readwrite', {
+                durability: 'strict',
+            });
             for (const rep of repos) {
                 await tx.store.put(rep);
             }

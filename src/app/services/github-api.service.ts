@@ -3,7 +3,6 @@
  * Source https://donmahallem.github.io/donmahallem.github.io.source/
  */
 
-
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -14,8 +13,7 @@ import { IGithubFileId, UserRepositoriesResponse, UserRepositoryResponse } from 
 })
 export class GithubApiService {
     public readonly API_ENDPOINT: string = 'https://api.github.com';
-    constructor(private http: HttpClient) {
-    }
+    constructor(private http: HttpClient) {}
 
     /**
      *
@@ -40,7 +38,9 @@ export class GithubApiService {
     }
 
     public getRawFile<T>(file: IGithubFileId): Observable<T> {
-        return this.http.get<T>(`https://raw.githubusercontent.com/${file.username}/${file.reponame}`
-            + `/${file.branch ? file.branch : 'master'}/${file.filepath}`);
+        return this.http.get<T>(
+            `https://raw.githubusercontent.com/${file.username}/${file.reponame}` +
+                `/${file.branch ? file.branch : 'master'}/${file.filepath}`
+        );
     }
 }

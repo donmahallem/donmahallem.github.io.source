@@ -5,10 +5,9 @@
 
 import { IEnvironment } from './environment.base';
 
-
 export const environment: IEnvironment = {
-  github: {
-    username: 'donmahallem',
-  },
-  production: true,
+    github: {
+        username: 'donmahallem',
+    },
+    production: true,
 };

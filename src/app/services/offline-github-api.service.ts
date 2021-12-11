@@ -3,7 +3,6 @@
  * Source https://donmahallem.github.io/donmahallem.github.io.source/
  */
 
-
 import { HttpClient } from '@angular/common/http';
 import { from, map, mergeMap, of, Observable, concatMap } from 'rxjs';
 import { IGithubFileId, UserRepositoriesResponse, UserRepositoryResponse } from '../modal';
@@ -11,9 +10,7 @@ import { ServerCacheService } from './server-cache.service';
 
 export class OfflineGithubApiService {
     public readonly API_ENDPOINT: string = 'https://raw.githubusercontent.com/donmahallem/donmahallem.github.io.source/api';
-    constructor(private http: HttpClient,
-        private cache: ServerCacheService) {
-    }
+    constructor(private http: HttpClient, private cache: ServerCacheService) {}
 
     /**
      *
@@ -23,11 +20,12 @@ export class OfflineGithubApiService {
      */
     public getUserRepos(username: string, pageSize = 25, page?: number): Observable<UserRepositoriesResponse> {
         const url = `${this.API_ENDPOINT}/repos/${page}.json`;
-        return this.http.get<UserRepositoriesResponse>(url)
-            .pipe(concatMap(async (items: UserRepositoriesResponse): Promise<UserRepositoriesResponse> => {
-                await this.cache.put(items)
+        return this.http.get<UserRepositoriesResponse>(url).pipe(
+            concatMap(async (items: UserRepositoriesResponse): Promise<UserRepositoriesResponse> => {
+                await this.cache.put(items);
                 return items;
-            }));
+            })
+        );
     }
 
     private getRepoOnline(fullname: string): Observable<UserRepositoryResponse> {
@@ -36,24 +34,29 @@ export class OfflineGithubApiService {
 
     public getRepo(usernameOrFullname: string, reponame?: string): Observable<UserRepositoryResponse> {
         const mergedReponame: string = reponame ? `${usernameOrFullname}/${reponame}` : usernameOrFullname;
-        return from(this.cache.get(mergedReponame))
-            .pipe(mergeMap((cachedRepo: UserRepositoryResponse): Observable<UserRepositoryResponse> => {
+        return from(this.cache.get(mergedReponame)).pipe(
+            mergeMap((cachedRepo: UserRepositoryResponse): Observable<UserRepositoryResponse> => {
                 if (cachedRepo) {
                     console.log('Got item from cache', mergedReponame);
                     return of(cachedRepo);
                 }
-                return this.getRepoOnline(mergedReponame)
-                    .pipe(mergeMap((repo: UserRepositoryResponse): Observable<UserRepositoryResponse> => {
-                        return from(this.cache.put(repo))
-                            .pipe(map((): UserRepositoryResponse => {
+                return this.getRepoOnline(mergedReponame).pipe(
+                    mergeMap((repo: UserRepositoryResponse): Observable<UserRepositoryResponse> => {
+                        return from(this.cache.put(repo)).pipe(
+                            map((): UserRepositoryResponse => {
                                 return repo;
-                            }));
-                    }));
-            }));
+                            })
+                        );
+                    })
+                );
+            })
+        );
     }
 
     public getRawFile<T>(file: IGithubFileId): Observable<T> {
-        return this.http.get<T>(`https://raw.githubusercontent.com/${file.username}/${file.reponame}`
-            + `/${file.branch ? file.branch : 'master'}/${file.filepath}`);
+        return this.http.get<T>(
+            `https://raw.githubusercontent.com/${file.username}/${file.reponame}` +
+                `/${file.branch ? file.branch : 'master'}/${file.filepath}`
+        );
     }
 }

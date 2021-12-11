@@ -3,14 +3,12 @@
  * Source https://donmahallem.github.io/donmahallem.github.io.source/
  */
 
-
 import { Mutex, MutexInterface } from 'async-mutex';
 import { UserRepositoriesResponse, UserRepositoryResponse } from '../modal';
 import { OfflineDatabase } from '../offline-database';
 import { CacheService } from './cache.service';
 
 export class ServerCacheService extends CacheService {
-
     private mutex: Mutex = new Mutex();
     constructor(public db: OfflineDatabase) {
         super();

@@ -3,7 +3,6 @@
  * Source https://donmahallem.github.io/donmahallem.github.io.source/
  */
 
-
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ReposOverviewComponent } from './repos-overview.component';
@@ -28,11 +27,7 @@ const tripPassagesRoute: Routes = [
 ];
 
 @NgModule({
-    exports: [
-        RouterModule,
-    ],
-    imports: [
-        RouterModule.forChild(tripPassagesRoute),
-    ],
+    exports: [RouterModule],
+    imports: [RouterModule.forChild(tripPassagesRoute)],
 })
-export class ReposRoutingModule { }
+export class ReposRoutingModule {}

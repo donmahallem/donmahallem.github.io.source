@@ -3,7 +3,6 @@
  * Source https://donmahallem.github.io/donmahallem.github.io.source/
  */
 
-
 import { Component, Input } from '@angular/core';
 import { DependencyInfo } from './dependendy-info';
 import { NpmPackageUtil } from './npm-package-util';
@@ -15,7 +14,6 @@ import { NpmPackageService } from './npm-package.service';
     templateUrl: './npm-package-list.component.html',
 })
 export class NpmPackageListComponent extends NpmPackageUtil {
-
     @Input()
     public packages: DependencyInfo[] = [];
     @Input()
@@ -33,5 +31,4 @@ export class NpmPackageListComponent extends NpmPackageUtil {
     public isDisabled(): boolean {
         return this.getPackageCount() < 1;
     }
-
 }

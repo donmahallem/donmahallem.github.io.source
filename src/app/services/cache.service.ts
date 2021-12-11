@@ -3,7 +3,6 @@
  * Source https://donmahallem.github.io/donmahallem.github.io.source/
  */
 
-
 import { UserRepositoriesResponse, UserRepositoryResponse } from '../modal';
 
 export abstract class CacheService {
