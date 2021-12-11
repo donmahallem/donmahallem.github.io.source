@@ -3,7 +3,6 @@
  * Source https://github.com/donmahallem/donmahallem.github.io.source
  */
 
-
 import { Component, Input } from '@angular/core';
 
 @Component({

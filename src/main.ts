@@ -3,7 +3,6 @@
  * Source https://github.com/donmahallem/donmahallem.github.io.source
  */
 
-
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
@@ -11,10 +10,11 @@ import { AppModule } from './app/app.module';
 import { environment } from './environments';
 
 if (environment.production) {
-  enableProdMode();
+    enableProdMode();
 }
 
 document.addEventListener('DOMContentLoaded', (): void => {
-  platformBrowserDynamic().bootstrapModule(AppModule)
-    .catch((err: any): void => console.error(err));
+    platformBrowserDynamic()
+        .bootstrapModule(AppModule)
+        .catch((err: any): void => console.error(err));
 });

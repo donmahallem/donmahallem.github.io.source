@@ -3,7 +3,6 @@
  * Source https://github.com/donmahallem/donmahallem.github.io.source
  */
 
-
 import { isPlatformBrowser } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
@@ -20,7 +19,6 @@ import { environment } from 'src/environments';
  */
 @Injectable()
 export class ReposResolver implements Resolve<UserRepositoriesResponse> {
-
     private readonly INT_REGEX: RegExp = /^([1-9]+|0*[1-9][0-9]+)$/;
     /**
      * Constructor
@@ -29,9 +27,7 @@ export class ReposResolver implements Resolve<UserRepositoriesResponse> {
      * @param api the {@ApiService}
      * @param router the {@Router}
      */
-    public constructor(@Inject(PLATFORM_ID) public platformId: object,
-        private api: GithubApiService,
-        private router: Router) { }
+    public constructor(@Inject(PLATFORM_ID) public platformId: object, private api: GithubApiService, private router: Router) {}
 
     public validatePage(value: string): boolean {
         return this.INT_REGEX.test(value);
@@ -53,13 +49,13 @@ export class ReposResolver implements Resolve<UserRepositoriesResponse> {
             }
             page = parseInt(providedPage, 10);
         }
-        return this.api
-            .getUserRepos(environment.github.username, 25, page)
-            .pipe(tap((value: any[]): void => {
+        return this.api.getUserRepos(environment.github.username, 25, page).pipe(
+            tap((value: any[]): void => {
                 if (value.length === 0 && page !== 1) {
                     throw new HttpErrorResponse({ status: 404 });
                 }
-            }), catchError((err: any | HttpErrorResponse): Observable<UserRepositoriesResponse> => {
+            }),
+            catchError((err: any | HttpErrorResponse): Observable<UserRepositoriesResponse> => {
                 if (err instanceof HttpErrorResponse) {
                     if (err.status === 404 && isPlatformBrowser(this.platformId)) {
                         void this.router.navigate(['404']);
@@ -70,6 +66,7 @@ export class ReposResolver implements Resolve<UserRepositoriesResponse> {
                     }
                 }
                 return EMPTY;
-            }));
+            })
+        );
     }
 }
