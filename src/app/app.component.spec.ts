@@ -1,8 +1,7 @@
 /*
  * Package @donmahallem/github-page
- * Source https://donmahallem.github.io/donmahallem.github.io.source/
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
  */
-
 
 import { Component } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
@@ -12,31 +11,27 @@ import { AppComponent } from './app.component';
 // tslint:disable:component-selector
 // tslint:disable:directive-selector
 @Component({
-  selector: 'mat-toolbar',
-  template: '',
+    selector: 'mat-toolbar',
+    template: '',
 })
-export class TestMatToolbarComponent { }
+export class TestMatToolbarComponent {}
 // tslint:enable:component-selector
 // tslint:enable:directive-selector
 describe('app.component', (): void => {
-  describe('AppComponent', (): void => {
-    beforeEach(waitForAsync((): void => {
-      TestBed.configureTestingModule({
-        declarations: [
-          AppComponent,
-          TestMatToolbarComponent,
-        ],
-        imports: [
-          RouterTestingModule,
-        ],
-      }).compileComponents();
-    }));
+    describe('AppComponent', (): void => {
+        beforeEach(
+            waitForAsync((): void => {
+                TestBed.configureTestingModule({
+                    declarations: [AppComponent, TestMatToolbarComponent],
+                    imports: [RouterTestingModule],
+                }).compileComponents();
+            })
+        );
 
-    it('should create the app', (): void => {
-      const fixture: ComponentFixture<AppComponent> = TestBed.createComponent(AppComponent);
-      const app: AppComponent = fixture.debugElement.componentInstance as AppComponent;
-      expect(app).toBeTruthy();
+        it('should create the app', (): void => {
+            const fixture: ComponentFixture<AppComponent> = TestBed.createComponent(AppComponent);
+            const app: AppComponent = fixture.debugElement.componentInstance as AppComponent;
+            expect(app).toBeTruthy();
+        });
     });
-
-  });
 });

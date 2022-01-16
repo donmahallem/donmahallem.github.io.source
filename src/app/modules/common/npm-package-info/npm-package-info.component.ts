@@ -1,8 +1,7 @@
 /*
  * Package @donmahallem/github-page
- * Source https://donmahallem.github.io/donmahallem.github.io.source/
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
  */
-
 
 import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
 import { EMPTY, Observable, Subscription } from 'rxjs';
@@ -22,8 +21,7 @@ export class NpmPackageInfoComponent extends NpmPackageUtil implements AfterView
     public dependencies: DependencyInfo[] = [];
     public devDependencies: DependencyInfo[] = [];
     public optionalDependencies: DependencyInfo[] = [];
-    constructor(private packageService: NpmPackageService,
-        private changeDetectorRef: ChangeDetectorRef) {
+    constructor(private packageService: NpmPackageService, private changeDetectorRef: ChangeDetectorRef) {
         super();
     }
     @Input()
@@ -41,9 +39,11 @@ export class NpmPackageInfoComponent extends NpmPackageUtil implements AfterView
     public ngAfterViewInit(): void {
         this.loadSubscription = this.packageService
             .observePackage()
-            .pipe(catchError((err: any): Observable<void> => {
-                return EMPTY;
-            }))
+            .pipe(
+                catchError((err: any): Observable<void> => {
+                    return EMPTY;
+                })
+            )
             .subscribe((pack: INpmPackage): void => {
                 this.dependencies = this.convertMapToArray(pack.dependencies);
                 this.devDependencies = this.convertMapToArray(pack.devDependencies);

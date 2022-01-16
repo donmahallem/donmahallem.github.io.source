@@ -1,8 +1,7 @@
 /*
  * Package @donmahallem/github-page
- * Source https://donmahallem.github.io/donmahallem.github.io.source/
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
  */
-
 
 import { isPlatformBrowser } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -20,7 +19,6 @@ import { environment } from 'src/environments';
  */
 @Injectable()
 export class RepoResolver implements Resolve<UserRepositoryResponse> {
-
     /**
      * Constructor
      *
@@ -28,9 +26,7 @@ export class RepoResolver implements Resolve<UserRepositoryResponse> {
      * @param api the {@ApiService}
      * @param router the {@Router}
      */
-    public constructor(@Inject(PLATFORM_ID) public platformId: object,
-        private api: GithubApiService,
-        private router: Router) { }
+    public constructor(@Inject(PLATFORM_ID) public platformId: object, private api: GithubApiService, private router: Router) {}
 
     /**
      * Resolves the stop information via the stopId param inside the route
@@ -39,9 +35,8 @@ export class RepoResolver implements Resolve<UserRepositoryResponse> {
      * @param state The RouterState
      */
     public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<UserRepositoryResponse> {
-        return this.api
-            .getRepo(environment.github.username, route.params.reponame as string)
-            .pipe(catchError((err: any | HttpErrorResponse): Observable<never> => {
+        return this.api.getRepo(environment.github.username, route.params.reponame as string).pipe(
+            catchError((err: any | HttpErrorResponse): Observable<never> => {
                 if (err instanceof HttpErrorResponse) {
                     if (err.status === 404 && isPlatformBrowser(this.platformId)) {
                         void this.router.navigate(['repos']);
@@ -52,6 +47,7 @@ export class RepoResolver implements Resolve<UserRepositoryResponse> {
                     }
                 }
                 return EMPTY;
-            }));
+            })
+        );
     }
 }

@@ -1,20 +1,19 @@
 /*
  * Package @donmahallem/github-page
- * Source https://donmahallem.github.io/donmahallem.github.io.source/
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
  */
 
 import { IEnvironment } from './environment.base';
-
 
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
 export const environment: IEnvironment = {
-  github: {
-    username: 'donmahallem',
-  },
-  production: false,
+    github: {
+        username: 'donmahallem',
+    },
+    production: false,
 };
 
 /*

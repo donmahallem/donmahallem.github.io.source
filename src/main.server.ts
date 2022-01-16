@@ -1,12 +1,11 @@
 /*
  * Package @donmahallem/github-page
- * Source https://donmahallem.github.io/donmahallem.github.io.source/
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
  */
-
 
 /***************************************************************************************************
  * Load `$localize` onto the global scope - used if i18n tags appear in Angular templates.
-*/
+ */
 import '@angular/localize/init';
 
 import { enableProdMode } from '@angular/core';
@@ -14,7 +13,7 @@ import { enableProdMode } from '@angular/core';
 import { environment } from './environments';
 
 if (environment.production) {
-  enableProdMode();
+    enableProdMode();
 }
 
 export { AppServerModule } from './app/app.server.module';

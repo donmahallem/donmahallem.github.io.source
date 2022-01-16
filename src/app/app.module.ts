@@ -1,8 +1,7 @@
 /*
  * Package @donmahallem/github-page
- * Source https://donmahallem.github.io/donmahallem.github.io.source/
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
  */
-
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -18,29 +17,26 @@ import { BrowserCacheService } from './services/browser-cache.service';
 import { CacheService } from './services/cache.service';
 
 @NgModule({
-  bootstrap: [AppComponent],
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    NotFoundComponent,
-  ],
-  imports: [
-    BrowserAnimationsModule,
-    HttpClientModule,
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
-    AppRoutingModule,
-    MatToolbarModule,
-  ],
-  providers: [
-    GithubApiService,
-    {
-      multi: true,
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-    }, {
-      provide: CacheService,
-      useClass: BrowserCacheService,
-    },
-  ],
+    bootstrap: [AppComponent],
+    declarations: [AppComponent, HomeComponent, NotFoundComponent],
+    imports: [
+        BrowserAnimationsModule,
+        HttpClientModule,
+        BrowserModule.withServerTransition({ appId: 'serverApp' }),
+        AppRoutingModule,
+        MatToolbarModule,
+    ],
+    providers: [
+        GithubApiService,
+        {
+            multi: true,
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+        },
+        {
+            provide: CacheService,
+            useClass: BrowserCacheService,
+        },
+    ],
 })
-export class AppModule { }
+export class AppModule {}

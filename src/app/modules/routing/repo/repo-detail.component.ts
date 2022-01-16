@@ -1,8 +1,7 @@
 /*
  * Package @donmahallem/github-page
- * Source https://donmahallem.github.io/donmahallem.github.io.source/
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
  */
-
 
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Data } from '@angular/router';
@@ -19,14 +18,10 @@ import { UserRepositoryResponse } from 'src/app/modal';
 export class RepoDetailComponent implements AfterViewInit, OnDestroy {
     public repository: UserRepositoryResponse = undefined;
     private updateSubscription: Subscription;
-    public constructor(private activatedRoute: ActivatedRoute,
-        private cdRef: ChangeDetectorRef) {
-
-    }
+    public constructor(private activatedRoute: ActivatedRoute, private cdRef: ChangeDetectorRef) {}
 
     public ngAfterViewInit(): void {
-        this.updateSubscription = this.activatedRoute
-            .data
+        this.updateSubscription = this.activatedRoute.data
             .pipe(map((data: Data): UserRepositoryResponse => data.repo as UserRepositoryResponse))
             .subscribe((repo: UserRepositoryResponse): void => {
                 this.setRepository(repo);
@@ -47,7 +42,7 @@ export class RepoDetailComponent implements AfterViewInit, OnDestroy {
     public isJavascript(): boolean {
         if (this.repository && this.repository.language) {
             const lowerCaseLanguage: string = this.repository.language.toLowerCase();
-            return (lowerCaseLanguage === 'typescript' || lowerCaseLanguage === 'javascript');
+            return lowerCaseLanguage === 'typescript' || lowerCaseLanguage === 'javascript';
         }
         return false;
     }

@@ -1,8 +1,7 @@
 /*
  * Package @donmahallem/github-page
- * Source https://donmahallem.github.io/donmahallem.github.io.source/
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
  */
-
 
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -21,23 +20,22 @@ export class ReposOverviewComponent implements AfterViewInit, OnDestroy {
     public page = 1;
     private updateSubscription: Subscription;
 
-    public constructor(private activatedRoute: ActivatedRoute,
-        private cdRef: ChangeDetectorRef) {
-
-    }
+    public constructor(private activatedRoute: ActivatedRoute, private cdRef: ChangeDetectorRef) {}
 
     public ngAfterViewInit(): void {
-        this.updateSubscription = this.activatedRoute
-            .data
-            .pipe(map((data: { repos: UserRepositoriesResponse }): UserRepositoriesResponse => {
-                return data.repos;
-            })).subscribe((repos: UserRepositoriesResponse): void => {
+        this.updateSubscription = this.activatedRoute.data
+            .pipe(
+                map((data: { repos: UserRepositoriesResponse }): UserRepositoriesResponse => {
+                    return data.repos;
+                })
+            )
+            .subscribe((repos: UserRepositoriesResponse): void => {
                 this.update(repos);
             });
     }
     public getCurrentPage(): number {
         const params: {
-            page?: string,
+            page?: string;
         } = this.activatedRoute.snapshot.params;
         if (params.page) {
             return parseInt(params.page, 10);

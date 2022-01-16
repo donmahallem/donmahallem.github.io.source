@@ -1,8 +1,7 @@
 /*
  * Package @donmahallem/github-page
- * Source https://donmahallem.github.io/donmahallem.github.io.source/
+ * Source https://github.com/donmahallem/donmahallem.github.io.source
  */
-
 
 import { Component, Input } from '@angular/core';
 import { UserRepositoryResponse } from 'src/app/modal';
@@ -33,5 +32,4 @@ export class RepoStatsBoxComponent {
     public get language(): string {
         return this?.repository?.language || 'unknown';
     }
-
 }
