@@ -32,7 +32,7 @@ jobs:
           npm ci
       - name: Create Prerender List
         run: |
-          npm run prepare:prerender2
+          npm run prepare:prerender
         env:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Deploy 🚀
