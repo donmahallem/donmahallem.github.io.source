@@ -38,14 +38,11 @@ jobs:
       - name: List Debug Information
         run: |
           ls -r -l ./src/assets
-          mkdir ./tmp
-          cp -r ./src/assets/repos ./tmp/repos
-          cp -r ./src/assets/repo ./tmp/repo
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.8
         with:
           branch: api # The branch the action should deploy to.
-          folder: ./tmp # The folder the action should deploy.
+          folder: ./src/assets # The folder the action should deploy.
           target-folder: .
           CLEAN: true
           token: ${{ secrets.GITHUB_TOKEN }}
