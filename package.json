@@ -16,7 +16,7 @@
     "dev:ssr": "ng run DonMahallem:serve-ssr",
     "serve:ssr": "node dist/DonMahallem/server/main.js",
     "build:ssr": "ng build --prod && ng run DonMahallem:server:production",
-    "prepare:prerender": "node --loader ts-node/esm  ./prerender/create-prerender.ts",
+    "prepare:prerender": "node --loader ts-node/esm  ./prerender/create-prerender2.ts",
     "all": "npm run build && npm run lint && npm run docs && npm run prepare:prerender"
   },
   "publishConfig": {
