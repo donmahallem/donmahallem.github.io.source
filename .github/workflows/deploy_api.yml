@@ -9,7 +9,7 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    name: Deploy App
+    name: Deploy Api Files
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -35,6 +35,9 @@ jobs:
           npm run prepare:prerender
         env:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: List Debug Information
+        run: |
+          ls -r -l ./src/assets
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.8
         with:
