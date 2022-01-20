@@ -36,7 +36,10 @@ jobs:
         env:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: List Debug Information
-        run: ls -r -l ./src/assets
+        run: |
+          ls -r -l ./src/assets
+          git add ./src/assets/repos/* --force
+          git add ./src/assets/repo/* --force
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.8
         with:
