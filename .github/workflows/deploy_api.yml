@@ -39,7 +39,7 @@ jobs:
         run: |
           ls -r -l ./src/assets
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.2.2
+        uses: JamesIves/github-pages-deploy-action@v4.2.3
         with:
           branch: api # The branch the action should deploy to.
           folder: ./src/assets # The folder the action should deploy.
