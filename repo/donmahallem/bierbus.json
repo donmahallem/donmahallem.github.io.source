@@ -66,7 +66,7 @@
   "deployments_url": "https://api.github.com/repos/donmahallem/bierbus/deployments",
   "created_at": "2019-04-10T14:51:51Z",
   "updated_at": "2021-03-03T13:16:38Z",
-  "pushed_at": "2022-02-07T02:19:22Z",
+  "pushed_at": "2022-02-14T00:49:20Z",
   "git_url": "git://github.com/donmahallem/bierbus.git",
   "ssh_url": "git@github.com:donmahallem/bierbus.git",
   "clone_url": "https://github.com/donmahallem/bierbus.git",
@@ -85,7 +85,7 @@
   "mirror_url": null,
   "archived": false,
   "disabled": false,
-  "open_issues_count": 3,
+  "open_issues_count": 4,
   "license": {
     "key": "apache-2.0",
     "name": "Apache License 2.0",
@@ -98,7 +98,7 @@
   "topics": [],
   "visibility": "public",
   "forks": 0,
-  "open_issues": 3,
+  "open_issues": 4,
   "watchers": 0,
   "default_branch": "master",
   "permissions": {
