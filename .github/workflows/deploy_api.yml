@@ -16,7 +16,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Setup Node
-        uses: actions/setup-node@v2.5.0
+        uses: actions/setup-node@v3.0.0
         with:
           node-version: '14'
       - name: Setup Cache
@@ -39,7 +39,7 @@ jobs:
         run: |
           ls -r -l ./src/assets
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@4.1.8
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
           branch: api # The branch the action should deploy to.
           folder: ./src/assets # The folder the action should deploy.
