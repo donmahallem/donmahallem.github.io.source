@@ -73,7 +73,7 @@
     "@angular/language-service": "13.2.4",
     "@angular/localize": "13.2.4",
     "@compodoc/compodoc": "1.1.19",
-    "@donmahallem/eslint-config": "1.0.19",
+    "@donmahallem/eslint-config": "1.0.20",
     "@donmahallem/tslint-config": "0.3.2",
     "@nguniversal/builders": "13.0.2",
     "@octokit/types": "6.34.0",
