@@ -15,7 +15,7 @@ jobs:
     - name: Run Hugo
       uses: docker://klakegg/hugo:0.92.2-ext-alpine-ci
       with:
-        entrypoint: "hugo --minify"
+        entrypoint: "'hugo --minify'"
     - name: Install SSH Client
       uses: webfactory/ssh-agent@v0.5.4
       with:
