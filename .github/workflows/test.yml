@@ -1,0 +1,12 @@
+name: CI
+
+on: [push]
+
+jobs:
+  myjob:
+    runs-on: ubuntu-18.04 # linux required if you want to use docker
+    steps:
+    - uses: actions/checkout@v1
+    - uses: docker://klakegg/0.92.1-ext-alpine-ci
+      with:
+        entrypoint: hugo
