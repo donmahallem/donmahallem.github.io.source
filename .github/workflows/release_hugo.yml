@@ -14,13 +14,13 @@ jobs:
         persist-credentials: false
     - name: Run Hugo
       if: github.ref != 'refs/heads/source'
-      uses: docker://klakegg/hugo:0.92.2-ext-alpine-ci
+      uses: docker://klakegg/hugo:0.93.0-ext-alpine-ci
       with:
         entrypoint: hugo
         args: --minify -D
     - name: Run Hugo
       if: github.ref == 'refs/heads/source'
-      uses: docker://klakegg/hugo:0.92.2-ext-alpine-ci
+      uses: docker://klakegg/hugo:0.93.0-ext-alpine-ci
       with:
         entrypoint: hugo
         args: --minify
