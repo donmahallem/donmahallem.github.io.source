@@ -1,12 +1,31 @@
-name: CI
+name: Build Page
 
 on: [push]
 
 jobs:
-  myjob:
+  hugo:
+    name: Build HUGO Page
     runs-on: ubuntu-18.04 # linux required if you want to use docker
     steps:
-    - uses: actions/checkout@v1
-    - uses: docker://klakegg/hugo:0.92.2-ext-alpine-ci
+    - name: Checkout
+      uses: actions/checkout@v3.0.0
       with:
-        entrypoint: hugo -D
+        submodules: recursive
+        persist-credentials: false
+    - name: Run Hugo
+      uses: docker://klakegg/hugo:0.92.2-ext-alpine-ci
+      with:
+        entrypoint: hugo
+    - name: Install SSH Client
+      uses: webfactory/ssh-agent@v0.5.4
+      with:
+        ssh-private-key: ${{ secrets.APP_DEPLOY_KEY }}
+    - name: Deploy 
+      uses: JamesIves/github-pages-deploy-action@releases/v3
+      with:
+        SSH: true
+        BRANCH: master # The branch the action should deploy to.
+        FOLDER: public # The folder the action should deploy.
+        REPOSITORY_NAME: donmahallem/donmahallem.github.io
+        TARGET_FOLDER: .
+        CLEAN: true
