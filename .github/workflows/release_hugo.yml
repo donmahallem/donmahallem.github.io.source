@@ -7,6 +7,6 @@ jobs:
     runs-on: ubuntu-18.04 # linux required if you want to use docker
     steps:
     - uses: actions/checkout@v1
-    - uses: docker://klakegg/0.92.1-ext-alpine-ci
+    - uses: docker://klakegg/hugo:0.92.2-ext-alpine-ci
       with:
         entrypoint: hugo
