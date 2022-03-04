@@ -9,4 +9,4 @@ jobs:
     - uses: actions/checkout@v1
     - uses: docker://klakegg/hugo:0.92.2-ext-alpine-ci
       with:
-        entrypoint: hugo
+        entrypoint: hugo -D
