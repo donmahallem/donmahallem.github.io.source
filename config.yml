@@ -1,4 +1,4 @@
-baseURL: 'http://example.org/'
+baseURL: 'https://donmahallem.github.io/'
 languageCode: en-us
 title: My New Hugo Site
 theme: PaperMod
@@ -18,6 +18,6 @@ menu:
       weight: 30
 params:
   editPost:
-    URL: "https://github.com/<path_to_repo>/content"
+    URL: "https://github.com/donmahallem/donmahallem.github.io.source/tree/source/content"
     Text: "Suggest Changes" # edit text
     appendFilePath: true # to append file path to Edit link
