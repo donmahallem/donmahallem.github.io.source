@@ -13,9 +13,17 @@ jobs:
         submodules: recursive
         persist-credentials: false
     - name: Run Hugo
+      if: github.ref != 'refs/heads/source'
       uses: docker://klakegg/hugo:0.92.2-ext-alpine-ci
       with:
-        entrypoint: "'hugo --minify'"
+        entrypoint: hugo
+        args: --minify -D
+    - name: Run Hugo
+      if: github.ref == 'refs/heads/source'
+      uses: docker://klakegg/hugo:0.92.2-ext-alpine-ci
+      with:
+        entrypoint: hugo
+        args: --minify
     - name: Install SSH Client
       uses: webfactory/ssh-agent@v0.5.4
       with:
