@@ -1,0 +1,23 @@
+baseURL: 'http://example.org/'
+languageCode: en-us
+title: My New Hugo Site
+theme: PaperMod
+menu:
+  main:
+    - identifier: categories
+      name: categories
+      url: /categories/
+      weight: 10
+    - identifier: tags
+      name: tags
+      url: /tags/
+      weight: 20
+    - identifier: github
+      name: github
+      url: 'https://github.com/donmahallem'
+      weight: 30
+params:
+  editPost:
+    URL: "https://github.com/<path_to_repo>/content"
+    Text: "Suggest Changes" # edit text
+    appendFilePath: true # to append file path to Edit link

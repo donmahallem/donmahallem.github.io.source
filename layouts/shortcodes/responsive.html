@@ -1,0 +1,18 @@
+{{ $banner := .Page.Resources.GetMatch (.Get "src") }}
+
+
+{{- if $banner -}}
+{{ $tiny := ($banner.Fill "480x280 q90") }}
+{{ $small := ($banner.Fill "768x280 q90") }}
+{{ $medium := ($banner.Fill "1024x280 q90") }}
+{{ $large := ($banner.Fill "1366x280 q90") }}
+<figure>
+    <img srcset="
+        {{- with $tiny.RelPermalink -}}{{.}} 480w{{- end -}}
+        {{- with $small.RelPermalink -}}, {{.}} 768w{{- end -}}
+        {{- with $medium.RelPermalink -}}, {{.}} 1024w{{- end -}}
+        {{- with $large.RelPermalink -}}, {{.}} 1366w{{- end -}}" src="{{ $banner.RelPermalink }}" alt="banner-image">
+</figure>
+{{else}}
+<p>{{- with (.Get "src") }} width="{{ . }}" {{ end -}}not found</p>
+{{- end }}
