@@ -12,6 +12,14 @@ jobs:
       with:
         submodules: recursive
         persist-credentials: false
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    - name: Load Repositories
+      run: python prerender.py
+      env:
+        TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Run Hugo
       if: github.ref != 'refs/heads/source'
       uses: docker://klakegg/hugo:0.92.2-ext-alpine-ci
