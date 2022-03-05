@@ -36,6 +36,7 @@ for page in range(0,1000):
         pageData['date']=repo['created_at']
         pageData['lastmod']=repo['updated_at']
         pageData['categories']=["repository"]
+        pageData['description']=["description"]
         with codecs.open("./content/repos/"+ repo["name"]+".md",'w') as f:
             f.write("---\n"+json.dumps(pageData)+"\n---\n")
     if len(pageContent) < pageSize:
