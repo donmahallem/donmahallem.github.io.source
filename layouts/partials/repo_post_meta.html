@@ -6,7 +6,7 @@ $scratch.Add "meta" (slice (printf "<span title='%s'>%s</span>"
 (.Date) (.Date | time.Format (default "January 2,2006" .Site.Params.DateFormat))))
 }}
 {{-
-$scratch.Add "meta" (slice (printf "<span title='%s'>%s</span>"
+$scratch.Add "meta" (slice (printf "<span title='%s'>Last modified: %s</span>"
 (.Lastmod) (.Lastmod | time.Format (default "January 2,2006" .Site.Params.DateFormat))))
 }}
 {{- end }}
