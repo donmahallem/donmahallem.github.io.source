@@ -19,8 +19,8 @@ jobs:
       id: cache-repos
       uses: actions/cache@v2.1.7
       with:
-        path: ./content/repos/
-        key: ${{ steps.date.outputs.date }}-repos
+        path: content/repos
+        key: ${{ steps.date.outputs.date }}-repos-${{ hashFiles('prerender.py') }}
     - name: Setup Python
       uses: actions/setup-python@v2
       with:
