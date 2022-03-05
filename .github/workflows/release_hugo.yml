@@ -12,13 +12,25 @@ jobs:
       with:
         submodules: recursive
         persist-credentials: false
+    - name: Get current date
+      id: date
+      run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+    - name: Cache Repos Content
+      id: cache-repos
+      uses: actions/cache@v2.1.7
+      with:
+        path: content/repos
+        key: ${{ steps.date.outputs.date }}-repos-${{ hashFiles('prerender.py') }}
     - name: Setup Python
+      if: steps.cache-repos.outputs.cache-hit != 'true'
       uses: actions/setup-python@v2
       with:
         python-version: '3.x'
     - name: Install python requirements
+      if: steps.cache-repos.outputs.cache-hit != 'true'
       run: pip install -r requirements.txt
     - name: Load Repositories
+      if: steps.cache-repos.outputs.cache-hit != 'true'
       run: python prerender.py
       env:
         TOKEN: ${{ secrets.GITHUB_TOKEN }}
