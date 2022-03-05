@@ -37,6 +37,9 @@ for page in range(0,1000):
         pageData['date']=repo['created_at']
         pageData['categories']=["repository"]
         pageData['description']=repo["description"]
+        pageData['cover'] = {
+            "image": f"https://opengraph.githubassets.com/e2cd6b7baf7072c4f39f426f3cd18dd1a284d8854b96d9f18162decc27d5aaf5/"+repo["full_name"]
+        }
 
         lastPushDate = dt.strptime(repo['pushed_at'], "%Y-%m-%dT%H:%M:%S%z")
         lastUpdateDate = dt.strptime(repo['updated_at'], "%Y-%m-%dT%H:%M:%S%z")
