@@ -24,7 +24,7 @@ def getPage(username,pageSize,page):
     resp =requests.get(f"https://api.github.com/users/{username}/repos?per_page={pageSize}&page={page}", params=params)
 
     return resp.json() 
-
+os.makedirs("./content/repos/", exist_ok=True)
 for page in range(0,1000):
     print(f"Loading page: {page}")
     pageContent = getPage(username=username,pageSize=pageSize,page=page)
@@ -35,9 +35,10 @@ for page in range(0,1000):
         pageData['title']=repo['name']
         pageData['date']=repo['created_at']
         pageData['lastmod']=repo['updated_at']
+        pageData['categories']=["repository"]
         with codecs.open("./content/repos/"+ repo["name"]+".md",'w') as f:
             f.write("---\n"+json.dumps(pageData)+"\n---\n")
-    if len(pageContent) > 1:
+    if len(pageContent) < pageSize:
         break
 
     time.sleep(1)
