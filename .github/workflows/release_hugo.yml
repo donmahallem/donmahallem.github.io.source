@@ -22,6 +22,7 @@ jobs:
         path: content/repos
         key: ${{ steps.date.outputs.date }}-repos-${{ hashFiles('prerender.py') }}
     - name: Setup Python
+      if: steps.cache-repos.outputs.cache-hit != 'true'
       uses: actions/setup-python@v2
       with:
         python-version: '3.x'
