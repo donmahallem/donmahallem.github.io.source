@@ -3,6 +3,7 @@ import os
 import time
 import codecs
 import json
+from datetime import datetime as dt
 
 username = 'DonMahallem'
 pageSize = 25
@@ -34,9 +35,13 @@ for page in range(0,1000):
         pageData['source']=repo
         pageData['title']=repo['name']
         pageData['date']=repo['created_at']
-        pageData['lastmod']=repo['updated_at']
         pageData['categories']=["repository"]
-        pageData['description']=["description"]
+        pageData['description']=repo["description"]
+
+        lastPushDate = dt.strptime(repo['pushed_at'], "%Y-%m-%dT%H:%M:%S%z")
+        lastUpdateDate = dt.strptime(repo['updated_at'], "%Y-%m-%dT%H:%M:%S%z")
+
+        pageData['lastmod'] = repo['updated_at'] if lastUpdateDate > lastPushDate else repo['pushed_at']
         with codecs.open("./content/repos/"+ repo["name"]+".md",'w') as f:
             f.write("---\n"+json.dumps(pageData)+"\n---\n")
     if len(pageContent) < pageSize:
