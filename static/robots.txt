@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: http://donmahallem.github.io/sitemap.xml
