@@ -16,8 +16,15 @@ menu:
       name: github
       url: 'https://github.com/donmahallem'
       weight: 30
+    - identifier: repoos
+      name: Repos
+      url: /repos/
+      weight: 30
 params:
   editPost:
     URL: "https://github.com/donmahallem/donmahallem.github.io.source/tree/source/content"
     Text: "Suggest Changes" # edit text
     appendFilePath: true # to append file path to Edit link
+  mainSections:
+    - posts
+    - repos
