@@ -36,7 +36,9 @@ for page in range(0,1000):
         pageData['title']=repo['name']
         pageData['date']=repo['created_at']
         pageData['categories']=["repository"]
-        pageData['description']=repo["description"]
+        if "description" in repo:
+            pageData['description']=repo["description"]
+            pageData['summary']=repo["description"]
         pageData['cover'] = {
             "image": f"https://opengraph.githubassets.com/e2cd6b7baf7072c4f39f426f3cd18dd1a284d8854b96d9f18162decc27d5aaf5/"+repo["full_name"]
         }
