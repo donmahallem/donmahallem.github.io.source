@@ -1,0 +1,50 @@
+name: Publish Page
+
+on:
+  schedule:
+    - cron: '0 */4 * * *'
+  workflow_run:
+    workflows: [Build Page]
+    types: [completed]
+    branches: [master]
+
+jobs:
+  publish_page:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    name: Build HUGO Page
+    runs-on: ubuntu-18.04 # linux required if you want to use docker
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3.0.0
+      with:
+        submodules: recursive
+        persist-credentials: false
+        ref: source
+    - name: Setup Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.x'
+    - name: Install python requirements
+      run: pip install -r requirements.txt
+    - name: Load Repositories
+      run: python prerender.py
+      env:
+        TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Run Hugo
+      uses: docker://klakegg/hugo:0.93.3-ext-alpine-ci
+      with:
+        entrypoint: hugo
+        args: --minify -D
+    - name: Install SSH Client
+      uses: webfactory/ssh-agent@v0.5.4
+      with:
+        ssh-private-key: ${{ secrets.APP_DEPLOY_KEY }}
+    - name: Deploy 
+      uses: JamesIves/github-pages-deploy-action@releases/v3
+      with:
+        SSH: true
+        BRANCH: master # The branch the action should deploy to.
+        FOLDER: public # The folder the action should deploy.
+        REPOSITORY_NAME: donmahallem/donmahallem.github.io
+        TARGET_FOLDER: .
+        CLEAN: true
