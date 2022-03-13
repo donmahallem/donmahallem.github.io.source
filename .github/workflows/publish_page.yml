@@ -6,7 +6,7 @@ on:
   workflow_run:
     workflows: [Build Page]
     types: [completed]
-    branches: [master]
+    branches: [source]
 
 jobs:
   publish_page:
