@@ -31,6 +31,7 @@ for page in range(0,1000):
     pageContent = getPage(username=username,pageSize=pageSize,page=page)
     print(f"Contained: {len(pageContent)}")
     for repo in pageContent:
+        body = ""
         pageData = dict()
         pageData['source']=repo
         pageData['title']=repo['name']
@@ -39,6 +40,7 @@ for page in range(0,1000):
         if "description" in repo:
             pageData['description']=repo["description"]
             pageData['summary']=repo["description"]
+            body = repo["description"]
         pageData['cover'] = {
             "image": f"https://opengraph.githubassets.com/e2cd6b7baf7072c4f39f426f3cd18dd1a284d8854b96d9f18162decc27d5aaf5/"+repo["full_name"]
         }
@@ -48,7 +50,7 @@ for page in range(0,1000):
 
         pageData['lastmod'] = repo['updated_at'] if lastUpdateDate > lastPushDate else repo['pushed_at']
         with codecs.open("./content/repos/"+ repo["name"]+".md",'w') as f:
-            f.write("---\n"+json.dumps(pageData)+"\n---\n")
+            f.write("---\n"+json.dumps(pageData)+"\n---\n"+body+"\n")
     if len(pageContent) < pageSize:
         break
 
