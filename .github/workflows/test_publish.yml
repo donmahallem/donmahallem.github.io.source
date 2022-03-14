@@ -1,0 +1,19 @@
+name: Test Publish Page
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_run:
+    workflows: [Build Page]
+    types: [completed]
+    branches: [source]
+
+jobs:
+  publish_page:
+    name: Build HUGO Page
+    runs-on: ubuntu-18.04 # linux required if you want to use docker
+    steps:
+    - name: Checkout
+      run: |
+        echo "${{github.event_name}}
+    
