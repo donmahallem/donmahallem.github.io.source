@@ -31,7 +31,7 @@ jobs:
       env:
         TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Run Hugo
-      uses: docker://klakegg/hugo:0.93.3-ext-alpine-ci
+      uses: docker://klakegg/hugo:0.94.0-ext-alpine-ci
       with:
         entrypoint: hugo
         args: --minify -D
