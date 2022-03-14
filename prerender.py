@@ -50,7 +50,7 @@ for page in range(0,1000):
 
         pageData['lastmod'] = repo['updated_at'] if lastUpdateDate > lastPushDate else repo['pushed_at']
         with codecs.open("./content/repos/"+ repo["name"]+".md",'w') as f:
-            f.write("---\n"+json.dumps(pageData)+"\n---\n"+body+"\n")
+            f.write("---\n{0}\n---\n{1}\n".format(json.dumps(pageData),body))
     if len(pageContent) < pageSize:
         break
 
