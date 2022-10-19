@@ -36,7 +36,7 @@ jobs:
         entrypoint: hugo
         args: --minify -D
     - name: Install SSH Client
-      uses: webfactory/ssh-agent@v0.5.4
+      uses: webfactory/ssh-agent@v0.6.0
       with:
         ssh-private-key: ${{ secrets.APP_DEPLOY_KEY }}
     - name: Deploy 
